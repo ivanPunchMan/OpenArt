@@ -44,7 +44,7 @@ class DataService {
     
     var fetchedResultController = NSFetchedResultsController<AssetEntity>()
     
-    private lazy var persistentContainer: NSPersistentContainer = {
+    static var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "AssetDataModel")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -54,17 +54,18 @@ class DataService {
         return container
     }()
     
-    private lazy var viewContext = persistentContainer.viewContext
+    private lazy var viewContext = Self.persistentContainer.viewContext
     
-    func addNewAsset(from model: AssetModel.SaveAsset.Request) {
+    func addNew(asset model: AssetSaveDataModel) {
         let assetEntity = AssetEntity(context: viewContext)
         
         assetEntity.collectionName = model.collectionName
         assetEntity.assetDescription = model.assetDescription
         assetEntity.assetName = model.assetName
-        assetEntity.collectionImage = model.collectionImage?.pngData()
-        assetEntity.assetImage = model.assetImage?.pngData()
+        assetEntity.collectionImage = model.collectionImageData
+        assetEntity.assetImage = model.assetImageData
         assetEntity.dateAdded = Date.now
+        assetEntity.tokenID = model.tokenID
         
         self.saveContext()
     }
@@ -94,6 +95,26 @@ class DataService {
         self.saveContext()
     }
     
+    func deleteAssetEntity(with uniqueID: String) {
+        let fetchRequest = AssetEntity.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        
+        let sortDescriptor = NSSortDescriptor(key: "tokenID", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        var assetEntities = [AssetEntity]()
+        do {
+            assetEntities = try self.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Не удалось достать объект с уникальным ID: \(error.localizedDescription)")
+        }
+        
+        for assetEntity in assetEntities {
+            self.viewContext.delete(assetEntity)
+        }
+        saveContext()
+    }
+    
 // MARK: - saveContext
     func saveContext () {
         if self.viewContext.hasChanges {
@@ -101,7 +122,7 @@ class DataService {
                 try self.viewContext.save()
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

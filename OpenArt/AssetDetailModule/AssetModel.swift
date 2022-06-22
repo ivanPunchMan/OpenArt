@@ -59,9 +59,11 @@ struct AssetModel {
             var collectionName: String?
             var collectionImage: UIImage?
         }
+        
         struct Response {
             
         }
+        
         struct ViewModel {
             
         }

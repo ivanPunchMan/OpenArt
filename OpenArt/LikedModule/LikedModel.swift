@@ -18,7 +18,7 @@ struct LikedModel {
         }
         
         struct AssetModel {
-            var uniqueID: String?
+            var tokenID: String?
             var assetName: String?
             var assetImage: Data?
             var assetDescription: String?
@@ -26,7 +26,7 @@ struct LikedModel {
             var collectionImage: Data?
             
             init(from assetEntity: AssetEntity) {
-                self.uniqueID = assetEntity.uniqueID
+                self.tokenID = assetEntity.tokenID
                 self.assetName = assetEntity.assetName
                 self.assetImage = assetEntity.assetImage
                 self.assetDescription = assetEntity.assetDescription
@@ -43,107 +43,18 @@ struct LikedModel {
             }
         }
     }
-    
-    enum DisplayAsset {
+
+    enum DeleteAsset2 {
         struct Request {
-            let indexPath: IndexPath
-            let cell: UICollectionViewCell
+            let uniqueID: String
         }
         
         struct Response {
-            let indexPath: IndexPath
-            let data: DisplaedData
-            let cell: UICollectionViewCell
-        }
-        
-        struct DisplaedData {
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-            
-            init(from assetEntity: AssetEntity) {
-                self.assetName = assetEntity.assetName
-                self.assetImage = UIImage(data: assetEntity.assetImage ?? Data())
-                self.assetDescription = assetEntity.assetDescription
-                self.collectionName = assetEntity.collectionName
-                self.collectionImage = UIImage(data: assetEntity.collectionImage ?? Data())
-            }
+            let uniqueID: String
         }
         
         struct ViewModel {
-            let indexPath: IndexPath
-            let data: DisplaedData
-            let cell: UICollectionViewCell
-        }
-    }
-    
-    enum LoadAsset {
-        struct Request {
-            let indexPath: IndexPath
-        }
-        
-        struct Response {
-            let indexPath: IndexPath
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-            
-            init(from assetEntity: AssetEntity, for indexPath: IndexPath) {
-                self.indexPath = indexPath
-                self.assetName = assetEntity.assetName
-                self.assetImage = UIImage(data: assetEntity.assetImage ?? Data())
-                self.assetDescription = assetEntity.assetDescription
-                self.collectionName = assetEntity.collectionName
-                self.collectionImage = UIImage(data: assetEntity.collectionImage ?? Data())
-            }
-        }
-        
-        struct ViewModel {
-            let indexPath: IndexPath
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-            
-            init(from response: Response) {
-                self.indexPath = response.indexPath
-                self.assetName = response.assetName
-                self.assetImage = response.assetImage
-                self.assetDescription = response.assetDescription
-                self.collectionName = response.collectionName
-                self.collectionImage = response.collectionImage
-            }
-        }
-    }
-    
-    enum CountAssets {
-        struct Request {}
-        
-        struct Response {
-            let count: Int
-        }
-        
-        struct ViewModel {
-            let count: Int
-        }
-    }
-    
-    enum DeleteAsset {
-        struct Request {
-            let indexPath: IndexPath
-        }
-        
-        struct Response {
-            let indexPath: IndexPath
-        }
-        
-        struct ViewModel {
-            let indexPath: IndexPath
+            let uniqueID: String
         }
     }
 }

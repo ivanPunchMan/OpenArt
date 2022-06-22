@@ -18,7 +18,7 @@ class LikedButton: UIButton {
         static let edgesInset: CGFloat = 16
     }
     
-    private var isActiveState = true
+    var isActiveState = true
     private var label = UILabel()
     
     init(text: String) {

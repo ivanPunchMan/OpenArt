@@ -22,7 +22,7 @@ final class LikedAssetCell: UICollectionViewCell {
         
         static let assetImageViewTopOffset: CGFloat = 8
         
-        static let assetNameLabelVerticalOffset: CGFloat = 11
+        static let assetNameLabelVerticalOffset: CGFloat = 5
         
         static let deleteAssetButtonSize: CGFloat = 24
     }
@@ -30,10 +30,9 @@ final class LikedAssetCell: UICollectionViewCell {
 //MARK: - properties
     var onDeleteButtonTappedHandler: (() -> Void)?
     private let containerView = UIView()
-    private let assetImageView = ResizingImageView()
+    private let assetImageView = UIImageView()
     private let assetNameLabel = UILabel()
     private let deleteAssetButton = UIButton()
-    private var uniqueID = ""
 //MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -51,23 +50,13 @@ final class LikedAssetCell: UICollectionViewCell {
         self.assetImageView.image = nil
     }
     
-//MARK: - internal methods
-    
+//MARK: - internal method
     func set(assetModel: LikedModel.LoadAssets.AssetModel?) {
         let assetImageData = assetModel?.assetImage ?? Data()
         let assetImage = UIImage(data: assetImageData) ?? UIImage()
         
-//        self.uniqueID = assetModel?.uniqueID
-        self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage)
+        self.assetImageView.image = assetImage
         self.assetNameLabel.text = assetModel?.assetName
-    }
-    
-    func set(assetImage: UIImage?) {
-        self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
-    }
-    
-    func set(assetName: String?) {
-        self.assetNameLabel.text = assetName
     }
 }
 
@@ -104,23 +93,20 @@ private extension LikedAssetCell {
     func setupAssetNameLabelLayout() {
         self.containerView.addSubview(self.assetNameLabel)
         self.configureAssetNameLabel()
-        let topConstraint = self.assetNameLabel.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.assetNameLabelVerticalOffset)
-        topConstraint.priority = UILayoutPriority(1000)
-        topConstraint.isActive = true
         NSLayoutConstraint.activate([
             self.assetNameLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.cellHorizontalInset),
             self.assetNameLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.assetNameLabelVerticalOffset),
-//            self.assetNameLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.cellHorizontalInset)
         ])
     }
     
     func setupDislikeButtonLayout() {
         self.containerView.addSubview(self.deleteAssetButton)
         self.configureDeleteAssetButton()
-        deleteAssetButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        deleteAssetButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
         NSLayoutConstraint.activate([
-            self.deleteAssetButton.centerYAnchor.constraint(equalTo: self.assetNameLabel.centerYAnchor),
-            self.deleteAssetButton.leadingAnchor.constraint(equalTo: self.assetNameLabel.trailingAnchor),
+            self.deleteAssetButton.topAnchor.constraint(equalTo: assetImageView.bottomAnchor, constant: 4),
+            self.deleteAssetButton.leadingAnchor.constraint(equalTo: self.assetNameLabel.trailingAnchor, constant: 5),
+            self.deleteAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
             self.deleteAssetButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constraint.cellHorizontalInset),
             self.deleteAssetButton.widthAnchor.constraint(equalToConstant: Constraint.deleteAssetButtonSize),
             self.deleteAssetButton.heightAnchor.constraint(equalToConstant: Constraint.deleteAssetButtonSize)
@@ -135,18 +121,18 @@ private extension LikedAssetCell {
     }
     
     func configureAssetImageView() {
+        self.assetImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
         self.assetImageView.translatesAutoresizingMaskIntoConstraints = false
         self.assetImageView.layer.cornerRadius = Constant.cornerRadius
         self.assetImageView.layer.masksToBounds = true
         self.assetImageView.contentMode = .scaleAspectFill
-
-//        self.assetImageView.setImageAndUpdateAspectRatio(image: UIImage(named: "testImage")!)
     }
     
     func configureAssetNameLabel() {
         self.assetNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.assetNameLabel.font = Typography.TextLG.medium.font
-        self.assetNameLabel.text = "Blabla bla-bla"
+        self.assetNameLabel.adjustsFontSizeToFitWidth = true
+        self.assetNameLabel.minimumScaleFactor = 0.4
     }
     
     func configureDeleteAssetButton() {

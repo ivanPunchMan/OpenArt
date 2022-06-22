@@ -34,11 +34,7 @@ final class LikedView: UIView {
     }
 
 //MARK: - properties
-    var fetchCountOFAssetsHandler: (() -> Void)?
-    var fetchAssetForCell: ((LikedModel.DisplayAsset.Request) -> Void)?
-    var fetchAssetForCellHandler: ((IndexPath) -> Void)?
-    var deleteAssetHandler: ((IndexPath) -> Void)?
-    var displayAssetHandler: ((LikedModel.LoadAsset.ViewModel) -> Void)?
+    var deleleAssetHandler2: ((String) -> Void)?
     lazy var collectionView = createCollectionView()
     private let likedLabel = UILabel()
     private var countOfAssets = 0
@@ -70,18 +66,6 @@ final class LikedView: UIView {
     func displayAssets(viewModel: LikedModel.LoadAssets.ViewModel) {
         self.assetsViewModel = viewModel
     }
-    
-    func deleteItem(at indexPath: IndexPath) {
-        self.assetsViewModel?.assets.remove(at: indexPath.row)
-//        self.collectionView.deleteItems(at: [indexPath])
-        self.collectionView.reloadData()
-    }
-    
-    func cell(at indexPath: IndexPath) -> LikedAssetCell? {
-        self.collectionView.cellForItem(at: indexPath) as? LikedAssetCell
-    }
-    
-    
 }
 
 //MARK: - private methods
@@ -146,6 +130,7 @@ private extension LikedView {
         self.likedLabel.translatesAutoresizingMaskIntoConstraints = false
         self.likedLabel.font = Typography.DisplayXS.semiBold.font
         self.likedLabel.text = "Liked"
+        self.likedLabel.backgroundColor = .clear
     }
 }
 
@@ -158,20 +143,15 @@ extension LikedView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikedAssetCell.id, for: indexPath) as? LikedAssetCell else { return UICollectionViewCell() }
         
-        self.fetchAssetForCell?(.init(indexPath: indexPath, cell: cell))
+        let asset = self.assetsViewModel?.assets[indexPath.row]
 
-//        self.displayAssetHandler = { viewModel in
-//            cell.set(assetImage: viewModel.assetImage)
-//            cell.set(assetName: viewModel.assetName)
-//        }
-        
-//        let asset = self.assetsViewModel?.assets[indexPath.row]
-//
-//        cell.set(assetModel: asset)
+        cell.set(assetModel: asset)
         
         cell.onDeleteButtonTappedHandler = { [weak self] in
-            self?.assetsViewModel?.assets.remove(at: indexPath.row)
-            self?.deleteAssetHandler?(indexPath)
+            if let tokenID = asset?.tokenID {
+                self?.deleleAssetHandler2?(tokenID)
+                self?.assetsViewModel?.assets.remove(at: indexPath.row)
+            }
         }
         
         return cell

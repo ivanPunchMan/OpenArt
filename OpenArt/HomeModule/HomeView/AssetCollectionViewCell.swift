@@ -17,12 +17,17 @@ final class AssetCollectionViewCell: UICollectionViewCell {
     }
     
 //MARK: - properties
+    var saveButtonTappedHandler: ((UIImage?, UIImage?) -> Void)?
     private let assetView = AssetView()
     
 //MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: .zero)
         self.setupLayout()
+        self.assetView.saveButtonHandler = { assetImage, collectionImage in
+            self.saveButtonTappedHandler?(assetImage, collectionImage)
+        }
+//        self.saveButtonTappedHandler = assetView.saveButtonHandler
     }
     
     @available(*, unavailable)

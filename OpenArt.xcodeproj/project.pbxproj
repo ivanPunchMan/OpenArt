@@ -54,6 +54,7 @@
 		C8A839D82861B61F007C047B /* LikedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D72861B61F007C047B /* LikedAssembly.swift */; };
 		C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */; };
 		C8A839E328631553007C047B /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E228631552007C047B /* NavigationBar.swift */; };
+		C8A839E528634873007C047B /* SaveAssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E428634873007C047B /* SaveAssetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		C8A839D72861B61F007C047B /* LikedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAssembly.swift; sourceTree = "<group>"; };
 		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AssetEntity+CoreDataProperties.swift"; path = "../AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8A839E228631552007C047B /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		C8A839E428634873007C047B /* SaveAssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAssetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			children = (
 				C823B513285744D900FB15AB /* NetworkWorker.swift */,
 				C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */,
+				C8A839E428634873007C047B /* SaveAssetModel.swift */,
 				C8A839B52860938E007C047B /* AssetDataModel.xcdatamodeld */,
 				C8A839C0286095D7007C047B /* AssetEntity+CoreDataClass.swift */,
 				C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */,
@@ -365,6 +368,7 @@
 				C8A839CE2860A213007C047B /* LikedInteractor.swift in Sources */,
 				C8A839D42860B07F007C047B /* LikedView.swift in Sources */,
 				C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */,
+				C8A839E528634873007C047B /* SaveAssetModel.swift in Sources */,
 				C823B5BA285A7FBA00FB15AB /* AssetCardView.swift in Sources */,
 				C823B50628568BBC00FB15AB /* HomePresenter.swift in Sources */,
 				C8A839D82861B61F007C047B /* LikedAssembly.swift in Sources */,

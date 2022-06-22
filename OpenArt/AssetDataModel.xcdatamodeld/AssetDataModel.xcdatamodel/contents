@@ -7,7 +7,7 @@
         <attribute name="collectionImage" optional="YES" attributeType="Binary" valueTransformerName="" customClassName="UIImage"/>
         <attribute name="collectionName" optional="YES" attributeType="String"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="uniqueID" optional="YES" attributeType="String"/>
+        <attribute name="tokenID" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Int"/>
     </entity>
     <elements>
         <element name="AssetEntity" positionX="-63" positionY="-18" width="128" height="134"/>

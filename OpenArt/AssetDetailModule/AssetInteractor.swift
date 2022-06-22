@@ -67,6 +67,6 @@ extension AssetInteractor: IAssetInteractor {
     }
     
     func save(data: AssetModel.SaveAsset.Request) {
-        self.dataStorageWorker.save(data: data)
+//        self.dataStorageWorker.save(data: data)
     }
 }

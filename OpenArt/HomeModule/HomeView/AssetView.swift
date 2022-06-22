@@ -27,12 +27,15 @@ final class AssetView: UIView {
     }
 
 //MARK: - properties
-    private let assetImage = UIImage(named: "testImage")
+    var saveButtonHandler: ((UIImage?, UIImage?) -> Void)?
+//    private let assetImage = UIImage(named: "testImage")
     private var collectionHeaderView = CollectionHeaderView()
     private var kebabMenuButton = UIButton(type: .system)
     private var assetImageView = ResizingImageView()
     private var multiplier: CGFloat?
     private let likedButton = UIButton()
+    private var assetImage: UIImage?
+    private var collectionImage: UIImage?
 
 //MARK: - init
     init() {
@@ -52,10 +55,12 @@ final class AssetView: UIView {
     }
     
     func set(collectionImage: UIImage?) {
+        self.collectionImage = collectionImage
         self.collectionHeaderView.set(collectionImage: collectionImage)
     }
     
     func set(assetImage: UIImage?) {
+        self.assetImage = assetImage
         self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
         self.assetImageView.image = assetImage
     }
@@ -124,6 +129,7 @@ private extension AssetView {
     }
     
     @objc func onLikedButtonTapped() {
+        self.saveButtonHandler?(self.assetImage, self.collectionImage)
         print("Like")
     }
 }

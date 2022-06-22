@@ -17,6 +17,12 @@ class NavigationBar: UIView {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setupLayout()
+        
+        if newButton.isActiveState {
+            savedButton.stateSwitch()
+        } else {
+            newButton.stateSwitch()
+        }
     }
     
     @available(*, unavailable)

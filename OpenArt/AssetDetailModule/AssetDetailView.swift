@@ -29,12 +29,10 @@ final class AssetDetailView: UIView {
     }
     
 //MARK: - properties
-    
     var onLikedButtonTappedHandler: ((AssetModel.SaveAsset.Request) -> Void)?
     private let scrollView = UIScrollView()
     private let containerView = UIView()
     private let assetDetailView = AssetCardView()
-//    private let likedButton = LikedButton()
     
 //MARK: - init
     init() {

@@ -32,6 +32,7 @@ enum HomeModel {
         struct AssetViewModel {
             let creatorUsername: String?
             let assetImageURL: String?
+            let assetDescription: String?
             let collectionName: String?
             let collectionImageURL: String?
             let tokenID: String?
@@ -39,6 +40,7 @@ enum HomeModel {
             init(from asset: Asset) {
                 self.creatorUsername = asset.creator?.user?.username
                 self.assetImageURL = asset.imageURL
+                self.assetDescription = asset.description
                 self.collectionName = asset.collection?.name
                 self.collectionImageURL = asset.collection?.imageURL
                 self.tokenID = asset.tokenID
@@ -82,6 +84,7 @@ enum HomeModel {
     
     enum SaveAsset {
         struct Request {
+            var tokenID: String?
             var assetName: String?
             var assetImage: UIImage?
             var assetDescription: String?

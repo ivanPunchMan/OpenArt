@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         let navigationVC = UINavigationController(rootViewController: HomeAssembly.build())
         let likedVC = LikedAssembly.build()
-        self.window?.rootViewController = likedVC
+        self.window?.rootViewController = navigationVC
         self.window?.makeKeyAndVisible()
     }
 }

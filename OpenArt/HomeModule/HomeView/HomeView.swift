@@ -27,6 +27,7 @@ final class HomeView: UIView {
     var displayAssetImageHandler: ((HomeModel.FetchAssetImage.ViewModel) -> Void)?
     var didSelectItemAt: ((IndexPath) -> Void)?
     var savedButtonTappedHandler: (() -> Void)?
+    var saveButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
     lazy var collectionView = createCollectionView()
     private let navigationBar = NavigationBar()
     
@@ -42,7 +43,7 @@ final class HomeView: UIView {
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
-        self.setupNavigationBar()
+//        self.setupNavigationBar()
         self.setupCollectionViewLayout()
     }
     
@@ -92,34 +93,34 @@ private extension HomeView {
         return layout
     }
     
-    func setupNavigationBar() {
-        self.addSubview(self.navigationBar)
-        self.configureNavigationBar()
-        NSLayoutConstraint.activate([
-            self.navigationBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40),
-            self.navigationBar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 18),
-            self.navigationBar.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -18)
-        ])
-    }
+//    func setupNavigationBar() {
+//        self.addSubview(self.navigationBar)
+//        self.configureNavigationBar()
+//        NSLayoutConstraint.activate([
+//            self.navigationBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40),
+//            self.navigationBar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 18),
+//            self.navigationBar.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -18)
+//        ])
+//    }
     
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.navigationBar.bottomAnchor, constant: 40),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+            self.collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
     
-    func configureNavigationBar() {
-        self.navigationBar.savedButton.addTarget(self, action: #selector(onSavedButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func onSavedButtonTapped() {
-        self.savedButtonTappedHandler?()
-        self.navigationBar.newButton.stateSwitch()
-    }
+//    func configureNavigationBar() {
+//        self.navigationBar.savedButton.addTarget(self, action: #selector(onSavedButtonTapped), for: .touchUpInside)
+//    }
+//
+//    @objc func onSavedButtonTapped() {
+//        self.savedButtonTappedHandler?()
+//        self.navigationBar.newButton.stateSwitch()
+//    }
 }
 
 extension HomeView: UICollectionViewDelegate {
@@ -142,6 +143,15 @@ extension HomeView: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
     
         cell.set(collectionName: asset.collectionName)
+        
+        cell.saveButtonTappedHandler = { [weak self] assetImage, collectionImage in
+            self?.saveButtonTappedHandler?(.init(tokenID: asset.tokenID,
+                                                 assetName: asset.creatorUsername,
+                                                 assetImage: assetImage,
+                                                 assetDescription: asset.assetDescription,
+                                                 collectionName: asset.collectionName,
+                                                 collectionImage: collectionImage))
+        }
         
         self.fetchImagesForCellHandler?(.init(indexPath: indexPath))
         

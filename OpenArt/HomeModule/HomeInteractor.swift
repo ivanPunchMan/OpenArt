@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import UIKit
 
 protocol IHomeInteractor: AnyObject {
+    func saveAsset(request: HomeModel.SaveAsset.Request)
     func fetchAssets(request: HomeModel.FetchAssets.Request)
     func fetchImagesForCell(request: HomeModel.FetchAssetImage.Request)
 }
@@ -22,22 +22,44 @@ final class HomeInteractor: IHomeDataStore {
     
     private var presenter: IHomePresenter
     private var networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker)
+    private var dataStorageWorker: IDataStorageSaveWorker
     private var next: String?
     
     
-    init(presenter: IHomePresenter, networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker)) {
+    init(presenter: IHomePresenter, networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker), dataStorageWorker: IDataStorageSaveWorker) {
         self.presenter = presenter
         self.networkWorker = networkWorker
+        self.dataStorageWorker = dataStorageWorker
     }
 }
 
 extension HomeInteractor: IHomeInteractor {
+    func saveAsset(request: HomeModel.SaveAsset.Request) {
+        
+        let tokenID = request.tokenID
+        let assetName = request.assetName
+        let assetImageData = request.assetImage?.pngData()
+        let assetDescription = request.assetDescription
+        let collectionName = request.collectionName
+        let collectionImageData = request.collectionImage?.pngData()
+        
+        let assetSaveDataModel = AssetSaveDataModel(tokenID: tokenID,
+                                                    assetName: assetName,
+                                                    assetImageData: assetImageData,
+                                                    assetDescription: assetDescription,
+                                                    collectionName: collectionName,
+                                                    collectionImageData: collectionImageData)
+        
+        dataStorageWorker.save(data: assetSaveDataModel)
+    }
+    
     func fetchAssets(request: HomeModel.FetchAssets.Request) {
         let nextPage = request.nextPage
         networkWorker.fetchAssets(nextPage: nextPage) { [weak self] result in
             switch result {
             case .success(let assetsDTO):
                 let assetsResponse = HomeModel.FetchAssets.Response.init(from: assetsDTO)
+                print(assetsResponse)
                 self?.assets = assetsResponse.assets
                 self?.presenter.presentAssets(response: assetsResponse)
             case .failure(let error):

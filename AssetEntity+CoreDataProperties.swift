@@ -2,7 +2,7 @@
 //  AssetEntity+CoreDataProperties.swift
 //  OpenArt
 //
-//  Created by Иван Дурмашев on 21.06.2022.
+//  Created by Иван Дурмашев on 22.06.2022.
 //
 //
 
@@ -22,7 +22,7 @@ extension AssetEntity {
     @NSManaged public var collectionName: String?
     @NSManaged public var collectionImage: Data?
     @NSManaged public var dateAdded: Date?
-    @NSManaged public var uniqueID: String?
+    @NSManaged public var tokenID: String?
 
 }
 

@@ -9,13 +9,14 @@ import Foundation
 import CoreData
 
 protocol IDataStorageSaveWorker {
-    func save(data: AssetModel.SaveAsset.Request)
+    func save(data: AssetSaveDataModel)
 }
 
 protocol IDataStorageLoadWorker {
     var deleteAsset: ((IndexPath?) -> Void)? { get set }
     func loadAssets() -> [AssetEntity]
     
+    func deleteAsset(with uniqueID: String)
     func countOfAssets() -> Int
     func loadAsset(for indexPath: IndexPath) -> AssetEntity
     func deleteAsset(at indexPath: IndexPath)
@@ -33,8 +34,8 @@ final class AssetDataStorageWorker: NSObject {
 }
 
 extension AssetDataStorageWorker: IDataStorageSaveWorker {
-    func save(data: AssetModel.SaveAsset.Request) {
-        self.dataService.addNewAsset(from: data)
+    func save(data: AssetSaveDataModel) {
+        self.dataService.addNew(asset: data)
         
         print(data)
         print("Данные сохранены")
@@ -52,6 +53,10 @@ extension AssetDataStorageWorker: IDataStorageLoadWorker {
         return assetEntity
     }
     
+    func deleteAsset(with uniqueID: String) {
+        self.dataService.deleteAssetEntity(with: uniqueID)
+    }
+    
     func deleteAsset(at indexPath: IndexPath) {
         let assetEntity = self.dataService.fetchedResultController.object(at: indexPath)
         self.dataService.delete(assetEntity: assetEntity)
@@ -63,12 +68,12 @@ extension AssetDataStorageWorker: IDataStorageLoadWorker {
 }
 
 extension AssetDataStorageWorker: NSFetchedResultsControllerDelegate {
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .delete:
-////            deleteAsset?(indexPath)
-//        default:
-//            break
-//        }
-//    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            deleteAsset?(indexPath)
+        default:
+            break
+        }
+    }
 }

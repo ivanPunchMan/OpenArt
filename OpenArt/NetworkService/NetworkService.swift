@@ -25,7 +25,7 @@ final class NetworkService {
     
     private enum QueryItem {
         static let orderDirection = URLQueryItem(name: "order_direction", value: "desc")
-        static let limit = URLQueryItem(name: "limit", value: "40")
+        static let limit = URLQueryItem(name: "limit", value: "50")
         static let include = URLQueryItem(name: "include_orders", value: "false")
     }
     
@@ -59,47 +59,14 @@ extension NetworkService: INetworkService {
             if let data = data {
                 do {
                     let assets = try self.jsonDecoder.decode(AssetsDTO.self, from: data)
-                    print(assets)
                     completion(.success(assets))
                 } catch {
                     completion(.failure(error))
                 }
             }
-        }//.resume()
+        }.resume()
     }
-    
-//    func loadAssets(nextPage: String?, completion: @escaping (Result<Price, Error>) -> Void) {
-//        let urlStr =    "https://deep-index.moralis.io/api/v2/nft/0x495f947276749ce646f68ac8c248420045cb7b5e/trades?chain=eth&marketplace=opensea"
-//
-////        "https://deep-index.moralis.io/api/v2/nft/0x495f947276749ce646f68ac8c248420045cb7b5e/lowestprice?chain=eth&marketplace=opensea"
-////    https://deep-index.moralis.io/api/v2/nft/0x495f947276749ce646f68ac8c248420045cb7b5e/trades?chain=eth&marketplace=opensea
-//        guard let url = URL(string: urlStr) else { return }
-//
-//        var request = URLRequest(url: url)
-//        let headers = ["accept": "application/json",
-//                       "X-API-Key": "8R9OvG6DN4QUbTGaSg3nC0OFG5CTz9In6eR8A8Q5GLHZpVzRRjpbqscy8wdJz8xO"]
-//        request.allHTTPHeaderFields = headers
-//
-//        self.session.dataTask(with: request) { [weak self] data, response, error in
-//            guard let self = self else { assert(false, "Некорректный URL") }
-//            print(response)
-//            if let error = error {
-//                completion(.failure(error))
-//            }
-//
-//            if let data = data {
-//                print(data)
-//                do {
-//                    let assets = try self.jsonDecoder.decode(Price.self, from: data)
-//                    print(assets)
-//                    completion(.success(assets))
-//                } catch {
-//                    completion(.failure(error))
-//                }
-//            }
-//        }.resume()
-//    }
-    
+
     enum NetError: Error {
         case uncorrectURL
     }
@@ -108,7 +75,6 @@ extension NetworkService: INetworkService {
         
         let urlStrong = urlString ?? ""
         guard let url = URL(string: urlStrong) else { completion(.failure(NetError.uncorrectURL))
-            print(urlStrong)
             return
         }
         let request = URLRequest(url: url, timeoutInterval: 30)
@@ -139,6 +105,7 @@ private extension NetworkService {
             QueryItem.limit,
             QueryItem.include,
             URLQueryItem(name: "cursor", value: cursor),
+//            URLQueryItem(name: "collection_slug", value: "cryptoverse-vip")
         ]
         var urlComponents = URLComponents(string: EndPoint.assetsURL)
         urlComponents?.queryItems = queryItems

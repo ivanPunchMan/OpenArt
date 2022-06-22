@@ -24,6 +24,8 @@ final class HomeViewController: UIViewController {
         self.interactor = interactor
         self.router = router
         
+        self.configureNavBar()
+        
         self.customView.fetchDataHandler = { request in
             interactor.fetchAssets(request: request)
         }
@@ -38,6 +40,10 @@ final class HomeViewController: UIViewController {
         
         self.customView.fetchImagesForCellHandler = { request in
             interactor.fetchImagesForCell(request: request)
+        }
+        
+        self.customView.saveButtonTappedHandler = { request in
+            interactor.saveAsset(request: request)
         }
     }
     
@@ -74,6 +80,18 @@ extension HomeViewController: IHomeViewController {
         if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? AssetCollectionViewCell {
             cell.set(collectionImage: viewModel.collectionImage)
         }
+    }
+}
+
+private extension HomeViewController {
+    func configureNavBar() {
+        let savedBarButton = UIBarButtonItem(image: UIImage(systemName: "photo.on.rectangle.angled"), style: .done, target: self, action: #selector(onSavedBarButtonTapped))
+        savedBarButton.tintColor = Color.black.tone
+        self.navigationItem.rightBarButtonItem = savedBarButton
+    }
+    
+    @objc func onSavedBarButtonTapped() {
+        self.router?.routeToSavedVC()
     }
 }
 
