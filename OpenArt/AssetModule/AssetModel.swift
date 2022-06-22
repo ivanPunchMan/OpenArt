@@ -65,42 +65,9 @@ struct AssetModel {
         }
         
         struct Response {
-            
         }
         
         struct ViewModel {
-            
-        }
-    }
-    
-//MARK: - LoadAsset
-    enum LoadAsset {
-        struct Request {
-            let indexPath: IndexPath?
-        }
-        
-        struct Response {
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-        }
-        
-        struct ViewModel {
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-            
-            init(from response: Response) {
-                self.assetName = response.assetName
-                self.assetImage = response.assetImage
-                self.assetDescription = response.assetDescription
-                self.collectionName = response.collectionName
-                self.collectionImage = response.collectionImage
-            }
         }
     }
 }

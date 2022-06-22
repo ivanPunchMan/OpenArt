@@ -22,10 +22,14 @@ final class AssetDetailView: UIView {
         static let profileAndDescriptionHorizontalOffset: CGFloat = 24
         
         static let separatorViewHeight: CGFloat = 1
+        
+        static let saveAssetButtonTopOffset: CGFloat = 32
+        static let saveAssetButtonHorizontalOffset: CGFloat = 16
+        static let saveAssetButtonBottomOffset: CGFloat = 16
     }
     
 //MARK: - properties
-    var onLikedButtonTappedHandler: ((AssetModel.SaveAsset.Request) -> Void)?
+    var onSaveAssetButtonTappedHandler: ((AssetModel.SaveAsset.Request) -> Void)?
     
     private let scrollView = UIScrollView()
     private let containerView = UIView()
@@ -33,7 +37,7 @@ final class AssetDetailView: UIView {
     private let collectionHeaderView = CollectionHeaderView()
     private let descriptionView = AssetDescriptionView()
     private let separatorView = UIView()
-    private let likedButton = LikedButton(text: "Save")
+    private let saveAssetButton = CustomButton(text: "Save")
     
 //MARK: - init
     init() {
@@ -69,10 +73,10 @@ private extension AssetDetailView {
         self.setupScrollViewLayout()
         self.setupContainerViewLayout()        
         self.setupAssetImageViewLayout()
-        self.setupProfileViewLayout()
+        self.setupCollectionHeaderViewLayout()
         self.setupDescriptionViewLayout()
         self.setupSeparatorViewLayout()
-        self.setupLikedButtonLayout()
+        self.setupSaveAssetButtonLayout()
     }
     
     func setupScrollViewLayout() {
@@ -118,7 +122,7 @@ private extension AssetDetailView {
         self.assetImageView.contentMode = .scaleAspectFit
     }
     
-    func setupProfileViewLayout() {
+    func setupCollectionHeaderViewLayout() {
         self.containerView.addSubview(self.collectionHeaderView)
         
         NSLayoutConstraint.activate([
@@ -158,23 +162,23 @@ private extension AssetDetailView {
         self.separatorView.backgroundColor = Color.black.tone.withAlphaComponent(Constant.separatorViewAlphaComponent)
     }
     
-    func setupLikedButtonLayout() {
-        self.containerView.addSubview(self.likedButton)
-        self.configureLikedButton()
+    func setupSaveAssetButtonLayout() {
+        self.containerView.addSubview(self.saveAssetButton)
+        self.configureSaveAssetButton()
         
         NSLayoutConstraint.activate([
-            self.likedButton.topAnchor.constraint(equalTo: self.separatorView.bottomAnchor, constant: 32),
-            self.likedButton.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
-            self.likedButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -16),
-            self.likedButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16)
+            self.saveAssetButton.topAnchor.constraint(equalTo: self.separatorView.bottomAnchor, constant: Constraint.saveAssetButtonTopOffset),
+            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.saveAssetButtonHorizontalOffset),
+            self.saveAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.saveAssetButtonBottomOffset),
+            self.saveAssetButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.saveAssetButtonHorizontalOffset)
         ])
     }
     
-    func configureLikedButton() {
-        self.likedButton.addTarget(self, action: #selector(onLikedButtonTapped), for: .touchUpInside)
+    func configureSaveAssetButton() {
+        self.saveAssetButton.addTarget(self, action: #selector(onSaveAssetButtonTapped), for: .touchUpInside)
     }
     
-    @objc func onLikedButtonTapped() {
+    @objc func onSaveAssetButtonTapped() {
         let assetName = descriptionView.assetName()
         let assetDescription = descriptionView.assetDescription()
         let assetImage = assetImageView.image
@@ -183,6 +187,6 @@ private extension AssetDetailView {
         
         let request = AssetModel.SaveAsset.Request.init(assetName: assetName, assetImage: assetImage, assetDescription: assetDescription, collectionName: collectionName, collectionImage: collectionImage)
         
-        self.onLikedButtonTappedHandler?(request)
+        self.onSaveAssetButtonTappedHandler?(request)
     }
 }

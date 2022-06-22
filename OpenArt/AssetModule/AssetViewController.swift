@@ -26,7 +26,7 @@ final class AssetViewController: UIViewController {
         self.interactor = interactor
         self.router = router
         
-        self.customView.onLikedButtonTappedHandler = { request in
+        self.customView.onSaveAssetButtonTappedHandler = { request in
             interactor.save(data: request)
         }
     }
@@ -46,23 +46,12 @@ final class AssetViewController: UIViewController {
         super.viewDidLoad()
         self.fetchAssetData()
     }
-    
-    func fetchAssetData() {
-        self.fetchAssetInfo(request: .init())
-        self.fetchAssetImageHandler(request: .init())
-        self.fetchCollectionImageHandler(request: .init())
-    }
-    
-    func fetchAssetInfo(request: AssetModel.FetchAssetInfo.Request) {
-        self.interactor?.fetchAssetInfo(request: request)
-    }
 
-    func fetchAssetImageHandler(request: AssetModel.FetchAssetImage.Request) {
-        self.interactor?.fetchAssetImage(request: request)
-    }
-    
-    func fetchCollectionImageHandler(request: AssetModel.FetchCollectionImage.Request) {
-        self.interactor?.fetchCollectionImage(request: request)
+//MARK: - internal method
+    func fetchAssetData() {
+        self.interactor?.fetchAssetInfo(request: .init())
+        self.interactor?.fetchAssetImage(request: .init())
+        self.interactor?.fetchCollectionImage(request: .init())
     }
 }
 

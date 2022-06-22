@@ -26,12 +26,12 @@ extension AssetPresenter: IAssetPresenter {
     }
     
     func presentAssetImage(response: AssetModel.FetchAssetImage.Response) {
-        let userImage = UIImage(data: response.assetImageData ?? Data())
-        self.vc?.displayAssetImage(viewModel: .init(assetImage: userImage))
+        let assetImage = UIImage(data: response.assetImageData ?? Data())
+        self.vc?.displayAssetImage(viewModel: .init(assetImage: assetImage))
     }
     
     func presentCollectionImage(response: AssetModel.FetchCollectionImage.Response) {
-        let userImage = UIImage(data: response.collectionImageData ?? Data())
-        self.vc?.displayCollectionImage(viewModel: .init(collectionImage: userImage))
+        let collectionImage = UIImage(data: response.collectionImageData ?? Data())
+        self.vc?.displayCollectionImage(viewModel: .init(collectionImage: collectionImage))
     }
 }

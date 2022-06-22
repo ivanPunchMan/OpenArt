@@ -36,7 +36,7 @@ extension HomeRouter: IHomeRouter {
     }
     
     func routeToSavedVC() {
-        let nextVC = LikedAssembly.build()
+        let nextVC = SavedAssembly.build()
         self.vc?.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

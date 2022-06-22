@@ -10,8 +10,8 @@ import UIKit
 
 class NavigationBar: UIView {
     
-    let newButton = LikedButton(text: "New")
-    let savedButton = LikedButton(text: "Saved")
+    let newButton = CustomButton(text: "New")
+    let savedButton = CustomButton(text: "Saved")
     
     init() {
         super.init(frame: .zero)

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C808A4E1285F9DA300A6D9E5 /* LikedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */; };
+		C808A4E1285F9DA300A6D9E5 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */; };
 		C808A4E3285FB21F00A6D9E5 /* DataStorageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */; };
 		C823B5022856220300FB15AB /* AssetsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5012856220300FB15AB /* AssetsDTO.swift */; };
 		C823B50428567B6200FB15AB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50328567B6200FB15AB /* NetworkService.swift */; };
@@ -18,7 +18,7 @@
 		C823B51028568CE800FB15AB /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50F28568CE800FB15AB /* HomeModel.swift */; };
 		C823B512285690D800FB15AB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B511285690D800FB15AB /* HomeView.swift */; };
 		C823B514285744D900FB15AB /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B513285744D900FB15AB /* NetworkWorker.swift */; };
-		C823B5162857680A00FB15AB /* AssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5152857680A00FB15AB /* AssetCollectionViewCell.swift */; };
+		C823B5162857680A00FB15AB /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */; };
 		C823B51D2857714800FB15AB /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B51C2857714800FB15AB /* Typography.swift */; };
 		C823B51F2857719100FB15AB /* Archivo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B51E2857719100FB15AB /* Archivo-Medium.ttf */; };
 		C823B5212857729600FB15AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5202857729600FB15AB /* Color.swift */; };
@@ -42,21 +42,21 @@
 		C8A839B72860938E007C047B /* AssetDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8A839B52860938E007C047B /* AssetDataModel.xcdatamodeld */; };
 		C8A839C2286095D7007C047B /* AssetEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839C0286095D7007C047B /* AssetEntity+CoreDataClass.swift */; };
 		C8A839C728609698007C047B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839C628609698007C047B /* DataService.swift */; };
-		C8A839CA2860A1E3007C047B /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839C92860A1E3007C047B /* LikedViewController.swift */; };
-		C8A839CC2860A1FE007C047B /* LikedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CB2860A1FE007C047B /* LikedRouter.swift */; };
-		C8A839CE2860A213007C047B /* LikedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CD2860A213007C047B /* LikedInteractor.swift */; };
-		C8A839D02860A229007C047B /* LikedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CF2860A229007C047B /* LikedPresenter.swift */; };
-		C8A839D22860A23F007C047B /* LikedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D12860A23F007C047B /* LikedModel.swift */; };
-		C8A839D42860B07F007C047B /* LikedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D32860B07F007C047B /* LikedView.swift */; };
-		C8A839D62860B2EB007C047B /* LikedAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D52860B2EB007C047B /* LikedAssetCell.swift */; };
-		C8A839D82861B61F007C047B /* LikedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D72861B61F007C047B /* LikedAssembly.swift */; };
+		C8A839CA2860A1E3007C047B /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839C92860A1E3007C047B /* SavedViewController.swift */; };
+		C8A839CC2860A1FE007C047B /* SavedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CB2860A1FE007C047B /* SavedRouter.swift */; };
+		C8A839CE2860A213007C047B /* SavedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CD2860A213007C047B /* SavedInteractor.swift */; };
+		C8A839D02860A229007C047B /* SavedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CF2860A229007C047B /* SavedPresenter.swift */; };
+		C8A839D22860A23F007C047B /* SavedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D12860A23F007C047B /* SavedModel.swift */; };
+		C8A839D42860B07F007C047B /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D32860B07F007C047B /* SavedView.swift */; };
+		C8A839D62860B2EB007C047B /* SavedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */; };
+		C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D72861B61F007C047B /* SavedAssembly.swift */; };
 		C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */; };
 		C8A839E328631553007C047B /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E228631552007C047B /* NavigationBar.swift */; };
 		C8A839E528634873007C047B /* SaveAssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E428634873007C047B /* SaveAssetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedButton.swift; sourceTree = "<group>"; };
+		C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageWorker.swift; sourceTree = "<group>"; };
 		C823B5012856220300FB15AB /* AssetsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDTO.swift; sourceTree = "<group>"; };
 		C823B50328567B6200FB15AB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		C823B50F28568CE800FB15AB /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		C823B511285690D800FB15AB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C823B513285744D900FB15AB /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
-		C823B5152857680A00FB15AB /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
+		C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		C823B51C2857714800FB15AB /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		C823B51E2857719100FB15AB /* Archivo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-Medium.ttf"; sourceTree = "<group>"; };
 		C823B5202857729600FB15AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -93,14 +93,14 @@
 		C8A839B62860938E007C047B /* AssetDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AssetDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C8A839C0286095D7007C047B /* AssetEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C8A839C628609698007C047B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		C8A839C92860A1E3007C047B /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
-		C8A839CB2860A1FE007C047B /* LikedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedRouter.swift; sourceTree = "<group>"; };
-		C8A839CD2860A213007C047B /* LikedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedInteractor.swift; sourceTree = "<group>"; };
-		C8A839CF2860A229007C047B /* LikedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPresenter.swift; sourceTree = "<group>"; };
-		C8A839D12860A23F007C047B /* LikedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedModel.swift; sourceTree = "<group>"; };
-		C8A839D32860B07F007C047B /* LikedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedView.swift; sourceTree = "<group>"; };
-		C8A839D52860B2EB007C047B /* LikedAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAssetCell.swift; sourceTree = "<group>"; };
-		C8A839D72861B61F007C047B /* LikedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAssembly.swift; sourceTree = "<group>"; };
+		C8A839C92860A1E3007C047B /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
+		C8A839CB2860A1FE007C047B /* SavedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRouter.swift; sourceTree = "<group>"; };
+		C8A839CD2860A213007C047B /* SavedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedInteractor.swift; sourceTree = "<group>"; };
+		C8A839CF2860A229007C047B /* SavedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPresenter.swift; sourceTree = "<group>"; };
+		C8A839D12860A23F007C047B /* SavedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedModel.swift; sourceTree = "<group>"; };
+		C8A839D32860B07F007C047B /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
+		C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCollectionViewCell.swift; sourceTree = "<group>"; };
+		C8A839D72861B61F007C047B /* SavedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAssembly.swift; sourceTree = "<group>"; };
 		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8A839E228631552007C047B /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		C8A839E428634873007C047B /* SaveAssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAssetModel.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C823B511285690D800FB15AB /* HomeView.swift */,
-				C823B5152857680A00FB15AB /* AssetCollectionViewCell.swift */,
+				C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */,
 				C823B5AF285A53DC00FB15AB /* CollectionHeaderView.swift */,
 			);
 			path = HomeView;
@@ -182,7 +182,7 @@
 			path = HomeModule;
 			sourceTree = "<group>";
 		};
-		C823B5A2285A3A5300FB15AB /* AssetDetailModule */ = {
+		C823B5A2285A3A5300FB15AB /* AssetModule */ = {
 			isa = PBXGroup;
 			children = (
 				C823B5A9285A402D00FB15AB /* AssetAssembly.swift */,
@@ -193,13 +193,12 @@
 				C823B5AD285A407100FB15AB /* AssetDetailView.swift */,
 				C823B5A7285A3FF300FB15AB /* AssetRouter.swift */,
 			);
-			path = AssetDetailModule;
+			path = AssetModule;
 			sourceTree = "<group>";
 		};
 		C88055D22848CBF000429670 = {
 			isa = PBXGroup;
 			children = (
-				C8A839EE2863BA4D007C047B /* Services */,
 				C88055DD2848CBF000429670 /* OpenArt */,
 				C88055DC2848CBF000429670 /* Products */,
 			);
@@ -216,11 +215,11 @@
 		C88055DD2848CBF000429670 /* OpenArt */ = {
 			isa = PBXGroup;
 			children = (
-				C823B513285744D900FB15AB /* NetworkWorker.swift */,
-				C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */,
+				C8A839EE2863BA4D007C047B /* Services */,
+				C8A5246D2863C21100F97A53 /* Workers */,
 				C823B59F285A3A1E00FB15AB /* HomeModule */,
-				C823B5A2285A3A5300FB15AB /* AssetDetailModule */,
-				C8A839C82860A1B0007C047B /* LikedModule */,
+				C823B5A2285A3A5300FB15AB /* AssetModule */,
+				C8A839C82860A1B0007C047B /* SavedModule */,
 				C823B51828576B5100FB15AB /* DisignSystem */,
 				C823B50928568C2700FB15AB /* SupportingFiles */,
 				C8A839EF2863BA74007C047B /* Extension UIKit */,
@@ -229,25 +228,34 @@
 			path = OpenArt;
 			sourceTree = "<group>";
 		};
-		C8A839C82860A1B0007C047B /* LikedModule */ = {
+		C8A5246D2863C21100F97A53 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				C8A839D72861B61F007C047B /* LikedAssembly.swift */,
-				C8A839D12860A23F007C047B /* LikedModel.swift */,
-				C8A839CD2860A213007C047B /* LikedInteractor.swift */,
-				C8A839CF2860A229007C047B /* LikedPresenter.swift */,
-				C8A839C92860A1E3007C047B /* LikedViewController.swift */,
-				C8A839DB286237F2007C047B /* View */,
-				C8A839CB2860A1FE007C047B /* LikedRouter.swift */,
+				C823B513285744D900FB15AB /* NetworkWorker.swift */,
+				C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */,
 			);
-			path = LikedModule;
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		C8A839C82860A1B0007C047B /* SavedModule */ = {
+			isa = PBXGroup;
+			children = (
+				C8A839D72861B61F007C047B /* SavedAssembly.swift */,
+				C8A839D12860A23F007C047B /* SavedModel.swift */,
+				C8A839CD2860A213007C047B /* SavedInteractor.swift */,
+				C8A839CF2860A229007C047B /* SavedPresenter.swift */,
+				C8A839C92860A1E3007C047B /* SavedViewController.swift */,
+				C8A839CB2860A1FE007C047B /* SavedRouter.swift */,
+				C8A839DB286237F2007C047B /* View */,
+			);
+			path = SavedModule;
 			sourceTree = "<group>";
 		};
 		C8A839DB286237F2007C047B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C8A839D32860B07F007C047B /* LikedView.swift */,
-				C8A839D52860B2EB007C047B /* LikedAssetCell.swift */,
+				C8A839D32860B07F007C047B /* SavedView.swift */,
+				C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,7 +302,7 @@
 			children = (
 				C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */,
 				C8A839E228631552007C047B /* NavigationBar.swift */,
-				C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */,
+				C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */,
 			);
 			path = ReusibleViews;
 			sourceTree = "<group>";
@@ -373,7 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C823B5B4285A6FB600FB15AB /* ExtensionUIImage.swift in Sources */,
-				C8A839D02860A229007C047B /* LikedPresenter.swift in Sources */,
+				C8A839D02860A229007C047B /* SavedPresenter.swift in Sources */,
 				C8A839C2286095D7007C047B /* AssetEntity+CoreDataClass.swift in Sources */,
 				C823B512285690D800FB15AB /* HomeView.swift in Sources */,
 				C8A839B72860938E007C047B /* AssetDataModel.xcdatamodeld in Sources */,
@@ -381,37 +389,37 @@
 				C823B50428567B6200FB15AB /* NetworkService.swift in Sources */,
 				C823B5A1285A3A4100FB15AB /* AssetViewController.swift in Sources */,
 				C823B51D2857714800FB15AB /* Typography.swift in Sources */,
-				C8A839D22860A23F007C047B /* LikedModel.swift in Sources */,
+				C8A839D22860A23F007C047B /* SavedModel.swift in Sources */,
 				C823B5AE285A407100FB15AB /* AssetDetailView.swift in Sources */,
 				C8A839E328631553007C047B /* NavigationBar.swift in Sources */,
 				C823B514285744D900FB15AB /* NetworkWorker.swift in Sources */,
 				C823B5AC285A404500FB15AB /* AssetModel.swift in Sources */,
 				C823B50828568BF200FB15AB /* HomeInteractor.swift in Sources */,
 				C808A4E3285FB21F00A6D9E5 /* DataStorageWorker.swift in Sources */,
-				C8A839D62860B2EB007C047B /* LikedAssetCell.swift in Sources */,
+				C8A839D62860B2EB007C047B /* SavedCollectionViewCell.swift in Sources */,
 				C823B5212857729600FB15AB /* Color.swift in Sources */,
-				C8A839CC2860A1FE007C047B /* LikedRouter.swift in Sources */,
+				C8A839CC2860A1FE007C047B /* SavedRouter.swift in Sources */,
 				C823B5B2285A5BA900FB15AB /* AssetDescriptionView.swift in Sources */,
 				C88055E32848CBF000429670 /* HomeViewController.swift in Sources */,
 				C823B5AA285A402D00FB15AB /* AssetAssembly.swift in Sources */,
-				C823B5162857680A00FB15AB /* AssetCollectionViewCell.swift in Sources */,
+				C823B5162857680A00FB15AB /* HomeCollectionViewCell.swift in Sources */,
 				C88055DF2848CBF000429670 /* AppDelegate.swift in Sources */,
 				C823B5A4285A3A7300FB15AB /* AssetInteractor.swift in Sources */,
 				C823B50E28568CA900FB15AB /* HomeAssembly.swift in Sources */,
-				C8A839CE2860A213007C047B /* LikedInteractor.swift in Sources */,
-				C8A839D42860B07F007C047B /* LikedView.swift in Sources */,
+				C8A839CE2860A213007C047B /* SavedInteractor.swift in Sources */,
+				C8A839D42860B07F007C047B /* SavedView.swift in Sources */,
 				C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */,
 				C8A839E528634873007C047B /* SaveAssetModel.swift in Sources */,
 				C823B50628568BBC00FB15AB /* HomePresenter.swift in Sources */,
-				C8A839D82861B61F007C047B /* LikedAssembly.swift in Sources */,
+				C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */,
 				C88055E12848CBF000429670 /* SceneDelegate.swift in Sources */,
 				C823B5A8285A3FF300FB15AB /* AssetRouter.swift in Sources */,
 				C8A839C728609698007C047B /* DataService.swift in Sources */,
 				C823B51028568CE800FB15AB /* HomeModel.swift in Sources */,
 				C823B5022856220300FB15AB /* AssetsDTO.swift in Sources */,
-				C808A4E1285F9DA300A6D9E5 /* LikedButton.swift in Sources */,
+				C808A4E1285F9DA300A6D9E5 /* CustomButton.swift in Sources */,
 				C823B5A6285A3A8B00FB15AB /* AssetPresenter.swift in Sources */,
-				C8A839CA2860A1E3007C047B /* LikedViewController.swift in Sources */,
+				C8A839CA2860A1E3007C047B /* SavedViewController.swift in Sources */,
 				C823B50C28568C7D00FB15AB /* HomeRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

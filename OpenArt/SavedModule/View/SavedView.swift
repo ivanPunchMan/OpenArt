@@ -1,5 +1,5 @@
 //
-//  LikedView.swift
+//  SavedView.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 20.06.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class LikedView: UIView {
+final class SavedView: UIView {
 //MARK: - private enums
     private enum Constant {
         static let itemAndGroupFractionalWidth: CGFloat = 1
@@ -34,12 +34,12 @@ final class LikedView: UIView {
     }
 
 //MARK: - properties
-    var deleleAssetHandler2: ((String) -> Void)?
+    var deleleAssetHandler: ((String) -> Void)?
     
     lazy var collectionView = createCollectionView()
     private let likedLabel = UILabel()
     
-    private var assetsViewModel: LikedModel.LoadAssets.ViewModel? {
+    private var assetsViewModel: SavedModel.LoadAssets.ViewModel? {
         didSet {
             self.collectionView.reloadData()
         }
@@ -58,20 +58,19 @@ final class LikedView: UIView {
     }
     
 //MARK: - internal methods    
-    func displayAssets(viewModel: LikedModel.LoadAssets.ViewModel) {
+    func displayAssets(viewModel: SavedModel.LoadAssets.ViewModel) {
         self.assetsViewModel = viewModel
     }
 }
 
 //MARK: - private methods
-private extension LikedView {
+private extension SavedView {
     func createCollectionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createCollectionViewLayout())
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(LikedAssetCell.self, forCellWithReuseIdentifier: LikedAssetCell.id)
+        collectionView.register(SavedCollectionViewCell.self, forCellWithReuseIdentifier: SavedCollectionViewCell.id)
         
         return collectionView
     }
@@ -130,13 +129,13 @@ private extension LikedView {
 }
 
 //MARK: - UICollectionViewDataSource
-extension LikedView: UICollectionViewDataSource {
+extension SavedView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.assetsViewModel?.assets.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikedAssetCell.id, for: indexPath) as? LikedAssetCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.id, for: indexPath) as? SavedCollectionViewCell else { return UICollectionViewCell() }
         
         let asset = self.assetsViewModel?.assets[indexPath.row]
 
@@ -144,15 +143,11 @@ extension LikedView: UICollectionViewDataSource {
         
         cell.onDeleteButtonTappedHandler = { [weak self] in
             if let tokenID = asset?.tokenID {
-                self?.deleleAssetHandler2?(tokenID)
+                self?.deleleAssetHandler?(tokenID)
                 self?.assetsViewModel?.assets.remove(at: indexPath.row)
             }
         }
         
         return cell
     }
-}
-
-extension LikedView: UICollectionViewDelegate {
-    
 }

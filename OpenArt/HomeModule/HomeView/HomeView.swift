@@ -24,7 +24,7 @@ final class HomeView: UIView {
     var fetchImagesForCellHandler: ((HomeModel.FetchAssetImage.Request) -> Void)?
     var didSelectItemAt: ((IndexPath) -> Void)?
     var savedButtonTappedHandler: (() -> Void)?
-    var saveButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
+    var saveAssetButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
     lazy var collectionView = createCollectionView()
     
     private let cachedDataSource: NSCache<AnyObject, UIImage> = {
@@ -55,7 +55,7 @@ private extension HomeView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(AssetCollectionViewCell.self, forCellWithReuseIdentifier: AssetCollectionViewCell.id)
+        collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.id)
         
         return collectionView
     }
@@ -111,22 +111,22 @@ extension HomeView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AssetCollectionViewCell.id, for: indexPath) as? AssetCollectionViewCell,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.id, for: indexPath) as? HomeCollectionViewCell,
             let asset = self.viewModel?.assets[indexPath.row]
         else { return UICollectionViewCell() }
+        
+        self.fetchImagesForCellHandler?(.init(indexPath: indexPath))
     
         cell.set(collectionName: asset.collectionName)
         
         cell.saveButtonTappedHandler = { [weak self] assetImage, collectionImage in
-            self?.saveButtonTappedHandler?(.init(tokenID: asset.tokenID,
+            self?.saveAssetButtonTappedHandler?(.init(tokenID: asset.tokenID,
                                                  assetName: asset.creatorUsername,
                                                  assetImage: assetImage,
                                                  assetDescription: asset.assetDescription,
                                                  collectionName: asset.collectionName,
                                                  collectionImage: collectionImage))
         }
-        
-        self.fetchImagesForCellHandler?(.init(indexPath: indexPath))
         
         return cell
     }

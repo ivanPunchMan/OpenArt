@@ -1,5 +1,5 @@
 //
-//  LikedViewController.swift
+//  SavedViewController.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 20.06.2022.
@@ -8,24 +8,24 @@
 import Foundation
 import UIKit
 
-protocol ILikedViewController: AnyObject {
-    func displayAssets(viewModel: LikedModel.LoadAssets.ViewModel)
+protocol ISavedViewController: AnyObject {
+    func displayAssets(viewModel: SavedModel.LoadAssets.ViewModel)
 }
 
-final class LikedViewController: UIViewController {
+final class SavedViewController: UIViewController {
 //MARK: - properties
-    private let customView = LikedView()
-    private var interactor: ILikedInteractor?
-    private var router: ILikedRouter?
+    private let customView = SavedView()
+    private var interactor: ISavedInteractor?
+    private var router: ISavedRouter?
     
 //MARK: - init
-    init(interactor: ILikedInteractor, router: ILikedRouter) {
+    init(interactor: ISavedInteractor, router: ISavedRouter) {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
         self.router = router
         
-        self.customView.deleleAssetHandler2 = { [weak self] uniqueID in
-            self?.interactor?.deleteAsset(for: .init(uniqueID: uniqueID))
+        self.customView.deleleAssetHandler = { [weak self] tokenID in
+            self?.interactor?.deleteAsset(for: .init(tokenID: tokenID))
         }
     }
     
@@ -46,15 +46,15 @@ final class LikedViewController: UIViewController {
     }
 }
 
-//MARK: - ILikedViewController
-extension LikedViewController: ILikedViewController {
-    func displayAssets(viewModel: LikedModel.LoadAssets.ViewModel) {
+//MARK: - ISavedViewController
+extension SavedViewController: ISavedViewController {
+    func displayAssets(viewModel: SavedModel.LoadAssets.ViewModel) {
         self.customView.displayAssets(viewModel: viewModel)
     }
 }
 
-private extension LikedViewController {
-    func fetchAssets(request: LikedModel.LoadAssets.Request) {
+private extension SavedViewController {
+    func fetchAssets(request: SavedModel.LoadAssets.Request) {
         self.interactor?.loadAssets(request: request)
     }
 }

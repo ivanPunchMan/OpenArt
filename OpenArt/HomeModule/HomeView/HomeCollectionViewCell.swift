@@ -1,5 +1,5 @@
 //
-//  AssetCollectionViewCell.swift
+//  HomeCollectionViewCell.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 13.06.2022.
@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-final class AssetCollectionViewCell: UICollectionViewCell {
-    static let id = String(describing: AssetCollectionViewCell.self)
+final class HomeCollectionViewCell: UICollectionViewCell {
+    static let id = String(describing: HomeCollectionViewCell.self)
     
 //MARK: - private enums
     private enum Constant {
@@ -23,12 +23,13 @@ final class AssetCollectionViewCell: UICollectionViewCell {
     
     private enum Constraint {
         static let assetViewHorizontalInset: CGFloat = 8
-        static let profileViewTopOffset: CGFloat = 8
+        static let collectionHeaderTopOffset: CGFloat = 8
         
-        static let kebabMenuTopOffset: CGFloat = 32
-        static let kebabMenuSize: CGFloat = 24
+        static let saveAssetTopOffset: CGFloat = 32
+        static let saveAssetButtonSize: CGFloat = 24
         
         static let assetImageViewTopOffset: CGFloat = 16
+        static let assetImageViewBottomOffset: CGFloat = 13
     }
     
 //MARK: - properties
@@ -36,9 +37,8 @@ final class AssetCollectionViewCell: UICollectionViewCell {
     
     private var containerView = UIView()
     private var collectionHeaderView = CollectionHeaderView()
-    private var kebabMenuButton = UIButton(type: .system)
+    private var saveAssetButton = UIButton(type: .system)
     private var assetImageView = ResizingImageView()
-    private let likedButton = UIButton()
     private var assetImage: UIImage?
     private var collectionImage: UIImage?
     
@@ -82,12 +82,12 @@ final class AssetCollectionViewCell: UICollectionViewCell {
 }
 
 //MARK: - private methods
-private extension AssetCollectionViewCell {
+private extension HomeCollectionViewCell {
     func setupLayout() {
         self.setupContainerViewLayout()
-        self.setupProfileViewLayout()
+        self.collectionHeaderViewLayout()
+        self.setupSaveAssetButtonLayout()
         self.setupAssetImageViewLayout()
-        self.setupLikedButtonLayout()
     }
     
     func setupContainerViewLayout() {
@@ -108,13 +108,37 @@ private extension AssetCollectionViewCell {
         self.containerView.layer.borderWidth = Constant.borderWidth
     }
     
-    func setupProfileViewLayout() {
+    func collectionHeaderViewLayout() {
         self.containerView.addSubview(self.collectionHeaderView)
         NSLayoutConstraint.activate([
-            self.collectionHeaderView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.profileViewTopOffset),
+            self.collectionHeaderView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.collectionHeaderTopOffset),
             self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.assetViewHorizontalInset),
-            self.collectionHeaderView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.assetViewHorizontalInset),
         ])
+    }
+    
+    func setupSaveAssetButtonLayout() {
+        self.containerView.addSubview(self.saveAssetButton)
+        self.configureSaveAssetButton()
+        NSLayoutConstraint.activate([
+            self.saveAssetButton.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.saveAssetTopOffset),
+            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.collectionHeaderView.trailingAnchor),
+            self.saveAssetButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.assetViewHorizontalInset),
+            self.saveAssetButton.widthAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),
+            self.saveAssetButton.heightAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),
+        ])
+    }
+    
+    func configureSaveAssetButton() {
+        self.saveAssetButton.translatesAutoresizingMaskIntoConstraints = false
+        self.saveAssetButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let addToSavedImage = UIImage(named: "addMenu")
+        self.saveAssetButton.setImage(addToSavedImage, for: .normal)
+        self.saveAssetButton.tintColor = Color.black.tone
+        self.saveAssetButton.addTarget(self, action: #selector(onSaveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func onSaveButtonTapped() {
+        self.saveButtonTappedHandler?(self.assetImage, self.collectionImage)
     }
     
     func setupAssetImageViewLayout() {
@@ -124,6 +148,7 @@ private extension AssetCollectionViewCell {
             self.assetImageView.topAnchor.constraint(equalTo: self.collectionHeaderView.bottomAnchor, constant: Constraint.assetImageViewTopOffset),
             self.assetImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.assetViewHorizontalInset),
             self.assetImageView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.assetViewHorizontalInset),
+            self.assetImageView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.assetImageViewBottomOffset)
         ])
     }
     
@@ -132,27 +157,5 @@ private extension AssetCollectionViewCell {
         self.assetImageView.layer.cornerRadius = Constant.cornerRadius
         self.assetImageView.layer.masksToBounds = true
         self.assetImageView.contentMode = .scaleAspectFit
-    }
-    
-    func setupLikedButtonLayout() {
-        self.containerView.addSubview(self.likedButton)
-        self.configureLikedButton()
-        let topConstraint = self.likedButton.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: 10)
-        topConstraint.priority = UILayoutPriority(500)
-        topConstraint.isActive = true
-        NSLayoutConstraint.activate([
-            self.likedButton.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
-            self.likedButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -10)
-        ])
-    }
-
-    func configureLikedButton() {
-        self.likedButton.translatesAutoresizingMaskIntoConstraints = false
-        self.likedButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        self.likedButton.addTarget(self, action: #selector(self.onSaveButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func onSaveButtonTapped() {
-        self.saveButtonTappedHandler?(self.assetImage, self.collectionImage)
     }
 }

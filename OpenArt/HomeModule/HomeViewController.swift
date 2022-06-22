@@ -43,7 +43,7 @@ final class HomeViewController: UIViewController {
             interactor.fetchImagesForCell(request: request)
         }
         
-        self.customView.saveButtonTappedHandler = { request in
+        self.customView.saveAssetButtonTappedHandler = { request in
             interactor.saveAsset(request: request)
         }
     }
@@ -73,13 +73,13 @@ extension HomeViewController: IHomeViewController {
     }
     
     func displayAssetImage(viewModel: HomeModel.FetchAssetImage.ViewModel) {
-        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? AssetCollectionViewCell {
+        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(assetImage: viewModel.assetImage)
         }
     }
     
     func displayCollectionImage(viewModel: HomeModel.FetchCollectionImage.ViewModel) {
-        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? AssetCollectionViewCell {
+        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(collectionImage: viewModel.collectionImage)
         }
     }
@@ -88,7 +88,8 @@ extension HomeViewController: IHomeViewController {
 //MARK: - private methods
 private extension HomeViewController {
     func configureNavBar() {
-        let savedBarButton = UIBarButtonItem(image: UIImage(systemName: "photo.on.rectangle.angled"), style: .done, target: self, action: #selector(onSavedBarButtonTapped))
+        let savedImage = UIImage(systemName: "photo.on.rectangle.angled")
+        let savedBarButton = UIBarButtonItem(image: savedImage, style: .done, target: self, action: #selector(onSavedBarButtonTapped))
         savedBarButton.tintColor = Color.black.tone
         self.navigationItem.rightBarButtonItem = savedBarButton
     }

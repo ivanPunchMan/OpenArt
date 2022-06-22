@@ -8,7 +8,6 @@
 import Foundation
 
 protocol IAssetInteractor: AnyObject {
-    var asset: Asset? { get set }
     func save(data: AssetModel.SaveAsset.Request)
     func fetchAssetInfo(request: AssetModel.FetchAssetInfo.Request)
     func fetchAssetImage(request: AssetModel.FetchAssetImage.Request)
@@ -19,6 +18,7 @@ protocol IAssetDataStore: AnyObject {
     var asset: Asset? { get set }
 }
 
+//MARK: - IAssetDataStore
 final class AssetInteractor: IAssetDataStore {
 //MARK: - properties
     var asset: Asset?

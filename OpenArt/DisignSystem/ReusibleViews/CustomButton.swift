@@ -1,5 +1,5 @@
 //
-//  LikedButton.swift
+//  CustomButton.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 19.06.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LikedButton: UIButton {
+class CustomButton: UIButton {
 //MARK: - private enums
     private enum Constant {
         static let conrnerRadius: CGFloat = 8
@@ -50,7 +50,7 @@ class LikedButton: UIButton {
 }
 
 //MARK: - private methods
-private extension LikedButton {
+private extension CustomButton {
     func configureView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = Color.primary.tone

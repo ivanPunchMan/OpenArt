@@ -7,8 +7,6 @@
 
 import Foundation
 import CoreData
-//НЕ ЗАБЫТЬ УДАЛИТЬ
-import UIKit
 
 class DataService {
     static var shared = DataService()
@@ -43,7 +41,7 @@ class DataService {
     
     func loadAssets() -> [AssetEntity] {
         let fetchRequest = AssetEntity.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         var assetEntities = [AssetEntity]()
@@ -61,7 +59,7 @@ class DataService {
         let fetchRequest = AssetEntity.fetchRequest()
         fetchRequest.fetchLimit = 1
         
-        let sortDescriptor = NSSortDescriptor(key: "tokenID", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "tokenID", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         var assetEntities = [AssetEntity]()

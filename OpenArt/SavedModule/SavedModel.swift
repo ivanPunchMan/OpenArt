@@ -1,5 +1,5 @@
 //
-//  LikedModel.swift
+//  SavedModel.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 20.06.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct LikedModel {
+struct SavedModel {
 //MARK: - LoadAssets
     enum LoadAssets {
         struct Request {
@@ -44,18 +44,18 @@ struct LikedModel {
         }
     }
 
-//MARK: - DeleteAsset2
-    enum DeleteAsset2 {
+//MARK: - DeleteAsset
+    enum DeleteAsset {
         struct Request {
-            let uniqueID: String
+            let tokenID: String
         }
         
         struct Response {
-            let uniqueID: String
+            let tokenID: String
         }
         
         struct ViewModel {
-            let uniqueID: String
+            let tokenID: String
         }
     }
 }

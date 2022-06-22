@@ -1,5 +1,5 @@
 //
-//  LikedAssetCell.swift
+//  SavedCollectionViewCell.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 20.06.2022.
@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-final class LikedAssetCell: UICollectionViewCell {
-    static let id = String(describing: LikedAssetCell.self)
+final class SavedCollectionViewCell: UICollectionViewCell {
+    static let id = String(describing: SavedCollectionViewCell.self)
 
 //MARK: - private enums
     private enum Constant {
@@ -26,6 +26,9 @@ final class LikedAssetCell: UICollectionViewCell {
         static let assetNameLabelVerticalOffset: CGFloat = 5
         
         static let deleteAssetButtonSize: CGFloat = 24
+        static let deleteAssetButtonTopOffset: CGFloat = 4
+        static let deleteAssetButtonLeadingOffset: CGFloat = 5
+        static let deleteAssetButtonBottomOffset: CGFloat = 5
     }
     
 //MARK: - properties
@@ -52,7 +55,7 @@ final class LikedAssetCell: UICollectionViewCell {
     }
     
 //MARK: - internal method
-    func set(assetModel: LikedModel.LoadAssets.AssetModel?) {
+    func set(assetModel: SavedModel.LoadAssets.AssetModel?) {
         let assetImageData = assetModel?.assetImage ?? Data()
         let assetImage = UIImage(data: assetImageData) ?? UIImage()
         
@@ -62,7 +65,7 @@ final class LikedAssetCell: UICollectionViewCell {
 }
 
 //MARK: - private methods
-private extension LikedAssetCell {
+private extension SavedCollectionViewCell {
     func setupLayout() {
         self.setupContainerViewLayout()
         self.setupAssetImageViewLayout()
@@ -120,9 +123,9 @@ private extension LikedAssetCell {
         self.configureDeleteAssetButton()
         deleteAssetButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
         NSLayoutConstraint.activate([
-            self.deleteAssetButton.topAnchor.constraint(equalTo: assetImageView.bottomAnchor, constant: 4),
-            self.deleteAssetButton.leadingAnchor.constraint(equalTo: self.assetNameLabel.trailingAnchor, constant: 5),
-            self.deleteAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
+            self.deleteAssetButton.topAnchor.constraint(equalTo: assetImageView.bottomAnchor, constant: Constraint.deleteAssetButtonTopOffset),
+            self.deleteAssetButton.leadingAnchor.constraint(equalTo: self.assetNameLabel.trailingAnchor, constant: Constraint.deleteAssetButtonLeadingOffset),
+            self.deleteAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.deleteAssetButtonBottomOffset),
             self.deleteAssetButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constraint.cellHorizontalInset),
             self.deleteAssetButton.widthAnchor.constraint(equalToConstant: Constraint.deleteAssetButtonSize),
             self.deleteAssetButton.heightAnchor.constraint(equalToConstant: Constraint.deleteAssetButtonSize)

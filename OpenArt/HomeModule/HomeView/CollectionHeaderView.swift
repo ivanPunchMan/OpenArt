@@ -11,23 +11,19 @@ import UIKit
 final class CollectionHeaderView: UIView {
 //MARK: - private enums
     private enum Constant {
-        static let avatarImageViewSize: CGFloat = 64
-        static let avatarImageViewCornerRadius: CGFloat = avatarImageViewSize / 2
+        static let collectionImageViewSize: CGFloat = 64
+        static let collectionImageViewCornerRadius: CGFloat = collectionImageViewSize / 2
     }
     
     private enum Constraint {
-        static let usernameLabelVerticalyOffset: CGFloat = 22
-        static let usernameLabelLeadingOffset: CGFloat = 16
-        
-        static let kebabMenuVerticalOffset: CGFloat = 20
-        static let kebabMenuSize: CGFloat = 24
+        static let collectionNameLabelLeadingOffset: CGFloat = 16
+        static let collectionNameLabelHeight: CGFloat = 20
     }
 
-//MARK: - private properties
+//MARK: - properties
     private let containerView = UIView()
     private lazy var collectionImageView = UIImageView()
     private var collectionNameLabel = UILabel()
-    private var kebabMenuButton = UIButton(type: .system)
 
 //MARK: - init
     init() {
@@ -64,69 +60,49 @@ final class CollectionHeaderView: UIView {
 private extension CollectionHeaderView {
     func setupLayout() {
         self.setupLayoutAvatarImageView()
-        self.setupLayoutUsernameLabel()
-        self.setupKebabMenuButtonLayout()
+        self.setupCollectionNameLabel()
     }
     
     func setupLayoutAvatarImageView() {
         self.addSubview(self.collectionImageView)
-        self.configureAvatarImageView()
+        self.configureCollectionImageView()
         NSLayoutConstraint.activate([
             self.collectionImageView.topAnchor.constraint(equalTo: self.topAnchor),
             self.collectionImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.collectionImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.collectionImageView.widthAnchor.constraint(equalToConstant: Constant.avatarImageViewSize),
+            self.collectionImageView.widthAnchor.constraint(equalToConstant: Constant.collectionImageViewSize),
         ])
-        let constraint = self.collectionImageView.heightAnchor.constraint(equalToConstant: Constant.avatarImageViewSize)
+        let constraint = self.collectionImageView.heightAnchor.constraint(equalToConstant: Constant.collectionImageViewSize)
         constraint.priority = UILayoutPriority(999)
         constraint.isActive = true
     }
     
-    func setupLayoutUsernameLabel() {
-        self.addSubview(self.collectionNameLabel)
-        self.configureUsernameLabel()
-        NSLayoutConstraint.activate([
-            self.collectionNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.collectionNameLabel.leadingAnchor.constraint(equalTo: self.collectionImageView.trailingAnchor, constant: Constraint.usernameLabelLeadingOffset),
-            self.collectionNameLabel.heightAnchor.constraint(equalToConstant: 20),
-        ])
-    }
-    
-    func setupKebabMenuButtonLayout() {
-        self.addSubview(self.kebabMenuButton)
-        self.configureKebabMenuButton()
-        NSLayoutConstraint.activate([
-            self.kebabMenuButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.kebabMenuButton.leadingAnchor.constraint(equalTo: self.collectionNameLabel.trailingAnchor),
-            self.kebabMenuButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.kebabMenuButton.widthAnchor.constraint(equalToConstant: Constraint.kebabMenuSize),
-            self.kebabMenuButton.heightAnchor.constraint(equalToConstant: Constraint.kebabMenuSize),
-        ])
-    }
-    
-    func configureAvatarImageView() {
+    func configureCollectionImageView() {
         self.collectionImageView.translatesAutoresizingMaskIntoConstraints = false
         self.collectionImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         self.collectionImageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         self.collectionImageView.backgroundColor = .clear
-        self.collectionImageView.layer.cornerRadius = Constant.avatarImageViewCornerRadius
+        self.collectionImageView.layer.cornerRadius = Constant.collectionImageViewCornerRadius
         self.collectionImageView.layer.masksToBounds = true
         self.collectionImageView.contentMode = .scaleAspectFill
     }
     
-    func configureUsernameLabel() {
+    func setupCollectionNameLabel() {
+        self.addSubview(self.collectionNameLabel)
+        self.configureCollectionNameLabel()
+        NSLayoutConstraint.activate([
+            self.collectionNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.collectionNameLabel.leadingAnchor.constraint(equalTo: self.collectionImageView.trailingAnchor, constant: Constraint.collectionNameLabelLeadingOffset),
+            self.collectionNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.collectionNameLabel.heightAnchor.constraint(equalToConstant: Constraint.collectionNameLabelHeight),
+        ])
+    }
+    
+    func configureCollectionNameLabel() {
         self.collectionNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.collectionNameLabel.font = Typography.TextLG.medium.font
         self.collectionNameLabel.textAlignment = .left
         self.collectionNameLabel.adjustsFontSizeToFitWidth = true
         self.collectionNameLabel.minimumScaleFactor = 0.4
-    }
-    
-    func configureKebabMenuButton() {
-        self.kebabMenuButton.translatesAutoresizingMaskIntoConstraints = false
-        self.kebabMenuButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        let kebabMenuImage = UIImage(named: "kebabMenu")
-        self.kebabMenuButton.setImage(kebabMenuImage, for: .normal)
-        self.kebabMenuButton.tintColor = Color.black.tone
     }
 }
