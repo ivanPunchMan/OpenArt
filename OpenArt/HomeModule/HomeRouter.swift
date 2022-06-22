@@ -17,13 +17,14 @@ protocol IHomeDataPassing: AnyObject {
     var dataStore: IHomeDataStore? { get }
 }
 
+//MARK: - IHomeDataPassing
 final class HomeRouter: IHomeDataPassing {
     weak var dataStore: IHomeDataStore?
     weak var vc: UIViewController?
 }
 
+//MARK: - IHomeRouter
 extension HomeRouter: IHomeRouter {
-    
     func routeToPlaceBidVC(from indexPath: IndexPath) {
         let nextVC = AssetAssembly.build()
         

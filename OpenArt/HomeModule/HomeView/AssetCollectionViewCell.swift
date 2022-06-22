@@ -11,6 +11,7 @@ import UIKit
 final class AssetCollectionViewCell: UICollectionViewCell {
     static let id = String(describing: AssetCollectionViewCell.self)
     
+//MARK: - private enums
     private enum Constant {
         static let profileViewLeadingOffset: CGFloat = 8
         static let profileViewTopOffset: CGFloat = 8
@@ -75,7 +76,6 @@ final class AssetCollectionViewCell: UICollectionViewCell {
 //MARK: - prepareForReuse
     override func prepareForReuse() {
         super.prepareForReuse()
-
         self.set(assetImage: nil)
         self.collectionHeaderView.set(collectionImage: nil)
     }

@@ -1,5 +1,5 @@
 //
-//  AssetView.swift
+//  AssetDetailView.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 15.06.2022.
@@ -7,10 +7,6 @@
 
 import Foundation
 import UIKit
-
-protocol IAssetDetailView: AnyObject {
-    
-}
 
 final class AssetDetailView: UIView {
  //MARK: - private enums
@@ -51,29 +47,24 @@ final class AssetDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//MARK: - internal methods
     func set(assetImage: UIImage?) {
         self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
-    }
-    
-    func set(collectionName: String?) {
-        self.collectionHeaderView.set(collectionName: collectionName)
     }
     
     func set(collectionImage: UIImage?) {
         self.collectionHeaderView.set(collectionImage: collectionImage)
     }
     
-    func set(title: String?) {
-        self.descriptionView.set(title: title)
-    }
-    
-    func set(description: String?) {
-        self.descriptionView.set(description: description)
+    func set(assetInfo viewModel: AssetModel.FetchAssetInfo.ViewModel) {
+        self.collectionHeaderView.set(collectionName: viewModel.collectionName)
+        self.descriptionView.set(title: viewModel.assetName)
+        self.descriptionView.set(description: viewModel.assetDescription)
     }
 }
 
-//MARK: - private method
-extension AssetDetailView: IAssetDetailView {
+//MARK: - private methods
+private extension AssetDetailView {
     func setupLayout() {
         self.setupScrollViewLayout()
         self.setupContainerViewLayout()        
@@ -135,6 +126,7 @@ extension AssetDetailView: IAssetDetailView {
             self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
             self.collectionHeaderView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset),
         ])
+        
         let topConstraint = self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset)
         topConstraint.priority = UILayoutPriority(250)
         topConstraint.isActive = true

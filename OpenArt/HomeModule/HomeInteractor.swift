@@ -18,6 +18,7 @@ protocol IHomeDataStore: AnyObject {
 }
 
 final class HomeInteractor: IHomeDataStore {
+//MARK: - properties
     var assets = [Asset]()
     
     private var presenter: IHomePresenter
@@ -25,7 +26,7 @@ final class HomeInteractor: IHomeDataStore {
     private var dataStorageWorker: IDataStorageSaveWorker
     private var next: String?
     
-    
+//MARK: - init
     init(presenter: IHomePresenter, networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker), dataStorageWorker: IDataStorageSaveWorker) {
         self.presenter = presenter
         self.networkWorker = networkWorker
@@ -33,6 +34,7 @@ final class HomeInteractor: IHomeDataStore {
     }
 }
 
+//MARK: - IHomeInteractor
 extension HomeInteractor: IHomeInteractor {
     func saveAsset(request: HomeModel.SaveAsset.Request) {
         let tokenID = request.tokenID
@@ -75,6 +77,7 @@ extension HomeInteractor: IHomeInteractor {
     }
 }
 
+//MARK: - private methods
 private extension HomeInteractor {
     func fetchAssetImage(from url: String?, for indexPath: IndexPath) {
         networkWorker.fetchImage(from: url) { [weak self] result in

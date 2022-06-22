@@ -15,6 +15,7 @@ final class LikedPresenter {
     weak var vc: ILikedViewController?
 }
 
+//MARK: - ILikedPresenter
 extension LikedPresenter: ILikedPresenter {
     func presentAssets(response: LikedModel.LoadAssets.Response) {
         self.vc?.displayAssets(viewModel: .init(from: response))

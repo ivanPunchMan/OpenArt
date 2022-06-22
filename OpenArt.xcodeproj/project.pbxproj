@@ -101,7 +101,7 @@
 		C8A839D32860B07F007C047B /* LikedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedView.swift; sourceTree = "<group>"; };
 		C8A839D52860B2EB007C047B /* LikedAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAssetCell.swift; sourceTree = "<group>"; };
 		C8A839D72861B61F007C047B /* LikedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAssembly.swift; sourceTree = "<group>"; };
-		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AssetEntity+CoreDataProperties.swift"; path = "../AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8A839E228631552007C047B /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		C8A839E428634873007C047B /* SaveAssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAssetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +120,6 @@
 		C823B50928568C2700FB15AB /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */,
 				C88055DE2848CBF000429670 /* AppDelegate.swift */,
 				C88055E02848CBF000429670 /* SceneDelegate.swift */,
 				C88055E72848CBF400429670 /* Assets.xcassets */,
@@ -151,16 +150,14 @@
 		C823B51828576B5100FB15AB /* DisignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */,
-				C8A839E228631552007C047B /* NavigationBar.swift */,
-				C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */,
+				C823B51B2857713400FB15AB /* Typography */,
 				C823B5202857729600FB15AB /* Color.swift */,
-				C823B51B2857713400FB15AB /* Fonts */,
+				C8A839F32863C07B007C047B /* ReusibleViews */,
 			);
 			path = DisignSystem;
 			sourceTree = "<group>";
 		};
-		C823B51B2857713400FB15AB /* Fonts */ = {
+		C823B51B2857713400FB15AB /* Typography */ = {
 			isa = PBXGroup;
 			children = (
 				C823B51E2857719100FB15AB /* Archivo-Medium.ttf */,
@@ -168,7 +165,7 @@
 				C823B5B7285A746300FB15AB /* Archivo-Regular.ttf */,
 				C823B51C2857714800FB15AB /* Typography.swift */,
 			);
-			path = Fonts;
+			path = Typography;
 			sourceTree = "<group>";
 		};
 		C823B59F285A3A1E00FB15AB /* HomeModule */ = {
@@ -202,6 +199,7 @@
 		C88055D22848CBF000429670 = {
 			isa = PBXGroup;
 			children = (
+				C8A839EE2863BA4D007C047B /* Services */,
 				C88055DD2848CBF000429670 /* OpenArt */,
 				C88055DC2848CBF000429670 /* Products */,
 			);
@@ -220,17 +218,12 @@
 			children = (
 				C823B513285744D900FB15AB /* NetworkWorker.swift */,
 				C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */,
-				C8A839E428634873007C047B /* SaveAssetModel.swift */,
-				C8A839B52860938E007C047B /* AssetDataModel.xcdatamodeld */,
-				C8A839C0286095D7007C047B /* AssetEntity+CoreDataClass.swift */,
-				C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */,
 				C823B59F285A3A1E00FB15AB /* HomeModule */,
 				C823B5A2285A3A5300FB15AB /* AssetDetailModule */,
 				C8A839C82860A1B0007C047B /* LikedModule */,
 				C823B51828576B5100FB15AB /* DisignSystem */,
-				C8A839C628609698007C047B /* DataService.swift */,
-				C823B50A28568C4100FB15AB /* NetworkService */,
 				C823B50928568C2700FB15AB /* SupportingFiles */,
+				C8A839EF2863BA74007C047B /* Extension UIKit */,
 				C88055EC2848CBF400429670 /* Info.plist */,
 			);
 			path = OpenArt;
@@ -257,6 +250,53 @@
 				C8A839D52860B2EB007C047B /* LikedAssetCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C8A839EE2863BA4D007C047B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C8A839F02863BB2E007C047B /* DataService */,
+				C823B50A28568C4100FB15AB /* NetworkService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C8A839EF2863BA74007C047B /* Extension UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */,
+			);
+			path = "Extension UIKit";
+			sourceTree = "<group>";
+		};
+		C8A839F02863BB2E007C047B /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+				C8A839C628609698007C047B /* DataService.swift */,
+				C8A839B52860938E007C047B /* AssetDataModel.xcdatamodeld */,
+				C8A839E428634873007C047B /* SaveAssetModel.swift */,
+				C8A839F12863BB46007C047B /* NSManagedObject */,
+			);
+			path = DataService;
+			sourceTree = "<group>";
+		};
+		C8A839F12863BB46007C047B /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				C8A839C0286095D7007C047B /* AssetEntity+CoreDataClass.swift */,
+				C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */,
+			);
+			path = NSManagedObject;
+			sourceTree = "<group>";
+		};
+		C8A839F32863C07B007C047B /* ReusibleViews */ = {
+			isa = PBXGroup;
+			children = (
+				C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */,
+				C8A839E228631552007C047B /* NavigationBar.swift */,
+				C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */,
+			);
+			path = ReusibleViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

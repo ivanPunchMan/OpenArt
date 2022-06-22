@@ -13,67 +13,29 @@ protocol IDataStorageSaveWorker {
 }
 
 protocol IDataStorageLoadWorker {
-    var deleteAsset: ((IndexPath?) -> Void)? { get set }
     func loadAssets() -> [AssetEntity]
-    
     func deleteAsset(with uniqueID: String)
-    func countOfAssets() -> Int
-    func loadAsset(for indexPath: IndexPath) -> AssetEntity
-    func deleteAsset(at indexPath: IndexPath)
 }
 
+//MARK: - AssetDataStorageWorker
 final class AssetDataStorageWorker: NSObject {
-    var deleteAsset: ((IndexPath?) -> Void)?
-    
     private let dataService = DataService.shared
-    
-    override init() {
-        super.init()
-//        dataService.fetchedResultController.delegate = self
-    }
 }
 
+//MARK: - IDataStorageSaveWorker
 extension AssetDataStorageWorker: IDataStorageSaveWorker {
     func save(data: AssetSaveDataModel) {
         self.dataService.addNew(asset: data)
-        
-        print(data)
-        print("Данные сохранены")
     }
 }
 
+//MARK: - IDataStorageLoadWorker
 extension AssetDataStorageWorker: IDataStorageLoadWorker {
-    func countOfAssets() -> Int {
-        self.dataService.countOfAssets()
-    }
-    
-    func loadAsset(for indexPath: IndexPath) -> AssetEntity {
-        let assetEntity = self.dataService.fetchedResultController.object(at: indexPath)
-
-        return assetEntity
-    }
-    
     func deleteAsset(with uniqueID: String) {
         self.dataService.deleteAssetEntity(with: uniqueID)
     }
     
-    func deleteAsset(at indexPath: IndexPath) {
-        let assetEntity = self.dataService.fetchedResultController.object(at: indexPath)
-        self.dataService.delete(assetEntity: assetEntity)
-    }
-    
     func loadAssets() -> [AssetEntity] {
         self.dataService.loadAssets()
-    }
-}
-
-extension AssetDataStorageWorker: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .delete:
-            deleteAsset?(indexPath)
-        default:
-            break
-        }
     }
 }

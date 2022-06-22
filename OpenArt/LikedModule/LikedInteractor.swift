@@ -14,6 +14,7 @@ protocol ILikedInteractor: AnyObject {
 
 protocol ILikedDataStore: AnyObject {}
 
+//MARK: - ILikedDataStore
 final class LikedInteractor: ILikedDataStore {
     private var presenter: ILikedPresenter?
     private var dataStorageWorker: IDataStorageLoadWorker
@@ -24,6 +25,7 @@ final class LikedInteractor: ILikedDataStore {
     }
 }
 
+//MARK: - ILikedInteractor
 extension LikedInteractor: ILikedInteractor {
     func loadAssets(request: LikedModel.LoadAssets.Request) {
         let assetsEntities = self.dataStorageWorker.loadAssets()

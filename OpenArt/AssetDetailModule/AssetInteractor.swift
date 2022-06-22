@@ -20,12 +20,13 @@ protocol IAssetDataStore: AnyObject {
 }
 
 final class AssetInteractor: IAssetDataStore {
-    
+//MARK: - properties
     var asset: Asset?
     private var presenter: IAssetPresenter
     private var networkWorker: IImageNetworkWorker
     private var dataStorageWorker: IDataStorageSaveWorker
     
+//MARK: - init
     init(presenter: IAssetPresenter, networkWorker: IImageNetworkWorker, dataStorageWorker: IDataStorageSaveWorker) {
         self.presenter = presenter
         self.networkWorker = networkWorker
@@ -33,6 +34,7 @@ final class AssetInteractor: IAssetDataStore {
     }
 }
 
+//MARK: - IAssetInteractor
 extension AssetInteractor: IAssetInteractor {
     func fetchAssetInfo(request: AssetModel.FetchAssetInfo.Request) {
         let assetName = asset?.name

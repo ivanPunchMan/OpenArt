@@ -8,7 +8,7 @@
 import UIKit
 
 struct LikedModel {
-    
+//MARK: - LoadAssets
     enum LoadAssets {
         struct Request {
         }
@@ -44,6 +44,7 @@ struct LikedModel {
         }
     }
 
+//MARK: - DeleteAsset2
     enum DeleteAsset2 {
         struct Request {
             let uniqueID: String

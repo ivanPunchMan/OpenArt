@@ -8,7 +8,7 @@
 import UIKit
 
 enum Typography {
-    
+//MARK: - DisplayXS
     enum DisplayXS {
         case semiBold
         
@@ -19,7 +19,7 @@ enum Typography {
             }
         }
     }
-    
+//MARK: - TextLG
     enum TextLG {
         case medium
         
@@ -30,7 +30,7 @@ enum Typography {
             }
         }
     }
-    
+//MARK: - TextMD
     enum TextMD {
         case regular
         
@@ -41,5 +41,4 @@ enum Typography {
             }
         }
     }
-
 }

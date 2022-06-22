@@ -32,7 +32,6 @@ class NavigationBar: UIView {
 }
 
 private extension NavigationBar {
-    
     func setupLayout() {
         self.setupNewButtonLayout()
         self.setupSavedButtonLayout()

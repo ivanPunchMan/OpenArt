@@ -35,9 +35,9 @@ final class LikedView: UIView {
 
 //MARK: - properties
     var deleleAssetHandler2: ((String) -> Void)?
+    
     lazy var collectionView = createCollectionView()
     private let likedLabel = UILabel()
-    private var countOfAssets = 0
     
     private var assetsViewModel: LikedModel.LoadAssets.ViewModel? {
         didSet {
@@ -57,12 +57,7 @@ final class LikedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//MARK: - internal methods
-    func set(countOfAssets: Int) {
-        self.countOfAssets = countOfAssets
-        collectionView.reloadData()
-    }
-    
+//MARK: - internal methods    
     func displayAssets(viewModel: LikedModel.LoadAssets.ViewModel) {
         self.assetsViewModel = viewModel
     }
@@ -116,6 +111,13 @@ private extension LikedView {
         ])
     }
     
+    func configureLikedLabel() {
+        self.likedLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.likedLabel.font = Typography.DisplayXS.semiBold.font
+        self.likedLabel.text = "Liked"
+        self.likedLabel.backgroundColor = .clear
+    }
+    
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
@@ -125,17 +127,10 @@ private extension LikedView {
             self.collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-    
-    func configureLikedLabel() {
-        self.likedLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.likedLabel.font = Typography.DisplayXS.semiBold.font
-        self.likedLabel.text = "Liked"
-        self.likedLabel.backgroundColor = .clear
-    }
 }
 
+//MARK: - UICollectionViewDataSource
 extension LikedView: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.assetsViewModel?.assets.count ?? 0
     }

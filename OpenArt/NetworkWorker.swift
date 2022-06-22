@@ -19,6 +19,7 @@ final class NetworkWorker {
     var networkService = NetworkService.shared
 }
 
+//MARK: - IAssetsNetworkWorker
 extension NetworkWorker: IAssetsNetworkWorker {
     func fetchAssets(nextPage: String?, completion: @escaping (Result<AssetsDTO, Error>) -> Void) {
         networkService.loadAssets(nextPage: nextPage) { result in
@@ -36,6 +37,7 @@ extension NetworkWorker: IAssetsNetworkWorker {
     }
 }
 
+//MARK: - IImageNetworkWorker
 extension NetworkWorker: IImageNetworkWorker {
     func fetchImage(from url: String?, completion: @escaping (Result<Data, Error>) -> Void) {
         networkService.downloadImage(from: url) { result in

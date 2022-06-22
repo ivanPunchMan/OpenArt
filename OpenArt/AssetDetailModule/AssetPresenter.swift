@@ -17,6 +17,7 @@ final class AssetPresenter {
     weak var vc: IAssetViewController?
 }
 
+//MARK: - IAssetPresenter
 extension AssetPresenter: IAssetPresenter {
     func presentAssetInfo(response: AssetModel.FetchAssetInfo.Response) {
         self.vc?.displayAssetInfo(viewModel: .init(assetName: response.assetName,

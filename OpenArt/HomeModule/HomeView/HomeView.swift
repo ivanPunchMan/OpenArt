@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class HomeView: UIView {
-    
+//MARK: - private enums
     private enum Constant {
         static let itemAndGroupFractionalWidth: CGFloat = 1
         static let itemAndGroupEstimatedHeightDimension: CGFloat = 563
@@ -17,7 +17,8 @@ final class HomeView: UIView {
         static let itemTopEdgeSpacing: CGFloat = 32
         static let itemHorizontalEdgeInsets: CGFloat = 16
     }
-    
+
+//MARK: - properties
     var viewModel: HomeModel.FetchAssets.ViewModel?
     var fetchDataHandler: ((HomeModel.FetchAssets.Request) -> Void)?
     var fetchImagesForCellHandler: ((HomeModel.FetchAssetImage.Request) -> Void)?
@@ -33,8 +34,7 @@ final class HomeView: UIView {
         return cache
     }()
         
-    private var urls = [String]()
-    
+//MARK: - init
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
@@ -45,13 +45,10 @@ final class HomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func display(comletion: @escaping (UIImage) -> Void) {
-    }
 }
 
+//MARK: - private methods
 private extension HomeView {
-    
     func createCollectionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         
@@ -98,12 +95,14 @@ private extension HomeView {
     }
 }
 
+//MARK: - UICollectionViewDelegate
 extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.didSelectItemAt?(indexPath)
     }
 }
 
+//MARK: - UICollectionViewDataSource
 extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let count = self.viewModel?.assets.count else { return 0 }
@@ -111,7 +110,6 @@ extension HomeView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AssetCollectionViewCell.id, for: indexPath) as? AssetCollectionViewCell,
             let asset = self.viewModel?.assets[indexPath.row]

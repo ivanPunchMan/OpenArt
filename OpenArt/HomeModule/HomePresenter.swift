@@ -18,6 +18,7 @@ final class HomePresenter {
     weak var vc: IHomeViewController?
 }
 
+//MARK: - IHomePresenter
 extension HomePresenter: IHomePresenter {
     func presentAssets(response: HomeModel.FetchAssets.Response) {
         let nextPage = response.nextPage

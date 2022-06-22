@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class AssetDescriptionView: UIView {
-    
+//MARK: - private enums
     private enum Constant {
         static let descriptionLabelTextColorAlphaComponent: CGFloat = 0.5
         static let descriptionLabelLineHeightMultiple: CGFloat = 1.26
@@ -19,9 +19,11 @@ final class AssetDescriptionView: UIView {
         static let descriptionLabelTopOffset: CGFloat = 16
     }
     
+//MARK: - properties
     private let assetNameLabel = UILabel()
     private let assetDescriptionLabel = UILabel()
     
+//MARK: - init
     init() {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +35,7 @@ final class AssetDescriptionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//MARK: - internal methods
     func set(title: String?) {
         self.assetNameLabel.text = title
     }
@@ -53,6 +56,7 @@ final class AssetDescriptionView: UIView {
     }
 }
 
+//MARK: - private methods
 private extension AssetDescriptionView {
     func setupLayout() {
         self.setupTitleLabelLayout()
@@ -69,6 +73,15 @@ private extension AssetDescriptionView {
         ])
     }
     
+    func configureTitleLabel() {
+        self.assetNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.assetNameLabel.font = Typography.TextLG.medium.font
+        self.assetNameLabel.textAlignment = .left
+        self.assetNameLabel.textColor = Color.black.tone
+        self.assetNameLabel.adjustsFontSizeToFitWidth = true
+        self.assetNameLabel.minimumScaleFactor = 0.4
+    }
+    
     func setupDescriptionLabelLayout() {
         self.addSubview(self.assetDescriptionLabel)
         self.configureDescriptionLabel()
@@ -78,15 +91,6 @@ private extension AssetDescriptionView {
             self.assetDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.assetDescriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
-    }
-    
-    func configureTitleLabel() {
-        self.assetNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.assetNameLabel.font = Typography.TextLG.medium.font
-        self.assetNameLabel.textAlignment = .left
-        self.assetNameLabel.textColor = Color.black.tone
-        self.assetNameLabel.adjustsFontSizeToFitWidth = true
-        self.assetNameLabel.minimumScaleFactor = 0.4
     }
     
     func configureDescriptionLabel() {

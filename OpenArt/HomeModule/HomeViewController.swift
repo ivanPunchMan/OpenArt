@@ -14,10 +14,12 @@ protocol IHomeViewController: AnyObject {
 }
 
 final class HomeViewController: UIViewController {
+//MARK: - properties
     private var interactor: IHomeInteractor?
     private var router: (IHomeRouter & IHomeDataPassing)?
     private var customView = HomeView()
     
+//MARK: - init
     init(interactor: IHomeInteractor, router: (IHomeRouter & IHomeDataPassing)) {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
@@ -51,17 +53,19 @@ final class HomeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+//MARK: - loadView
     override func loadView() {
         self.view = self.customView
     }
-    
+
+//MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customView.fetchDataHandler?(.init(nextPage: nil))
     }
 }
 
+//MARK: - IHomeViewController
 extension HomeViewController: IHomeViewController {
     func displayAssets(viewModel: HomeModel.FetchAssets.ViewModel) {
         self.customView.viewModel = viewModel
@@ -81,6 +85,7 @@ extension HomeViewController: IHomeViewController {
     }
 }
 
+//MARK: - private methods
 private extension HomeViewController {
     func configureNavBar() {
         let savedBarButton = UIBarButtonItem(image: UIImage(systemName: "photo.on.rectangle.angled"), style: .done, target: self, action: #selector(onSavedBarButtonTapped))

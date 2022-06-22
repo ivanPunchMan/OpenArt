@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 enum HomeModel {
+//MARK: - FetchAssets
     enum FetchAssets {
         struct Request {
             let nextPage: String?
@@ -48,6 +49,7 @@ enum HomeModel {
         }
     }
     
+//MARK: - FetchCollectionImage
     enum FetchCollectionImage {
         struct Request {
             let indexPath: IndexPath
@@ -63,7 +65,8 @@ enum HomeModel {
             let indexPath: IndexPath
         }
     }
-    
+
+//MARK: - FetchAssetImage
     enum FetchAssetImage {
         struct Request {
             let indexPath: IndexPath
@@ -79,7 +82,8 @@ enum HomeModel {
             let indexPath: IndexPath
         }
     }
-    
+  
+//MARK: - SaveAsset
     enum SaveAsset {
         struct Request {
             var tokenID: String?
@@ -89,11 +93,9 @@ enum HomeModel {
             var collectionName: String?
             var collectionImage: UIImage?
         }
-        struct Response {
-            
-        }
-        struct ViewModel {
-            
-        }
+        
+        struct Response {}
+        
+        struct ViewModel {}
     }
 }

@@ -69,9 +69,7 @@ final class AssetViewController: UIViewController {
 //MARK: - IAssetViewController
 extension AssetViewController: IAssetViewController {
     func displayAssetInfo(viewModel: AssetModel.FetchAssetInfo.ViewModel) {
-        self.customView.set(collectionName: viewModel.collectionName)
-        self.customView.set(title: viewModel.assetName)
-        self.customView.set(description: viewModel.assetDescription)
+        self.customView.set(assetInfo: viewModel)
     }
     
     func displayAssetImage(viewModel: AssetModel.FetchAssetImage.ViewModel) {

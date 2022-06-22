@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class LikedButton: UIButton {
-    
+//MARK: - private enums
     private enum Constant {
         static let conrnerRadius: CGFloat = 8
     }
@@ -17,10 +17,12 @@ class LikedButton: UIButton {
     private enum Constraint {
         static let edgesInset: CGFloat = 16
     }
-    
+
+//MARK: - properties
     var isActiveState = true
     private var label = UILabel()
     
+//MARK: - init
     init(text: String) {
         super.init(frame: .zero)
         self.label.text = text
@@ -32,7 +34,8 @@ class LikedButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+//MARK: - internal methods
     func stateSwitch() {
         if isActiveState {
             self.label.textColor = .white
@@ -44,7 +47,10 @@ class LikedButton: UIButton {
             self.isActiveState = true
         }
     }
-    
+}
+
+//MARK: - private methods
+private extension LikedButton {
     func configureView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = Color.primary.tone
@@ -69,7 +75,5 @@ class LikedButton: UIButton {
         self.label.textAlignment = .center
         self.label.font = Typography.TextLG.medium.font
         self.label.textColor = .white
-        
-//        self.label.text = "Like"
     }
 }

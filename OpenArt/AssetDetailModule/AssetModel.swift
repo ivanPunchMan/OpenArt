@@ -8,6 +8,7 @@
 import UIKit
 
 struct AssetModel {
+//MARK: - FetchCollectionImage
     enum FetchCollectionImage {
         struct Request {
             var collectionImageURL: String?
@@ -21,7 +22,8 @@ struct AssetModel {
             var collectionImage: UIImage?
         }
     }
-    
+
+//MARK: - FetchAssetImage
     enum FetchAssetImage {
         struct Request {
         }
@@ -34,7 +36,8 @@ struct AssetModel {
             let assetImage: UIImage?
         }
     }
-    
+
+//MARK: - FetchAssetInfo
     enum FetchAssetInfo {
         struct Request {}
         
@@ -51,6 +54,7 @@ struct AssetModel {
         }
     }
     
+//MARK: - SaveAsset
     enum SaveAsset {
         struct Request {
             var assetName: String?
@@ -69,6 +73,7 @@ struct AssetModel {
         }
     }
     
+//MARK: - LoadAsset
     enum LoadAsset {
         struct Request {
             let indexPath: IndexPath?

@@ -10,7 +10,8 @@ import UIKit
 
 final class LikedAssetCell: UICollectionViewCell {
     static let id = String(describing: LikedAssetCell.self)
-    
+
+//MARK: - private enums
     private enum Constant {
         static let cornerRadius: CGFloat = 8
         static let borderAlphaComponent: CGFloat = 0.08
@@ -90,6 +91,14 @@ private extension LikedAssetCell {
         ])
     }
     
+    func configureAssetImageView() {
+        self.assetImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        self.assetImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.assetImageView.layer.cornerRadius = Constant.cornerRadius
+        self.assetImageView.layer.masksToBounds = true
+        self.assetImageView.contentMode = .scaleAspectFill
+    }
+    
     func setupAssetNameLabelLayout() {
         self.containerView.addSubview(self.assetNameLabel)
         self.configureAssetNameLabel()
@@ -97,6 +106,13 @@ private extension LikedAssetCell {
             self.assetNameLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.cellHorizontalInset),
             self.assetNameLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.assetNameLabelVerticalOffset),
         ])
+    }
+    
+    func configureAssetNameLabel() {
+        self.assetNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.assetNameLabel.font = Typography.TextLG.medium.font
+        self.assetNameLabel.adjustsFontSizeToFitWidth = true
+        self.assetNameLabel.minimumScaleFactor = 0.4
     }
     
     func setupDislikeButtonLayout() {
@@ -118,21 +134,6 @@ private extension LikedAssetCell {
         self.containerView.layer.cornerRadius = Constant.cornerRadius
         self.containerView.layer.borderColor = Color.black.tone.withAlphaComponent(Constant.borderAlphaComponent).cgColor
         self.containerView.layer.borderWidth = Constant.borderWidth
-    }
-    
-    func configureAssetImageView() {
-        self.assetImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        self.assetImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.assetImageView.layer.cornerRadius = Constant.cornerRadius
-        self.assetImageView.layer.masksToBounds = true
-        self.assetImageView.contentMode = .scaleAspectFill
-    }
-    
-    func configureAssetNameLabel() {
-        self.assetNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.assetNameLabel.font = Typography.TextLG.medium.font
-        self.assetNameLabel.adjustsFontSizeToFitWidth = true
-        self.assetNameLabel.minimumScaleFactor = 0.4
     }
     
     func configureDeleteAssetButton() {

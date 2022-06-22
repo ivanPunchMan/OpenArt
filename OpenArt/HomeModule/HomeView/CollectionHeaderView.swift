@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class CollectionHeaderView: UIView {
-
 //MARK: - private enums
     private enum Constant {
         static let avatarImageViewSize: CGFloat = 64
