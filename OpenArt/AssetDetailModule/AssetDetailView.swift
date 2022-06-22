@@ -30,19 +30,20 @@ final class AssetDetailView: UIView {
     
 //MARK: - properties
     var onLikedButtonTappedHandler: ((AssetModel.SaveAsset.Request) -> Void)?
+    
     private let scrollView = UIScrollView()
     private let containerView = UIView()
-    private let assetDetailView = AssetCardView()
+    private let assetImageView = ResizingImageView()
+    private let collectionHeaderView = CollectionHeaderView()
+    private let descriptionView = AssetDescriptionView()
+    private let separatorView = UIView()
+    private let likedButton = LikedButton(text: "Save")
     
 //MARK: - init
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
         self.setupLayout()
-        
-        self.assetDetailView.onLikedButtonTappedHandler = { [weak self] request in
-            self?.onLikedButtonTappedHandler?(request)
-        }
     }
     
     @available(*, unavailable)
@@ -51,23 +52,23 @@ final class AssetDetailView: UIView {
     }
     
     func set(assetImage: UIImage?) {
-        self.assetDetailView.set(assetImage: assetImage)
-    }
-    
-    func set(colletionImage: UIImage?) {
-        self.assetDetailView.set(collectionImage: colletionImage)
+        self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
     }
     
     func set(collectionName: String?) {
-        self.assetDetailView.set(collectionName: collectionName)
+        self.collectionHeaderView.set(collectionName: collectionName)
+    }
+    
+    func set(collectionImage: UIImage?) {
+        self.collectionHeaderView.set(collectionImage: collectionImage)
     }
     
     func set(title: String?) {
-        self.assetDetailView.set(title: title)
+        self.descriptionView.set(title: title)
     }
     
     func set(description: String?) {
-        self.assetDetailView.set(description: description)
+        self.descriptionView.set(description: description)
     }
 }
 
@@ -75,24 +76,30 @@ final class AssetDetailView: UIView {
 extension AssetDetailView: IAssetDetailView {
     func setupLayout() {
         self.setupScrollViewLayout()
-        self.setupContainerViewLayout()
-        self.setupAssetDetailView()
+        self.setupContainerViewLayout()        
+        self.setupAssetImageViewLayout()
+        self.setupProfileViewLayout()
+        self.setupDescriptionViewLayout()
+        self.setupSeparatorViewLayout()
+        self.setupLikedButtonLayout()
     }
     
     func setupScrollViewLayout() {
         self.addSubview(self.scrollView)
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            self.scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            self.scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            self.scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+            self.scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
     
     func setupContainerViewLayout() {
         self.scrollView.addSubview(self.containerView)
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             self.containerView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
             self.containerView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
@@ -102,13 +109,88 @@ extension AssetDetailView: IAssetDetailView {
         ])
     }
     
-    func setupAssetDetailView() {
-        self.containerView.addSubview(self.assetDetailView)
+    func setupAssetImageViewLayout() {
+        self.containerView.addSubview(self.assetImageView)
+        self.configureAssetImageView()
+        
         NSLayoutConstraint.activate([
-            self.assetDetailView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
-            self.assetDetailView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
-            self.assetDetailView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -300),
-            self.assetDetailView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor)
+            self.assetImageView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.assetImageViewTopOffset),
+            self.assetImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
+            self.assetImageView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset),
         ])
+    }
+    
+    func configureAssetImageView() {
+        self.assetImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.assetImageView.layer.cornerRadius = Constant.cornerRadius
+        self.assetImageView.layer.masksToBounds = true
+        self.assetImageView.contentMode = .scaleAspectFit
+    }
+    
+    func setupProfileViewLayout() {
+        self.containerView.addSubview(self.collectionHeaderView)
+        
+        NSLayoutConstraint.activate([
+            self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
+            self.collectionHeaderView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset),
+        ])
+        let topConstraint = self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset)
+        topConstraint.priority = UILayoutPriority(250)
+        topConstraint.isActive = true
+    }
+    
+    func setupDescriptionViewLayout() {
+        self.containerView.addSubview(self.descriptionView)
+        
+        NSLayoutConstraint.activate([
+            self.descriptionView.topAnchor.constraint(equalTo: self.collectionHeaderView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.descriptionView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
+            self.descriptionView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset)
+        ])
+    }
+    
+    func setupSeparatorViewLayout() {
+        self.containerView.addSubview(self.separatorView)
+        self.configureSeparatorView()
+        
+        NSLayoutConstraint.activate([
+            self.separatorView.topAnchor.constraint(equalTo: self.descriptionView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.separatorView.widthAnchor.constraint(equalTo: self.containerView.widthAnchor),
+            self.separatorView.heightAnchor.constraint(equalToConstant: Constraint.separatorViewHeight)
+        ])
+    }
+    
+    func configureSeparatorView() {
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.backgroundColor = Color.black.tone.withAlphaComponent(Constant.separatorViewAlphaComponent)
+    }
+    
+    func setupLikedButtonLayout() {
+        self.containerView.addSubview(self.likedButton)
+        self.configureLikedButton()
+        
+        NSLayoutConstraint.activate([
+            self.likedButton.topAnchor.constraint(equalTo: self.separatorView.bottomAnchor, constant: 32),
+            self.likedButton.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
+            self.likedButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -16),
+            self.likedButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    func configureLikedButton() {
+        self.likedButton.addTarget(self, action: #selector(onLikedButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func onLikedButtonTapped() {
+        let assetName = descriptionView.assetName()
+        let assetDescription = descriptionView.assetDescription()
+        let assetImage = assetImageView.image
+        let collectionName = collectionHeaderView.collectionName()
+        let collectionImage = collectionHeaderView.collectionImage()
+        
+        let request = AssetModel.SaveAsset.Request.init(assetName: assetName, assetImage: assetImage, assetDescription: assetDescription, collectionName: collectionName, collectionImage: collectionImage)
+        
+        self.onLikedButtonTappedHandler?(request)
     }
 }

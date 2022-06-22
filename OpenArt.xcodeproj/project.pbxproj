@@ -22,7 +22,6 @@
 		C823B51D2857714800FB15AB /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B51C2857714800FB15AB /* Typography.swift */; };
 		C823B51F2857719100FB15AB /* Archivo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B51E2857719100FB15AB /* Archivo-Medium.ttf */; };
 		C823B5212857729600FB15AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5202857729600FB15AB /* Color.swift */; };
-		C823B59E2859F98700FB15AB /* AssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B59D2859F98700FB15AB /* AssetView.swift */; };
 		C823B5A1285A3A4100FB15AB /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A0285A3A4100FB15AB /* AssetViewController.swift */; };
 		C823B5A4285A3A7300FB15AB /* AssetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A3285A3A7300FB15AB /* AssetInteractor.swift */; };
 		C823B5A6285A3A8B00FB15AB /* AssetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */; };
@@ -35,7 +34,6 @@
 		C823B5B4285A6FB600FB15AB /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */; };
 		C823B5B6285A745400FB15AB /* Archivo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B5B5285A745400FB15AB /* Archivo-SemiBold.ttf */; };
 		C823B5B8285A746300FB15AB /* Archivo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B5B7285A746300FB15AB /* Archivo-Regular.ttf */; };
-		C823B5BA285A7FBA00FB15AB /* AssetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5B9285A7FBA00FB15AB /* AssetCardView.swift */; };
 		C88055DF2848CBF000429670 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88055DE2848CBF000429670 /* AppDelegate.swift */; };
 		C88055E12848CBF000429670 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88055E02848CBF000429670 /* SceneDelegate.swift */; };
 		C88055E32848CBF000429670 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88055E22848CBF000429670 /* HomeViewController.swift */; };
@@ -73,7 +71,6 @@
 		C823B51C2857714800FB15AB /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		C823B51E2857719100FB15AB /* Archivo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-Medium.ttf"; sourceTree = "<group>"; };
 		C823B5202857729600FB15AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		C823B59D2859F98700FB15AB /* AssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetView.swift; sourceTree = "<group>"; };
 		C823B5A0285A3A4100FB15AB /* AssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewController.swift; sourceTree = "<group>"; };
 		C823B5A3285A3A7300FB15AB /* AssetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInteractor.swift; sourceTree = "<group>"; };
 		C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPresenter.swift; sourceTree = "<group>"; };
@@ -86,7 +83,6 @@
 		C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		C823B5B5285A745400FB15AB /* Archivo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-SemiBold.ttf"; sourceTree = "<group>"; };
 		C823B5B7285A746300FB15AB /* Archivo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-Regular.ttf"; sourceTree = "<group>"; };
-		C823B5B9285A7FBA00FB15AB /* AssetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCardView.swift; sourceTree = "<group>"; };
 		C88055DB2848CBF000429670 /* OpenArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88055DE2848CBF000429670 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C88055E02848CBF000429670 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,7 +143,6 @@
 			children = (
 				C823B511285690D800FB15AB /* HomeView.swift */,
 				C823B5152857680A00FB15AB /* AssetCollectionViewCell.swift */,
-				C823B59D2859F98700FB15AB /* AssetView.swift */,
 				C823B5AF285A53DC00FB15AB /* CollectionHeaderView.swift */,
 			);
 			path = HomeView;
@@ -156,7 +151,6 @@
 		C823B51828576B5100FB15AB /* DisignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C823B5B9285A7FBA00FB15AB /* AssetCardView.swift */,
 				C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */,
 				C8A839E228631552007C047B /* NavigationBar.swift */,
 				C808A4E0285F9DA300A6D9E5 /* LikedButton.swift */,
@@ -350,7 +344,6 @@
 				C8A839D22860A23F007C047B /* LikedModel.swift in Sources */,
 				C823B5AE285A407100FB15AB /* AssetDetailView.swift in Sources */,
 				C8A839E328631553007C047B /* NavigationBar.swift in Sources */,
-				C823B59E2859F98700FB15AB /* AssetView.swift in Sources */,
 				C823B514285744D900FB15AB /* NetworkWorker.swift in Sources */,
 				C823B5AC285A404500FB15AB /* AssetModel.swift in Sources */,
 				C823B50828568BF200FB15AB /* HomeInteractor.swift in Sources */,
@@ -369,7 +362,6 @@
 				C8A839D42860B07F007C047B /* LikedView.swift in Sources */,
 				C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */,
 				C8A839E528634873007C047B /* SaveAssetModel.swift in Sources */,
-				C823B5BA285A7FBA00FB15AB /* AssetCardView.swift in Sources */,
 				C823B50628568BBC00FB15AB /* HomePresenter.swift in Sources */,
 				C8A839D82861B61F007C047B /* LikedAssembly.swift in Sources */,
 				C88055E12848CBF000429670 /* SceneDelegate.swift in Sources */,

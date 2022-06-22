@@ -79,6 +79,6 @@ extension AssetViewController: IAssetViewController {
     }
     
     func displayCollectionImage(viewModel: AssetModel.FetchCollectionImage.ViewModel) {
-        self.customView.set(colletionImage: viewModel.collectionImage)
+        self.customView.set(collectionImage: viewModel.collectionImage)
     }
 }
