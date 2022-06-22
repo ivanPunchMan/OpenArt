@@ -113,9 +113,6 @@ private extension CollectionHeaderView {
         self.collectionImageView.layer.cornerRadius = Constant.avatarImageViewCornerRadius
         self.collectionImageView.layer.masksToBounds = true
         self.collectionImageView.contentMode = .scaleAspectFill
-        
-        //test
-//        self.collectionImageView.image = UIImage(named: "collectionImage")
     }
     
     func configureUsernameLabel() {
@@ -124,9 +121,6 @@ private extension CollectionHeaderView {
         self.collectionNameLabel.textAlignment = .left
         self.collectionNameLabel.adjustsFontSizeToFitWidth = true
         self.collectionNameLabel.minimumScaleFactor = 0.4
-        
-        //для теста
-//        self.collectionNameLabel.text = "ivanPunchMan"
     }
     
     func configureKebabMenuButton() {

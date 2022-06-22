@@ -19,17 +19,12 @@ final class HomeView: UIView {
     }
     
     var viewModel: HomeModel.FetchAssets.ViewModel?
-    var userImage: HomeModel.FetchCollectionImage.ViewModel?
     var fetchDataHandler: ((HomeModel.FetchAssets.Request) -> Void)?
-    var fetchCollectionImageHandler: ((HomeModel.FetchCollectionImage.Request) -> Void)?
     var fetchImagesForCellHandler: ((HomeModel.FetchAssetImage.Request) -> Void)?
-    var displayImageHandler: ((HomeModel.FetchCollectionImage.ViewModel) -> Void)?
-    var displayAssetImageHandler: ((HomeModel.FetchAssetImage.ViewModel) -> Void)?
     var didSelectItemAt: ((IndexPath) -> Void)?
     var savedButtonTappedHandler: (() -> Void)?
     var saveButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
     lazy var collectionView = createCollectionView()
-    private let navigationBar = NavigationBar()
     
     private let cachedDataSource: NSCache<AnyObject, UIImage> = {
         let cache = NSCache<AnyObject, UIImage>()
@@ -43,7 +38,6 @@ final class HomeView: UIView {
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
-//        self.setupNavigationBar()
         self.setupCollectionViewLayout()
     }
     
@@ -92,17 +86,7 @@ private extension HomeView {
         
         return layout
     }
-    
-//    func setupNavigationBar() {
-//        self.addSubview(self.navigationBar)
-//        self.configureNavigationBar()
-//        NSLayoutConstraint.activate([
-//            self.navigationBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40),
-//            self.navigationBar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 18),
-//            self.navigationBar.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -18)
-//        ])
-//    }
-    
+     
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
@@ -112,15 +96,6 @@ private extension HomeView {
             self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
-    
-//    func configureNavigationBar() {
-//        self.navigationBar.savedButton.addTarget(self, action: #selector(onSavedButtonTapped), for: .touchUpInside)
-//    }
-//
-//    @objc func onSavedButtonTapped() {
-//        self.savedButtonTappedHandler?()
-//        self.navigationBar.newButton.stateSwitch()
-//    }
 }
 
 extension HomeView: UICollectionViewDelegate {

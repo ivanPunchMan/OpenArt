@@ -28,7 +28,6 @@ final class AssetView: UIView {
 
 //MARK: - properties
     var saveButtonHandler: ((UIImage?, UIImage?) -> Void)?
-//    private let assetImage = UIImage(named: "testImage")
     private var collectionHeaderView = CollectionHeaderView()
     private var kebabMenuButton = UIButton(type: .system)
     private var assetImageView = ResizingImageView()
@@ -117,9 +116,6 @@ private extension AssetView {
         self.assetImageView.layer.cornerRadius = Constant.cornerRadius
         self.assetImageView.layer.masksToBounds = true
         self.assetImageView.contentMode = .scaleAspectFit
-        
-        //Для теста
-//        self.assetImageView.collectionImage = UIImage(named: "testImage")
     }
     
     func configureLikedButton() {

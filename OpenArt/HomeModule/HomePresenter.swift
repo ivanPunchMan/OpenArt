@@ -25,10 +25,6 @@ extension HomePresenter: IHomePresenter {
         vc?.displayAssets(viewModel: .init(nextPage: nextPage, assets: assetViewModels))
     }
     
-    func presentImage(response: HomeModel.FetchCollectionImage.Response) {
-        
-    }
-    
     func presentAssetImage(response: HomeModel.FetchAssetImage.Response) {
         let userImage = UIImage(data: response.assetImageData ?? Data())
         vc?.displayAssetImage(viewModel: .init(assetImage: userImage, indexPath: response.indexPath))

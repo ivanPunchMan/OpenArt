@@ -50,7 +50,6 @@ enum HomeModel {
     
     enum FetchCollectionImage {
         struct Request {
-//            var collectionImageURL: String?
             let indexPath: IndexPath
         }
         
@@ -67,7 +66,6 @@ enum HomeModel {
     
     enum FetchAssetImage {
         struct Request {
-//            let assetImageURL: String?
             let indexPath: IndexPath
         }
         
@@ -98,13 +96,4 @@ enum HomeModel {
             
         }
     }
-}
-
-
-struct Price: Codable {
-    let result: [Resul]
-}
-
-struct Resul: Codable {
-    let price: String
 }

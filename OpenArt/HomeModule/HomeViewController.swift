@@ -14,7 +14,6 @@ protocol IHomeViewController: AnyObject {
 }
 
 final class HomeViewController: UIViewController {
-    
     private var interactor: IHomeInteractor?
     private var router: (IHomeRouter & IHomeDataPassing)?
     private var customView = HomeView()
@@ -64,7 +63,6 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: IHomeViewController {
-    
     func displayAssets(viewModel: HomeModel.FetchAssets.ViewModel) {
         self.customView.viewModel = viewModel
         self.customView.collectionView.reloadData()

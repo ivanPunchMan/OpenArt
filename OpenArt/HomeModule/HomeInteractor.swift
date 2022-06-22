@@ -35,7 +35,6 @@ final class HomeInteractor: IHomeDataStore {
 
 extension HomeInteractor: IHomeInteractor {
     func saveAsset(request: HomeModel.SaveAsset.Request) {
-        
         let tokenID = request.tokenID
         let assetName = request.assetName
         let assetImageData = request.assetImage?.pngData()
@@ -59,17 +58,12 @@ extension HomeInteractor: IHomeInteractor {
             switch result {
             case .success(let assetsDTO):
                 let assetsResponse = HomeModel.FetchAssets.Response.init(from: assetsDTO)
-                print(assetsResponse)
                 self?.assets = assetsResponse.assets
                 self?.presenter.presentAssets(response: assetsResponse)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func fetchAssets(response: HomeModel.FetchAssets.Response) {
-        self.presenter.presentAssets(response: response)
     }
     
     func fetchImagesForCell(request: HomeModel.FetchAssetImage.Request) {
