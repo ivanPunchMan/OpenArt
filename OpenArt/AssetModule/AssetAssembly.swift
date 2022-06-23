@@ -10,11 +10,9 @@ import Foundation
 enum AssetAssembly {
     static func build() -> AssetViewController {
         let presenter = AssetPresenter()
-        let networkWorker = NetworkWorker()
-        let dataStorageWorker = AssetDataStorageWorker()
-        let interactor = AssetInteractor(presenter: presenter, networkWorker: networkWorker, dataStorageWorker: dataStorageWorker)
+        let interactor = AssetInteractor(presenter)
         let router = AssetRouter()
-        let vc = AssetViewController(interactor: interactor, router: router)
+        let vc = AssetViewController(interactor, router)
         presenter.vc = vc
         router.dataStore = interactor
         

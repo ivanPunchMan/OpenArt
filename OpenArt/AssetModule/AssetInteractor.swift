@@ -12,24 +12,19 @@ protocol IAssetInteractor: AnyObject {
 }
 
 protocol IAssetDataStore: AnyObject {
-    var asset: Asset? { get set }
-    var assetDataStore: AssetDataProviderModel? { get set }
+    var assetDataStore: AssetDataStoreModel? { get set }
 }
 
 //MARK: - IAssetDataStore
 final class AssetInteractor: IAssetDataStore {
 //MARK: - properties
-    var asset: Asset?
-    var assetDataStore: AssetDataProviderModel?
+    var assetDataStore: AssetDataStoreModel?
+    
     private var presenter: IAssetPresenter
-    private var networkWorker: IImageNetworkWorker
-    private var dataStorageWorker: IDataStorageSaveWorker
     
 //MARK: - init
-    init(presenter: IAssetPresenter, networkWorker: IImageNetworkWorker, dataStorageWorker: IDataStorageSaveWorker) {
+    init(_ presenter: IAssetPresenter) {
         self.presenter = presenter
-        self.networkWorker = networkWorker
-        self.dataStorageWorker = dataStorageWorker
     }
 }
 

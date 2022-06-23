@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C808A4E1285F9DA300A6D9E5 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */; };
 		C808A4E3285FB21F00A6D9E5 /* DataStorageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */; };
 		C823B5022856220300FB15AB /* AssetsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5012856220300FB15AB /* AssetsDTO.swift */; };
 		C823B50428567B6200FB15AB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50328567B6200FB15AB /* NetworkService.swift */; };
@@ -15,7 +14,7 @@
 		C823B50828568BF200FB15AB /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50728568BF200FB15AB /* HomeInteractor.swift */; };
 		C823B50C28568C7D00FB15AB /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50B28568C7D00FB15AB /* HomeRouter.swift */; };
 		C823B50E28568CA900FB15AB /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50D28568CA900FB15AB /* HomeAssembly.swift */; };
-		C823B51028568CE800FB15AB /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50F28568CE800FB15AB /* HomeModel.swift */; };
+		C823B51028568CE800FB15AB /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B50F28568CE800FB15AB /* HomeModels.swift */; };
 		C823B512285690D800FB15AB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B511285690D800FB15AB /* HomeView.swift */; };
 		C823B514285744D900FB15AB /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B513285744D900FB15AB /* NetworkWorker.swift */; };
 		C823B5162857680A00FB15AB /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */; };
@@ -27,11 +26,11 @@
 		C823B5A6285A3A8B00FB15AB /* AssetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */; };
 		C823B5A8285A3FF300FB15AB /* AssetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A7285A3FF300FB15AB /* AssetRouter.swift */; };
 		C823B5AA285A402D00FB15AB /* AssetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5A9285A402D00FB15AB /* AssetAssembly.swift */; };
-		C823B5AC285A404500FB15AB /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5AB285A404500FB15AB /* AssetModel.swift */; };
+		C823B5AC285A404500FB15AB /* AssetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5AB285A404500FB15AB /* AssetModels.swift */; };
 		C823B5AE285A407100FB15AB /* AssetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5AD285A407100FB15AB /* AssetDetailView.swift */; };
 		C823B5B0285A53DC00FB15AB /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5AF285A53DC00FB15AB /* CollectionHeaderView.swift */; };
 		C823B5B2285A5BA900FB15AB /* AssetDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */; };
-		C823B5B4285A6FB600FB15AB /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */; };
+		C823B5B4285A6FB600FB15AB /* ResizingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823B5B3285A6FB600FB15AB /* ResizingImageView.swift */; };
 		C823B5B6285A745400FB15AB /* Archivo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B5B5285A745400FB15AB /* Archivo-SemiBold.ttf */; };
 		C823B5B8285A746300FB15AB /* Archivo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C823B5B7285A746300FB15AB /* Archivo-Regular.ttf */; };
 		C88055DF2848CBF000429670 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88055DE2848CBF000429670 /* AppDelegate.swift */; };
@@ -46,17 +45,15 @@
 		C8A839CC2860A1FE007C047B /* SavedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CB2860A1FE007C047B /* SavedRouter.swift */; };
 		C8A839CE2860A213007C047B /* SavedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CD2860A213007C047B /* SavedInteractor.swift */; };
 		C8A839D02860A229007C047B /* SavedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839CF2860A229007C047B /* SavedPresenter.swift */; };
-		C8A839D22860A23F007C047B /* SavedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D12860A23F007C047B /* SavedModel.swift */; };
+		C8A839D22860A23F007C047B /* SavedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D12860A23F007C047B /* SavedModels.swift */; };
 		C8A839D42860B07F007C047B /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D32860B07F007C047B /* SavedView.swift */; };
 		C8A839D62860B2EB007C047B /* SavedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */; };
 		C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D72861B61F007C047B /* SavedAssembly.swift */; };
 		C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */; };
-		C8A839E328631553007C047B /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E228631552007C047B /* NavigationBar.swift */; };
-		C8A839E528634873007C047B /* AssetDataProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E428634873007C047B /* AssetDataProviderModel.swift */; };
+		C8A839E528634873007C047B /* AssetDataStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E428634873007C047B /* AssetDataStoreModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		C808A4E2285FB21F00A6D9E5 /* DataStorageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageWorker.swift; sourceTree = "<group>"; };
 		C823B5012856220300FB15AB /* AssetsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDTO.swift; sourceTree = "<group>"; };
 		C823B50328567B6200FB15AB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -64,7 +61,7 @@
 		C823B50728568BF200FB15AB /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		C823B50B28568C7D00FB15AB /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		C823B50D28568CA900FB15AB /* HomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
-		C823B50F28568CE800FB15AB /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		C823B50F28568CE800FB15AB /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
 		C823B511285690D800FB15AB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C823B513285744D900FB15AB /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -76,11 +73,11 @@
 		C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPresenter.swift; sourceTree = "<group>"; };
 		C823B5A7285A3FF300FB15AB /* AssetRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetRouter.swift; sourceTree = "<group>"; };
 		C823B5A9285A402D00FB15AB /* AssetAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAssembly.swift; sourceTree = "<group>"; };
-		C823B5AB285A404500FB15AB /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModel.swift; sourceTree = "<group>"; };
+		C823B5AB285A404500FB15AB /* AssetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetModels.swift; sourceTree = "<group>"; };
 		C823B5AD285A407100FB15AB /* AssetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailView.swift; sourceTree = "<group>"; };
 		C823B5AF285A53DC00FB15AB /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
 		C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDescriptionView.swift; sourceTree = "<group>"; };
-		C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
+		C823B5B3285A6FB600FB15AB /* ResizingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizingImageView.swift; sourceTree = "<group>"; };
 		C823B5B5285A745400FB15AB /* Archivo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-SemiBold.ttf"; sourceTree = "<group>"; };
 		C823B5B7285A746300FB15AB /* Archivo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Archivo-Regular.ttf"; sourceTree = "<group>"; };
 		C88055DB2848CBF000429670 /* OpenArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,13 +94,12 @@
 		C8A839CB2860A1FE007C047B /* SavedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRouter.swift; sourceTree = "<group>"; };
 		C8A839CD2860A213007C047B /* SavedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedInteractor.swift; sourceTree = "<group>"; };
 		C8A839CF2860A229007C047B /* SavedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPresenter.swift; sourceTree = "<group>"; };
-		C8A839D12860A23F007C047B /* SavedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedModel.swift; sourceTree = "<group>"; };
+		C8A839D12860A23F007C047B /* SavedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedModels.swift; sourceTree = "<group>"; };
 		C8A839D32860B07F007C047B /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCollectionViewCell.swift; sourceTree = "<group>"; };
 		C8A839D72861B61F007C047B /* SavedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAssembly.swift; sourceTree = "<group>"; };
 		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C8A839E228631552007C047B /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		C8A839E428634873007C047B /* AssetDataProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDataProviderModel.swift; sourceTree = "<group>"; };
+		C8A839E428634873007C047B /* AssetDataStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDataStoreModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +148,6 @@
 			children = (
 				C823B51B2857713400FB15AB /* Typography */,
 				C823B5202857729600FB15AB /* Color.swift */,
-				C8A839F32863C07B007C047B /* ReusibleViews */,
 			);
 			path = DisignSystem;
 			sourceTree = "<group>";
@@ -172,7 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				C823B50D28568CA900FB15AB /* HomeAssembly.swift */,
-				C823B50F28568CE800FB15AB /* HomeModel.swift */,
+				C823B50F28568CE800FB15AB /* HomeModels.swift */,
 				C823B50728568BF200FB15AB /* HomeInteractor.swift */,
 				C823B50528568BBC00FB15AB /* HomePresenter.swift */,
 				C88055E22848CBF000429670 /* HomeViewController.swift */,
@@ -186,11 +181,11 @@
 			isa = PBXGroup;
 			children = (
 				C823B5A9285A402D00FB15AB /* AssetAssembly.swift */,
-				C823B5AB285A404500FB15AB /* AssetModel.swift */,
+				C823B5AB285A404500FB15AB /* AssetModels.swift */,
 				C823B5A3285A3A7300FB15AB /* AssetInteractor.swift */,
 				C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */,
 				C823B5A0285A3A4100FB15AB /* AssetViewController.swift */,
-				C823B5AD285A407100FB15AB /* AssetDetailView.swift */,
+				C8F501CB2865008B00A52395 /* View */,
 				C823B5A7285A3FF300FB15AB /* AssetRouter.swift */,
 			);
 			path = AssetModule;
@@ -222,7 +217,7 @@
 				C8A839C82860A1B0007C047B /* SavedModule */,
 				C823B51828576B5100FB15AB /* DisignSystem */,
 				C823B50928568C2700FB15AB /* SupportingFiles */,
-				C8A839EF2863BA74007C047B /* Extension UIKit */,
+				C8A839EF2863BA74007C047B /* CustomView */,
 				C88055EC2848CBF400429670 /* Info.plist */,
 			);
 			path = OpenArt;
@@ -241,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				C8A839D72861B61F007C047B /* SavedAssembly.swift */,
-				C8A839D12860A23F007C047B /* SavedModel.swift */,
+				C8A839D12860A23F007C047B /* SavedModels.swift */,
 				C8A839CD2860A213007C047B /* SavedInteractor.swift */,
 				C8A839CF2860A229007C047B /* SavedPresenter.swift */,
 				C8A839C92860A1E3007C047B /* SavedViewController.swift */,
@@ -269,12 +264,12 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		C8A839EF2863BA74007C047B /* Extension UIKit */ = {
+		C8A839EF2863BA74007C047B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				C823B5B3285A6FB600FB15AB /* ExtensionUIImage.swift */,
+				C823B5B3285A6FB600FB15AB /* ResizingImageView.swift */,
 			);
-			path = "Extension UIKit";
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		C8A839F02863BB2E007C047B /* DataService */ = {
@@ -282,7 +277,7 @@
 			children = (
 				C8A839C628609698007C047B /* DataService.swift */,
 				C8A839B52860938E007C047B /* AssetDataModel.xcdatamodeld */,
-				C8A839E428634873007C047B /* AssetDataProviderModel.swift */,
+				C8A839E428634873007C047B /* AssetDataStoreModel.swift */,
 				C8A839F12863BB46007C047B /* NSManagedObject */,
 			);
 			path = DataService;
@@ -297,14 +292,13 @@
 			path = NSManagedObject;
 			sourceTree = "<group>";
 		};
-		C8A839F32863C07B007C047B /* ReusibleViews */ = {
+		C8F501CB2865008B00A52395 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C823B5AD285A407100FB15AB /* AssetDetailView.swift */,
 				C823B5B1285A5BA900FB15AB /* AssetDescriptionView.swift */,
-				C8A839E228631552007C047B /* NavigationBar.swift */,
-				C808A4E0285F9DA300A6D9E5 /* CustomButton.swift */,
 			);
-			path = ReusibleViews;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,7 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C823B5B4285A6FB600FB15AB /* ExtensionUIImage.swift in Sources */,
+				C823B5B4285A6FB600FB15AB /* ResizingImageView.swift in Sources */,
 				C8A839D02860A229007C047B /* SavedPresenter.swift in Sources */,
 				C8A839C2286095D7007C047B /* AssetEntity+CoreDataClass.swift in Sources */,
 				C823B512285690D800FB15AB /* HomeView.swift in Sources */,
@@ -389,11 +383,10 @@
 				C823B50428567B6200FB15AB /* NetworkService.swift in Sources */,
 				C823B5A1285A3A4100FB15AB /* AssetViewController.swift in Sources */,
 				C823B51D2857714800FB15AB /* Typography.swift in Sources */,
-				C8A839D22860A23F007C047B /* SavedModel.swift in Sources */,
+				C8A839D22860A23F007C047B /* SavedModels.swift in Sources */,
 				C823B5AE285A407100FB15AB /* AssetDetailView.swift in Sources */,
-				C8A839E328631553007C047B /* NavigationBar.swift in Sources */,
 				C823B514285744D900FB15AB /* NetworkWorker.swift in Sources */,
-				C823B5AC285A404500FB15AB /* AssetModel.swift in Sources */,
+				C823B5AC285A404500FB15AB /* AssetModels.swift in Sources */,
 				C823B50828568BF200FB15AB /* HomeInteractor.swift in Sources */,
 				C808A4E3285FB21F00A6D9E5 /* DataStorageWorker.swift in Sources */,
 				C8A839D62860B2EB007C047B /* SavedCollectionViewCell.swift in Sources */,
@@ -409,15 +402,14 @@
 				C8A839CE2860A213007C047B /* SavedInteractor.swift in Sources */,
 				C8A839D42860B07F007C047B /* SavedView.swift in Sources */,
 				C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */,
-				C8A839E528634873007C047B /* AssetDataProviderModel.swift in Sources */,
+				C8A839E528634873007C047B /* AssetDataStoreModel.swift in Sources */,
 				C823B50628568BBC00FB15AB /* HomePresenter.swift in Sources */,
 				C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */,
 				C88055E12848CBF000429670 /* SceneDelegate.swift in Sources */,
 				C823B5A8285A3FF300FB15AB /* AssetRouter.swift in Sources */,
 				C8A839C728609698007C047B /* DataService.swift in Sources */,
-				C823B51028568CE800FB15AB /* HomeModel.swift in Sources */,
+				C823B51028568CE800FB15AB /* HomeModels.swift in Sources */,
 				C823B5022856220300FB15AB /* AssetsDTO.swift in Sources */,
-				C808A4E1285F9DA300A6D9E5 /* CustomButton.swift in Sources */,
 				C823B5A6285A3A8B00FB15AB /* AssetPresenter.swift in Sources */,
 				C8A839CA2860A1E3007C047B /* SavedViewController.swift in Sources */,
 				C823B50C28568C7D00FB15AB /* HomeRouter.swift in Sources */,

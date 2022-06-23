@@ -21,12 +21,12 @@ class DataService {
         return container
     }()
     
-    private lazy var viewContext = Self.persistentContainer.newBackgroundContext()
+    private lazy var backgroundContext = Self.persistentContainer.newBackgroundContext()
     
     private init() {}
     
-    func addNew(asset model: AssetDataProviderModel) {
-        let assetEntity = AssetEntity(context: viewContext)
+    func addNew(asset model: AssetDataStoreModel) {
+        let assetEntity = AssetEntity(context: backgroundContext)
         
         assetEntity.collectionName = model.collectionName
         assetEntity.assetDescription = model.assetDescription
@@ -47,7 +47,7 @@ class DataService {
         var assetEntities = [AssetEntity]()
         
         do {
-            assetEntities = try self.viewContext.fetch(fetchRequest)
+            assetEntities = try self.backgroundContext.fetch(fetchRequest)
         } catch {
             print(error.localizedDescription)
         }
@@ -64,13 +64,13 @@ class DataService {
         
         var assetEntities = [AssetEntity]()
         do {
-            assetEntities = try self.viewContext.fetch(fetchRequest)
+            assetEntities = try self.backgroundContext.fetch(fetchRequest)
         } catch {
             print("Не удалось достать объект с уникальным ID: \(error.localizedDescription)")
         }
         
         for assetEntity in assetEntities {
-            self.viewContext.delete(assetEntity)
+            self.backgroundContext.delete(assetEntity)
         }
         saveContext()
     }
@@ -79,9 +79,9 @@ class DataService {
 private extension DataService {
 // MARK: - saveContext
     func saveContext () {
-        if self.viewContext.hasChanges {
+        if self.backgroundContext.hasChanges {
             do {
-                try self.viewContext.save()
+                try self.backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 print("Unresolved error \(nserror), \(nserror.userInfo)")

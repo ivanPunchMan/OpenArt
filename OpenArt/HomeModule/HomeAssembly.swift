@@ -11,12 +11,12 @@ import UIKit
 enum HomeAssembly {
     static func build() -> HomeViewController {
         let networkWorker = NetworkWorker()
-        let dataStorageWorker = AssetDataStorageWorker()
+        let dataStorageWorker = DataStorageWorker()
         let presenter = HomePresenter()
         let router = HomeRouter()
-        let interactor = HomeInteractor(presenter: presenter, networkWorker: networkWorker, dataStorageWorker: dataStorageWorker)
+        let interactor = HomeInteractor(presenter, networkWorker, dataStorageWorker)
         router.dataStore = interactor
-        let vc = HomeViewController(interactor: interactor, router: router)
+        let vc = HomeViewController(interactor, router)
         router.vc = vc
         presenter.vc = vc
         

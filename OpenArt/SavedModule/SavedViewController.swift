@@ -19,7 +19,7 @@ final class SavedViewController: UIViewController {
     private var router: ISavedRouter?
     
 //MARK: - init
-    init(interactor: ISavedInteractor, router: ISavedRouter) {
+    init(_ interactor: ISavedInteractor, _ router: ISavedRouter) {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
         self.router = router

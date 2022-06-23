@@ -26,9 +26,18 @@ extension SavedRouter: ISavedRouter {
     func routeToAssetVC() {
         let assetVC = AssetAssembly.build()
         
-        let selectedAsset = self.dataStore?.selectedAsset
-        assetVC.router?.dataStore?.assetDataStore = selectedAsset
+        self.passDataTo(assetVC, from: dataStore)
         
-        vc?.navigationController?.pushViewController(assetVC, animated: true)
+        self.navigateTo(assetVC)
+    }
+}
+
+private extension SavedRouter {
+    func passDataTo(_ asset: AssetViewController?, from savedDataStore: ISavedDataStore?) {
+        asset?.router?.dataStore?.assetDataStore = savedDataStore?.assetDataStore
+    }
+    
+    func navigateTo<T: UIViewController>(_ destination: T) {
+        self.vc?.navigationController?.pushViewController(destination, animated: true)
     }
 }

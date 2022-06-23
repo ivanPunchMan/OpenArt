@@ -8,21 +8,20 @@
 import Foundation
 
 protocol IHomeInteractor: AnyObject {
-    func selectAsset(request: HomeModel.SelectAsset.Request)
-    func saveAsset(request: HomeModel.SaveAsset.Request)
-    func fetchAssets(request: HomeModel.FetchAssets.Request)
-    func fetchImagesForCell(request: HomeModel.FetchAssetImage.Request)
+    func selectAsset(_ request: HomeModel.SelectAsset.Request)
+    func saveAsset(_ request: HomeModel.SaveAsset.Request)
+    func fetchAssets(_ request: HomeModel.FetchAssets.Request)
+    func fetchImagesForCell(_ request: HomeModel.FetchAssetImage.Request)
 }
 
 protocol IHomeDataStore: AnyObject {
-    var assets: [Asset] { get set }
-    var asset: AssetDataProviderModel? { get set }
+    var assetDataStore: AssetDataStoreModel? { get set }
 }
 
 final class HomeInteractor: IHomeDataStore {
 //MARK: - properties
     var assets = [Asset]()
-    var asset: AssetDataProviderModel?
+    var assetDataStore: AssetDataStoreModel?
     
     private var presenter: IHomePresenter
     private var networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker)
@@ -30,7 +29,7 @@ final class HomeInteractor: IHomeDataStore {
     private var next: String?
     
 //MARK: - init
-    init(presenter: IHomePresenter, networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker), dataStorageWorker: IDataStorageSaveWorker) {
+    init(_ presenter: IHomePresenter,_  networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker),_  dataStorageWorker: IDataStorageSaveWorker) {
         self.presenter = presenter
         self.networkWorker = networkWorker
         self.dataStorageWorker = dataStorageWorker
@@ -39,44 +38,36 @@ final class HomeInteractor: IHomeDataStore {
 
 //MARK: - IHomeInteractor
 extension HomeInteractor: IHomeInteractor {
-    
-    func selectAsset(request: HomeModel.SelectAsset.Request) {
-        self.asset = request.asset
+    func selectAsset(_ request: HomeModel.SelectAsset.Request) {
+        self.assetDataStore = request.asset
     }
     
-    func saveAsset(request: HomeModel.SaveAsset.Request) {
-        let tokenID = request.tokenID
-        let assetName = request.assetName
-        let assetImageData = request.assetImage?.pngData()
-        let assetDescription = request.assetDescription
-        let collectionName = request.collectionName
-        let collectionImageData = request.collectionImage?.pngData()
+    func saveAsset(_ request: HomeModel.SaveAsset.Request) {
+        let assetSaveDataModel = AssetDataStoreModel(tokenID: request.tokenID,
+                                                        assetName: request.assetName,
+                                                        assetImageData: request.assetImage?.pngData(),
+                                                        assetDescription: request.assetDescription,
+                                                        collectionName: request.collectionName,
+                                                        collectionImageData: request.collectionImage?.pngData())
         
-        let assetSaveDataModel = AssetDataProviderModel(tokenID: tokenID,
-                                                    assetName: assetName,
-                                                    assetImageData: assetImageData,
-                                                    assetDescription: assetDescription,
-                                                    collectionName: collectionName,
-                                                    collectionImageData: collectionImageData)
-        
-        dataStorageWorker.save(data: assetSaveDataModel)
+        self.dataStorageWorker.save(data: assetSaveDataModel)
     }
     
-    func fetchAssets(request: HomeModel.FetchAssets.Request) {
+    func fetchAssets(_ request: HomeModel.FetchAssets.Request) {
         let nextPage = request.nextPage
-        networkWorker.fetchAssets(nextPage: nextPage) { [weak self] result in
+        self.networkWorker.fetchAssets(nextPage: nextPage) { [weak self] result in
             switch result {
             case .success(let assetsDTO):
                 let assetsResponse = HomeModel.FetchAssets.Response(from: assetsDTO)
                 self?.assets += assetsResponse.assets
-                self?.presenter.presentAssets(response: assetsResponse)
+                self?.presenter.presentAssets(assetsResponse)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    func fetchImagesForCell(request: HomeModel.FetchAssetImage.Request) {
+    func fetchImagesForCell(_ request: HomeModel.FetchAssetImage.Request) {
         let urlAsset = assets[request.indexPath.row].imageURL
         let urlCollection = assets[request.indexPath.row].collection?.imageURL
         
@@ -88,7 +79,7 @@ extension HomeInteractor: IHomeInteractor {
 //MARK: - private methods
 private extension HomeInteractor {
     func fetchAssetImage(from url: String?, for indexPath: IndexPath) {
-        networkWorker.fetchImage(from: url) { [weak self] result in
+        self.networkWorker.fetchImage(from: url) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.presenter.presentAssetImage(response: .init(assetImageData: data, indexPath: indexPath))
@@ -100,7 +91,7 @@ private extension HomeInteractor {
     }
     
     func fetchCollectionImage(from url: String?, for indexPath: IndexPath) {
-        networkWorker.fetchImage(from: url) { [weak self] result in
+        self.networkWorker.fetchImage(from: url) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.presenter.presentCollectionImage(response: .init(collectionImageData: data, indexPath: indexPath))

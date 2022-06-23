@@ -141,14 +141,17 @@ extension SavedView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.id, for: indexPath) as? SavedCollectionViewCell else { return UICollectionViewCell() }
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.id, for: indexPath) as? SavedCollectionViewCell,
+            let assets = self.assetsViewModel?.assets, assets.indices.contains(indexPath.row)
+        else { return UICollectionViewCell() }
         
-        let asset = self.assetsViewModel?.assets[indexPath.row]
+        let asset = assets[indexPath.row]
 
         cell.set(assetModel: asset)
         
         cell.onDeleteButtonTappedHandler = { [weak self] in
-            if let tokenID = asset?.tokenID {
+            if let tokenID = asset.tokenID {
                 self?.deleleAssetHandler?(tokenID)
                 self?.assetsViewModel?.assets.remove(at: indexPath.row)
             }

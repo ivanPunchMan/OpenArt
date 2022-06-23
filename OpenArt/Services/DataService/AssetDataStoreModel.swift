@@ -1,5 +1,5 @@
 //
-//  AssetDataProviderModel.swift
+//  AssetDataStoreModel.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 22.06.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AssetDataProviderModel {
+struct AssetDataStoreModel {
     var tokenID: String?
     var assetName: String?
     var assetImageData: Data?

@@ -15,12 +15,12 @@ protocol IHomeViewController: AnyObject {
 
 final class HomeViewController: UIViewController {
 //MARK: - properties
-    private var interactor: IHomeInteractor?
     private var router: (IHomeRouter & IHomeDataPassing)?
+    private var interactor: IHomeInteractor?
     private var customView = HomeView()
     
 //MARK: - init
-    init(interactor: IHomeInteractor, router: (IHomeRouter & IHomeDataPassing)) {
+    init(_ interactor: IHomeInteractor,_ router: (IHomeRouter & IHomeDataPassing)) {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
         self.router = router
@@ -28,28 +28,21 @@ final class HomeViewController: UIViewController {
         self.configureNavBar()
         
         self.customView.fetchDataHandler = { request in
-            interactor.fetchAssets(request: request)
+            interactor.fetchAssets(request)
         }
         
         self.customView.didSelectItem = { asset in
-            interactor.selectAsset(request: .init(asset: asset))
+            let request = HomeModel.SelectAsset.Request(asset: asset)
+            interactor.selectAsset(request)
             router.routeToAsset()
         }
         
-        self.customView.didSelectItemAt = { indexPath in
-            router.routeToAssetVC(from: indexPath)
-        }
-        
-        self.customView.savedButtonTappedHandler = {
-            router.routeToSavedVC()
-        }
-        
         self.customView.fetchImagesForCellHandler = { request in
-            interactor.fetchImagesForCell(request: request)
+            interactor.fetchImagesForCell(request)
         }
         
         self.customView.saveAssetButtonTappedHandler = { request in
-            interactor.saveAsset(request: request)
+            interactor.saveAsset(request)
         }
     }
     
@@ -79,18 +72,12 @@ extension HomeViewController: IHomeViewController {
     }
     
     func displayAssetImage(viewModel: HomeModel.FetchAssetImage.ViewModel) {
-//        self.customView.setAssetImageHandler?(viewModel.assetImage ?? UIImage())
-//        self.customView.collectionView.reloadItems(at: [viewModel.indexPath])
-        
         if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(assetImage: viewModel.assetImage)
         }
     }
     
     func displayCollectionImage(viewModel: HomeModel.FetchCollectionImage.ViewModel) {
-//        self.customView.setColletcionImageHandler?(viewModel.collectionImage ?? UIImage())
-//        self.customView.collectionView.reloadItems(at: [viewModel.indexPath])
-        
         if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(collectionImage: viewModel.collectionImage)
         }
@@ -107,7 +94,7 @@ private extension HomeViewController {
     }
     
     @objc func onSavedBarButtonTapped() {
-        self.router?.routeToSavedVC()
+        self.router?.routeToSaved()
     }
 }
 

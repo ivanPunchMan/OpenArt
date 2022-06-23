@@ -37,7 +37,7 @@ final class SavedCollectionViewCell: UICollectionViewCell {
     private let assetImageView = UIImageView()
     private let assetNameLabel = UILabel()
     private let deleteAssetButton = UIButton()
-//MARK: - init()
+//MARK: - init
     override init(frame: CGRect) {
         super.init(frame: .zero)
         self.setupLayout()
@@ -123,7 +123,7 @@ private extension SavedCollectionViewCell {
         self.configureDeleteAssetButton()
         deleteAssetButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
         NSLayoutConstraint.activate([
-            self.deleteAssetButton.topAnchor.constraint(equalTo: assetImageView.bottomAnchor, constant: Constraint.deleteAssetButtonTopOffset),
+            self.deleteAssetButton.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.deleteAssetButtonTopOffset),
             self.deleteAssetButton.leadingAnchor.constraint(equalTo: self.assetNameLabel.trailingAnchor, constant: Constraint.deleteAssetButtonLeadingOffset),
             self.deleteAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.deleteAssetButtonBottomOffset),
             self.deleteAssetButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constraint.cellHorizontalInset),

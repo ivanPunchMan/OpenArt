@@ -21,6 +21,14 @@ final class CollectionHeaderView: UIView {
     }
 
 //MARK: - properties
+    var collectionName: String? {
+        self.collectionNameLabel.text
+    }
+    
+    var collectionImage: UIImage? {
+        self.collectionImageView.image
+    }
+    
     private let containerView = UIView()
     private lazy var collectionImageView = UIImageView()
     private var collectionNameLabel = UILabel()
@@ -30,7 +38,6 @@ final class CollectionHeaderView: UIView {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setupLayout()
-
     }
     
     @available(*, unavailable)
@@ -46,14 +53,6 @@ final class CollectionHeaderView: UIView {
     func set(collectionImage: UIImage?) {
         self.collectionImageView.image = collectionImage
     }
-    
-    func collectionName() -> String? {
-        self.collectionNameLabel.text
-    }
-    
-    func collectionImage() -> UIImage? {
-        self.collectionImageView.image
-    }
 }
 
 //MARK: - private methods
@@ -66,6 +65,7 @@ private extension CollectionHeaderView {
     func setupLayoutAvatarImageView() {
         self.addSubview(self.collectionImageView)
         self.configureCollectionImageView()
+        
         NSLayoutConstraint.activate([
             self.collectionImageView.topAnchor.constraint(equalTo: self.topAnchor),
             self.collectionImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -90,6 +90,7 @@ private extension CollectionHeaderView {
     func setupCollectionNameLabel() {
         self.addSubview(self.collectionNameLabel)
         self.configureCollectionNameLabel()
+        
         NSLayoutConstraint.activate([
             self.collectionNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.collectionNameLabel.leadingAnchor.constraint(equalTo: self.collectionImageView.trailingAnchor, constant: Constraint.collectionNameLabelLeadingOffset),

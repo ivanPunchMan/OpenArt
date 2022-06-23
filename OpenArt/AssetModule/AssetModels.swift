@@ -28,29 +28,4 @@ struct AssetModel {
             let collectionName: String?
         }
     }
-    
-//MARK: - SaveAsset
-    enum SaveAsset {
-        struct Request {
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
-        }
-        
-        struct Response {
-        }
-        
-        struct ViewModel {
-        }
-    }
-    
-    struct AssetDataStore {
-        var assetName: String?
-        var assetImage: Data?
-        var assetDescription: String?
-        var collectionName: String?
-        var collectionImage: Data?
-    }
 }

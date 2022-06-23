@@ -15,11 +15,12 @@ protocol IAssetViewController: AnyObject {
 final class AssetViewController: UIViewController {
 //MARK: - properties
     var router: (IAssetRouter & IAssetDataPassing)?
+    
     private let customView = AssetDetailView()
     private var interactor: IAssetInteractor?
 
 //MARK: - init
-    init(interactor: IAssetInteractor, router: (IAssetRouter & IAssetDataPassing)) {
+    init(_ interactor: IAssetInteractor,_  router: (IAssetRouter & IAssetDataPassing)) {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
         self.router = router

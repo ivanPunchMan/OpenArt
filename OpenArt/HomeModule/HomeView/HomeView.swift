@@ -19,16 +19,11 @@ final class HomeView: UIView {
     }
 
 //MARK: - properties
-    var setAssetImageHandler: ((UIImage) -> Void)?
-    var setColletcionImageHandler: ((UIImage) -> Void)?
     var nextPage = ""
     var assetsViewModel = [HomeModel.FetchAssets.AssetViewModel]()
-    var viewModel: HomeModel.FetchAssets.ViewModel?
     var fetchDataHandler: ((HomeModel.FetchAssets.Request) -> Void)?
     var fetchImagesForCellHandler: ((HomeModel.FetchAssetImage.Request) -> Void)?
-    var didSelectItemAt: ((IndexPath) -> Void)?
-    var didSelectItem: ((AssetDataProviderModel) -> Void)?
-    var savedButtonTappedHandler: (() -> Void)?
+    var didSelectItem: ((AssetDataStoreModel) -> Void)?
     var saveAssetButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
     lazy var collectionView = createCollectionView()
     
@@ -91,7 +86,7 @@ private extension HomeView {
     }
     
     func calculateIndexPathsToReload(from newViewModel: HomeModel.FetchAssets.ViewModel) -> [IndexPath] {
-        let assetsCount = assetsViewModel.count
+        let assetsCount = self.assetsViewModel.count
         let newPageAssetsCount = newViewModel.assets.count
         
         let startIndex = assetsCount - newPageAssetsCount
@@ -101,6 +96,7 @@ private extension HomeView {
      
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
+        
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -122,7 +118,6 @@ extension HomeView: UICollectionViewDelegate {
                                   assetDescription: asset.assetDescription,
                                   collectionName: asset.collectionName,
                                   collectionImageData: cell?.collectionImage?.pngData()))
-//        self.didSelectItemAt?(indexPath)
     }
 }
 
@@ -142,23 +137,15 @@ extension HomeView: UICollectionViewDataSource {
         
         self.fetchImagesForCellHandler?(.init(indexPath: indexPath))
         
-//        self.setAssetImageHandler = { assetImage in
-//            cell.set(assetImage: assetImage)
-//        }
-//
-//        self.setColletcionImageHandler = { collectionImage in
-//            cell.set(collectionImage: collectionImage)
-//        }
-    
         cell.set(collectionName: asset.collectionName)
         
-        cell.saveButtonTappedHandler = { [weak self] assetImage, collectionImage in
+        cell.saveButtonTappedHandler = { [weak self] in
             self?.saveAssetButtonTappedHandler?(.init(tokenID: asset.tokenID,
                                                       assetName: asset.assetName,
-                                                      assetImage: assetImage,
+                                                      assetImage: cell.assetImage,
                                                       assetDescription: asset.assetDescription,
                                                       collectionName: asset.collectionName,
-                                                      collectionImage: collectionImage))
+                                                      collectionImage: cell.collectionImage))
         }
         
         return cell
@@ -169,8 +156,8 @@ extension HomeView: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let indexPath = indexPaths.first
         
-        if (assetsViewModel.count - 5) == indexPath?.row {
-            fetchDataHandler?(.init(nextPage: nextPage))
+        if (self.assetsViewModel.count - 5) == indexPath?.row {
+            self.fetchDataHandler?(.init(nextPage: self.nextPage))
         }
     }
 }

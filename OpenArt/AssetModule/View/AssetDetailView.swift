@@ -22,22 +22,16 @@ final class AssetDetailView: UIView {
         static let profileAndDescriptionHorizontalOffset: CGFloat = 24
         
         static let separatorViewHeight: CGFloat = 1
-        
-        static let saveAssetButtonTopOffset: CGFloat = 32
-        static let saveAssetButtonHorizontalOffset: CGFloat = 16
-        static let saveAssetButtonBottomOffset: CGFloat = 16
+        static let separatorViewBottomOffset: CGFloat = 5
     }
     
 //MARK: - properties
-    var onSaveAssetButtonTappedHandler: ((AssetModel.SaveAsset.Request) -> Void)?
-    
     private let scrollView = UIScrollView()
     private let containerView = UIView()
     private let assetImageView = ResizingImageView()
     private let collectionHeaderView = CollectionHeaderView()
     private let descriptionView = AssetDescriptionView()
     private let separatorView = UIView()
-    private let saveAssetButton = CustomButton(text: "Save")
     
 //MARK: - init
     init() {
@@ -52,16 +46,8 @@ final class AssetDetailView: UIView {
     }
     
 //MARK: - internal methods
-    func set(assetImage: UIImage?) {
-        self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
-    }
-    
-    func set(collectionImage: UIImage?) {
-        self.collectionHeaderView.set(collectionImage: collectionImage)
-    }
-    
     func set(assetInfo viewModel: AssetModel.FetchAssetData.ViewModel) {
-        self.assetImageView.image = viewModel.assetImage
+        self.assetImageView.setImageAndUpdateAspectRatio(image: viewModel.assetImage ?? UIImage())
         self.collectionHeaderView.set(collectionImage: viewModel.collectionImage)
         self.collectionHeaderView.set(collectionName: viewModel.collectionName)
         self.descriptionView.set(title: viewModel.assetName)
@@ -149,7 +135,7 @@ private extension AssetDetailView {
         
         NSLayoutConstraint.activate([
             self.separatorView.topAnchor.constraint(equalTo: self.descriptionView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
-            self.separatorView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
+            self.separatorView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.separatorViewBottomOffset),
             self.separatorView.widthAnchor.constraint(equalTo: self.containerView.widthAnchor),
             self.separatorView.heightAnchor.constraint(equalToConstant: Constraint.separatorViewHeight)
         ])

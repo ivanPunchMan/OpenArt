@@ -44,7 +44,7 @@ final class AssetDescriptionView: UIView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = Constant.descriptionLabelLineHeightMultiple
         self.assetDescriptionLabel.attributedText = NSAttributedString(string: description ?? "",
-                                                                  attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
+                                                                       attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle])
     }
     
     func assetName() -> String? {

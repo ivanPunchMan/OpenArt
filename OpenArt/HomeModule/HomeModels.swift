@@ -1,5 +1,5 @@
 //
-//  HomeEntity.swift
+//  HomeModel.swift
 //  OpenArt
 //
 //  Created by Иван Дурмашев on 13.06.2022.
@@ -56,12 +56,12 @@ enum HomeModel {
         }
         
         struct Response {
-            var collectionImageData: Data?
+            let collectionImageData: Data?
             let indexPath: IndexPath
         }
         
         struct ViewModel {
-            var collectionImage: UIImage?
+            let collectionImage: UIImage?
             let indexPath: IndexPath
         }
     }
@@ -86,22 +86,18 @@ enum HomeModel {
 //MARK: - SaveAsset
     enum SaveAsset {
         struct Request {
-            var tokenID: String?
-            var assetName: String?
-            var assetImage: UIImage?
-            var assetDescription: String?
-            var collectionName: String?
-            var collectionImage: UIImage?
+            let tokenID: String?
+            let assetName: String?
+            let assetImage: UIImage?
+            let assetDescription: String?
+            let collectionName: String?
+            let collectionImage: UIImage?
         }
-        
-        struct Response {}
-        
-        struct ViewModel {}
     }
     
     enum SelectAsset {
         struct Request {
-            let asset: AssetDataProviderModel
+            let asset: AssetDataStoreModel
         }
     }
 }

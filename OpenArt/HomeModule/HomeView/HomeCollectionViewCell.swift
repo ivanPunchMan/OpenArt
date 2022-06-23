@@ -13,9 +13,6 @@ final class HomeCollectionViewCell: UICollectionViewCell {
     
 //MARK: - private enums
     private enum Constant {
-        static let profileViewLeadingOffset: CGFloat = 8
-        static let profileViewTopOffset: CGFloat = 8
-        
         static let cornerRadius: CGFloat = 8
         static let borderAlphaComponent: CGFloat = 0.08
         static let borderWidth: CGFloat = 1
@@ -26,22 +23,24 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         static let collectionHeaderTopOffset: CGFloat = 8
         
         static let saveAssetTopOffset: CGFloat = 32
+        static let saveAssetButtonLeadingOffset: CGFloat = 5
         static let saveAssetButtonSize: CGFloat = 30
         
         static let assetImageViewTopOffset: CGFloat = 16
         static let assetImageViewBottomOffset: CGFloat = 13
     }
     
-//MARK: - properties
+//MARK: - internal properties
     var assetImage: UIImage? {
         self.assetImageView.image
     }
     var collectionImage: UIImage? {
-        self.collectionHeaderView.collectionImage()
+        self.collectionHeaderView.collectionImage
     }
     
-    var saveButtonTappedHandler: ((UIImage?, UIImage?) -> Void)?
-    
+    var saveButtonTappedHandler: (() -> Void)?
+
+//MARK: - private properties
     private var containerView = UIView()
     private var collectionHeaderView = CollectionHeaderView()
     private var saveAssetButton = UIButton(type: .system)
@@ -96,6 +95,7 @@ private extension HomeCollectionViewCell {
     func setupContainerViewLayout() {
         self.contentView.addSubview(self.containerView)
         self.configureContainerView()
+        
         NSLayoutConstraint.activate([
             self.containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             self.containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
@@ -113,6 +113,7 @@ private extension HomeCollectionViewCell {
     
     func collectionHeaderViewLayout() {
         self.containerView.addSubview(self.collectionHeaderView)
+        
         NSLayoutConstraint.activate([
             self.collectionHeaderView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.collectionHeaderTopOffset),
             self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.assetViewHorizontalInset),
@@ -122,10 +123,10 @@ private extension HomeCollectionViewCell {
     func setupSaveAssetButtonLayout() {
         self.containerView.addSubview(self.saveAssetButton)
         self.configureSaveAssetButton()
+        
         NSLayoutConstraint.activate([
-//            self.saveAssetButton.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.saveAssetTopOffset),
             self.saveAssetButton.centerYAnchor.constraint(equalTo: self.collectionHeaderView.centerYAnchor),
-            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.collectionHeaderView.trailingAnchor, constant: 5),
+            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.collectionHeaderView.trailingAnchor, constant: Constraint.saveAssetButtonLeadingOffset),
             self.saveAssetButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.assetViewHorizontalInset),
             self.saveAssetButton.widthAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),
             self.saveAssetButton.heightAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),
@@ -142,12 +143,13 @@ private extension HomeCollectionViewCell {
     }
     
     @objc func onSaveButtonTapped() {
-        self.saveButtonTappedHandler?(self.assetImage, self.collectionImage)
+        self.saveButtonTappedHandler?()
     }
     
     func setupAssetImageViewLayout() {
         self.containerView.addSubview(self.assetImageView)
         self.configureAssetImageView()
+        
         NSLayoutConstraint.activate([
             self.assetImageView.topAnchor.constraint(equalTo: self.collectionHeaderView.bottomAnchor, constant: Constraint.assetImageViewTopOffset),
             self.assetImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.assetViewHorizontalInset),
