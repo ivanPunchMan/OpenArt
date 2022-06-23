@@ -9,8 +9,9 @@ import Foundation
 import UIKit
 
 protocol IHomeRouter: AnyObject {
+    func routeToAsset()
     func routeToSavedVC()
-    func routeToPlaceBidVC(from indexPath: IndexPath)
+    func routeToAssetVC(from indexPath: IndexPath)
 }
 
 protocol IHomeDataPassing: AnyObject {
@@ -25,18 +26,27 @@ final class HomeRouter: IHomeDataPassing {
 
 //MARK: - IHomeRouter
 extension HomeRouter: IHomeRouter {
-    func routeToPlaceBidVC(from indexPath: IndexPath) {
-        let nextVC = AssetAssembly.build()
+    func routeToAssetVC(from indexPath: IndexPath) {
+        let assetVC = AssetAssembly.build()
         
         if let assets = self.dataStore?.assets, assets.indices.contains(indexPath.row) {
-            nextVC.router?.dataStore?.asset = assets[indexPath.row]
+            assetVC.router?.dataStore?.asset = assets[indexPath.row]
         }
         
-        self.vc?.navigationController?.pushViewController(nextVC, animated: true)
+        self.vc?.navigationController?.pushViewController(assetVC, animated: true)
+    }
+    
+    func routeToAsset() {
+        let assetVC = AssetAssembly.build()
+        
+        assetVC.router?.dataStore?.assetDataStore = dataStore?.asset
+        
+        self.vc?.navigationController?.pushViewController(assetVC, animated: true)
     }
     
     func routeToSavedVC() {
         let nextVC = SavedAssembly.build()
+        
         self.vc?.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

@@ -8,9 +8,7 @@
 import UIKit
 
 protocol IAssetPresenter: AnyObject {
-    func presentAssetInfo(response: AssetModel.FetchAssetInfo.Response)
-    func presentAssetImage(response: AssetModel.FetchAssetImage.Response)
-    func presentCollectionImage(response: AssetModel.FetchCollectionImage.Response)
+    func presentAssetData(response: AssetModel.FetchAssetData.Response)
 }
 
 final class AssetPresenter {
@@ -19,19 +17,14 @@ final class AssetPresenter {
 
 //MARK: - IAssetPresenter
 extension AssetPresenter: IAssetPresenter {
-    func presentAssetInfo(response: AssetModel.FetchAssetInfo.Response) {
-        self.vc?.displayAssetInfo(viewModel: .init(assetName: response.assetName,
-                                              assetDescription: response.assetDescription,
-                                              collectionName: response.collectionName))
-    }
-    
-    func presentAssetImage(response: AssetModel.FetchAssetImage.Response) {
+    func presentAssetData(response: AssetModel.FetchAssetData.Response) {
         let assetImage = UIImage(data: response.assetImageData ?? Data())
-        self.vc?.displayAssetImage(viewModel: .init(assetImage: assetImage))
-    }
-    
-    func presentCollectionImage(response: AssetModel.FetchCollectionImage.Response) {
         let collectionImage = UIImage(data: response.collectionImageData ?? Data())
-        self.vc?.displayCollectionImage(viewModel: .init(collectionImage: collectionImage))
+        
+        self.vc?.displayAssetData(viewModel: .init(assetImage: assetImage,
+                                                   collectionImage: collectionImage,
+                                                   assetName: response.assetName,
+                                                   assetDescription: response.assetDescription,
+                                                   collectionName: response.collectionName))
     }
 }

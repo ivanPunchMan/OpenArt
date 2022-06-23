@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 protocol IAssetViewController: AnyObject {
-    func displayAssetInfo(viewModel: AssetModel.FetchAssetInfo.ViewModel)
-    func displayAssetImage(viewModel: AssetModel.FetchAssetImage.ViewModel)
-    func displayCollectionImage(viewModel: AssetModel.FetchCollectionImage.ViewModel)
+    func displayAssetData(viewModel: AssetModel.FetchAssetData.ViewModel)
 }
 
 final class AssetViewController: UIViewController {
@@ -25,10 +23,6 @@ final class AssetViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.interactor = interactor
         self.router = router
-        
-        self.customView.onSaveAssetButtonTappedHandler = { request in
-            interactor.save(data: request)
-        }
     }
     
     @available(*, unavailable)
@@ -49,23 +43,13 @@ final class AssetViewController: UIViewController {
 
 //MARK: - internal method
     func fetchAssetData() {
-        self.interactor?.fetchAssetInfo(request: .init())
-        self.interactor?.fetchAssetImage(request: .init())
-        self.interactor?.fetchCollectionImage(request: .init())
+        self.interactor?.fetchAssetData(request: .init())
     }
 }
 
 //MARK: - IAssetViewController
 extension AssetViewController: IAssetViewController {
-    func displayAssetInfo(viewModel: AssetModel.FetchAssetInfo.ViewModel) {
+    func displayAssetData(viewModel: AssetModel.FetchAssetData.ViewModel) {
         self.customView.set(assetInfo: viewModel)
-    }
-    
-    func displayAssetImage(viewModel: AssetModel.FetchAssetImage.ViewModel) {
-        self.customView.set(assetImage: viewModel.assetImage)
-    }
-    
-    func displayCollectionImage(viewModel: AssetModel.FetchCollectionImage.ViewModel) {
-        self.customView.set(collectionImage: viewModel.collectionImage)
     }
 }

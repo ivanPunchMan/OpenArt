@@ -8,49 +8,24 @@
 import UIKit
 
 struct AssetModel {
-//MARK: - FetchCollectionImage
-    enum FetchCollectionImage {
-        struct Request {
-            var collectionImageURL: String?
-        }
-        
-        struct Response {
-            var collectionImageData: Data?
-        }
-        
-        struct ViewModel {
-            var collectionImage: UIImage?
-        }
-    }
-
-//MARK: - FetchAssetImage
-    enum FetchAssetImage {
-        struct Request {
-        }
+//MARK: - FetchAssetData
+    enum FetchAssetData {
+        struct Request {}
         
         struct Response {
             let assetImageData: Data?
+            let collectionImageData: Data?
+            let assetName: String?
+            let assetDescription: String?
+            let collectionName: String?
         }
         
         struct ViewModel {
             let assetImage: UIImage?
-        }
-    }
-
-//MARK: - FetchAssetInfo
-    enum FetchAssetInfo {
-        struct Request {}
-        
-        struct Response {
-            var assetName: String?
-            var assetDescription: String?
-            var collectionName: String?
-        }
-        
-        struct ViewModel {
-            var assetName: String?
-            var assetDescription: String?
-            var collectionName: String?
+            let collectionImage: UIImage?
+            let assetName: String?
+            let assetDescription: String?
+            let collectionName: String?
         }
     }
     
@@ -69,5 +44,13 @@ struct AssetModel {
         
         struct ViewModel {
         }
+    }
+    
+    struct AssetDataStore {
+        var assetName: String?
+        var assetImage: Data?
+        var assetDescription: String?
+        var collectionName: String?
+        var collectionImage: Data?
     }
 }

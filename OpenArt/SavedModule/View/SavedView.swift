@@ -10,6 +10,10 @@ import UIKit
 
 final class SavedView: UIView {
 //MARK: - private enums
+    private enum Text {
+        static let savedLabelText = "Saved"
+    }
+    
     private enum Constant {
         static let itemAndGroupFractionalWidth: CGFloat = 1
         static let itemAndGroupEstimatedHeightDimension: CGFloat = 563
@@ -26,18 +30,19 @@ final class SavedView: UIView {
     }
     
     private enum Constraint {
-        static let likedViewHorizontalInset: CGFloat = 16
+        static let savedViewHorizontalInset: CGFloat = 16
         
-        static let likedLabelTopOffset: CGFloat = 27
+        static let savedLabelTopOffset: CGFloat = 27
         
         static let collectionViewTopOffset: CGFloat = 16
     }
 
 //MARK: - properties
     var deleleAssetHandler: ((String) -> Void)?
+    var didSelectItemAt: ((IndexPath) -> Void)?
     
     lazy var collectionView = createCollectionView()
-    private let likedLabel = UILabel()
+    private let savedLabel = UILabel()
     
     private var assetsViewModel: SavedModel.LoadAssets.ViewModel? {
         didSet {
@@ -70,6 +75,7 @@ private extension SavedView {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(SavedCollectionViewCell.self, forCellWithReuseIdentifier: SavedCollectionViewCell.id)
         
         return collectionView
@@ -96,31 +102,31 @@ private extension SavedView {
     }
     
     func setupLayout() {
-        self.setupLikedLabelLayout()
+        self.setupSavedLabelLayout()
         self.setupCollectionViewLayout()
     }
     
-    func setupLikedLabelLayout() {
-        self.addSubview(self.likedLabel)
-        self.configureLikedLabel()
+    func setupSavedLabelLayout() {
+        self.addSubview(self.savedLabel)
+        self.configureSavedLabel()
         NSLayoutConstraint.activate([
-            self.likedLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constraint.likedLabelTopOffset),
-            self.likedLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.likedViewHorizontalInset),
-            self.likedLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -Constraint.likedViewHorizontalInset)
+            self.savedLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constraint.savedLabelTopOffset),
+            self.savedLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.savedViewHorizontalInset),
+            self.savedLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -Constraint.savedViewHorizontalInset)
         ])
     }
     
-    func configureLikedLabel() {
-        self.likedLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.likedLabel.font = Typography.DisplayXS.semiBold.font
-        self.likedLabel.text = "Liked"
-        self.likedLabel.backgroundColor = .clear
+    func configureSavedLabel() {
+        self.savedLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.savedLabel.font = Typography.DisplayXS.semiBold.font
+        self.savedLabel.text = Text.savedLabelText
+        self.savedLabel.backgroundColor = .clear
     }
     
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.likedLabel.bottomAnchor, constant: Constraint.collectionViewTopOffset),
+            self.collectionView.topAnchor.constraint(equalTo: self.savedLabel.bottomAnchor, constant: Constraint.collectionViewTopOffset),
             self.collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
@@ -149,5 +155,11 @@ extension SavedView: UICollectionViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension SavedView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.didSelectItemAt?(indexPath)
     }
 }

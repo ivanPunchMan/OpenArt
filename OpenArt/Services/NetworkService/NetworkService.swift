@@ -40,15 +40,15 @@ final class NetworkService {
 }
 
 extension NetworkService: INetworkService {
-
     func loadAssets(nextPage: String?, completion: @escaping (Result<AssetsDTO, Error>) -> Void) {
+                
         let url = self.url(param: nextPage)
 
         var request = URLRequest(url: url)
         let headers = ["X-RapidAPI-Key": "0c963ec949msh5c8f66cec582c34p1bfc69jsn5d668d6ecc2a",
                        "X-RapidAPI-Host": "opensea13.p.rapidapi.com"]
         request.allHTTPHeaderFields = headers
-
+        
         self.session.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { assert(false, "Некорректный URL") }
 
@@ -64,7 +64,7 @@ extension NetworkService: INetworkService {
                     completion(.failure(error))
                 }
             }
-        }.resume()
+        }//.resume()
     }
 
     enum NetError: Error {
@@ -105,7 +105,6 @@ private extension NetworkService {
             QueryItem.limit,
             QueryItem.include,
             URLQueryItem(name: "cursor", value: cursor),
-//            URLQueryItem(name: "collection_slug", value: "cryptoverse-vip")
         ]
         var urlComponents = URLComponents(string: EndPoint.assetsURL)
         urlComponents?.queryItems = queryItems

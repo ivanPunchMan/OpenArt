@@ -19,10 +19,15 @@ final class HomeView: UIView {
     }
 
 //MARK: - properties
+    var setAssetImageHandler: ((UIImage) -> Void)?
+    var setColletcionImageHandler: ((UIImage) -> Void)?
+    var nextPage = ""
+    var assetsViewModel = [HomeModel.FetchAssets.AssetViewModel]()
     var viewModel: HomeModel.FetchAssets.ViewModel?
     var fetchDataHandler: ((HomeModel.FetchAssets.Request) -> Void)?
     var fetchImagesForCellHandler: ((HomeModel.FetchAssetImage.Request) -> Void)?
     var didSelectItemAt: ((IndexPath) -> Void)?
+    var didSelectItem: ((AssetDataProviderModel) -> Void)?
     var savedButtonTappedHandler: (() -> Void)?
     var saveAssetButtonTappedHandler: ((HomeModel.SaveAsset.Request) -> Void)?
     lazy var collectionView = createCollectionView()
@@ -55,6 +60,7 @@ private extension HomeView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.id)
         
         return collectionView
@@ -83,6 +89,15 @@ private extension HomeView {
         
         return layout
     }
+    
+    func calculateIndexPathsToReload(from newViewModel: HomeModel.FetchAssets.ViewModel) -> [IndexPath] {
+        let assetsCount = assetsViewModel.count
+        let newPageAssetsCount = newViewModel.assets.count
+        
+        let startIndex = assetsCount - newPageAssetsCount
+        let endIndex = assetsCount + newPageAssetsCount
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+    }
      
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
@@ -98,36 +113,64 @@ private extension HomeView {
 //MARK: - UICollectionViewDelegate
 extension HomeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.didSelectItemAt?(indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as? HomeCollectionViewCell
+        let asset = self.assetsViewModel[indexPath.row]
+        
+        self.didSelectItem?(.init(tokenID: asset.tokenID,
+                                  assetName: asset.assetName,
+                                  assetImageData: cell?.assetImage?.pngData(),
+                                  assetDescription: asset.assetDescription,
+                                  collectionName: asset.collectionName,
+                                  collectionImageData: cell?.collectionImage?.pngData()))
+//        self.didSelectItemAt?(indexPath)
     }
 }
 
 //MARK: - UICollectionViewDataSource
 extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = self.viewModel?.assets.count else { return 0 }
-        return count
+        self.assetsViewModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.id, for: indexPath) as? HomeCollectionViewCell,
-            let asset = self.viewModel?.assets[indexPath.row]
+                self.assetsViewModel.indices.contains(indexPath.row)
         else { return UICollectionViewCell() }
         
+        let asset = self.assetsViewModel[indexPath.row]
+        
         self.fetchImagesForCellHandler?(.init(indexPath: indexPath))
+        
+//        self.setAssetImageHandler = { assetImage in
+//            cell.set(assetImage: assetImage)
+//        }
+//
+//        self.setColletcionImageHandler = { collectionImage in
+//            cell.set(collectionImage: collectionImage)
+//        }
     
         cell.set(collectionName: asset.collectionName)
         
         cell.saveButtonTappedHandler = { [weak self] assetImage, collectionImage in
             self?.saveAssetButtonTappedHandler?(.init(tokenID: asset.tokenID,
-                                                 assetName: asset.creatorUsername,
-                                                 assetImage: assetImage,
-                                                 assetDescription: asset.assetDescription,
-                                                 collectionName: asset.collectionName,
-                                                 collectionImage: collectionImage))
+                                                      assetName: asset.assetName,
+                                                      assetImage: assetImage,
+                                                      assetDescription: asset.assetDescription,
+                                                      collectionName: asset.collectionName,
+                                                      collectionImage: collectionImage))
         }
         
         return cell
+    }
+}
+
+extension HomeView: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let indexPath = indexPaths.first
+        
+        if (assetsViewModel.count - 5) == indexPath?.row {
+            fetchDataHandler?(.init(nextPage: nextPage))
+        }
     }
 }

@@ -7,12 +7,6 @@
 
 import UIKit
 
-extension UIImage {
-    var multiplier: CGFloat {
-        CGFloat(self.size.height / self.size.width)
-    }
-}
-
 
 class ResizingImageView: UIImageView {
     var aspectRatio: NSLayoutConstraint?
@@ -23,7 +17,7 @@ class ResizingImageView: UIImageView {
         self.aspectRatio?.isActive = false
         if image.size.width > 0 {
             self.aspectRatio = self.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: image.size.height / image.size.width)
-            self.aspectRatio?.priority = UILayoutPriority(900)
+            self.aspectRatio?.priority = UILayoutPriority(1000)
         }
         self.aspectRatio?.isActive = true
     }

@@ -56,7 +56,7 @@ final class SavedCollectionViewCell: UICollectionViewCell {
     
 //MARK: - internal method
     func set(assetModel: SavedModel.LoadAssets.AssetModel?) {
-        let assetImageData = assetModel?.assetImage ?? Data()
+        let assetImageData = assetModel?.assetImageData ?? Data()
         let assetImage = UIImage(data: assetImageData) ?? UIImage()
         
         self.assetImageView.image = assetImage

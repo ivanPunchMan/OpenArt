@@ -8,20 +8,19 @@
 import Foundation
 
 protocol IAssetInteractor: AnyObject {
-    func save(data: AssetModel.SaveAsset.Request)
-    func fetchAssetInfo(request: AssetModel.FetchAssetInfo.Request)
-    func fetchAssetImage(request: AssetModel.FetchAssetImage.Request)
-    func fetchCollectionImage(request: AssetModel.FetchCollectionImage.Request)
+    func fetchAssetData(request: AssetModel.FetchAssetData.Request)
 }
 
 protocol IAssetDataStore: AnyObject {
     var asset: Asset? { get set }
+    var assetDataStore: AssetDataProviderModel? { get set }
 }
 
 //MARK: - IAssetDataStore
 final class AssetInteractor: IAssetDataStore {
 //MARK: - properties
     var asset: Asset?
+    var assetDataStore: AssetDataProviderModel?
     private var presenter: IAssetPresenter
     private var networkWorker: IImageNetworkWorker
     private var dataStorageWorker: IDataStorageSaveWorker
@@ -36,39 +35,11 @@ final class AssetInteractor: IAssetDataStore {
 
 //MARK: - IAssetInteractor
 extension AssetInteractor: IAssetInteractor {
-    func fetchAssetInfo(request: AssetModel.FetchAssetInfo.Request) {
-        let assetName = asset?.name
-        let assetDescription = asset?.description
-        let collectionName = asset?.collection?.name
-        
-        self.presenter.presentAssetInfo(response: .init(assetName: assetName, assetDescription: assetDescription, collectionName: collectionName))
-    }
-    
-    func fetchAssetImage(request: AssetModel.FetchAssetImage.Request) {
-        networkWorker.fetchImage(from: asset?.imageURL) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.presenter.presentAssetImage(response: .init(assetImageData: data))
-            case .failure(let error):
-                self?.presenter.presentAssetImage(response: .init(assetImageData: nil))
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchCollectionImage(request: AssetModel.FetchCollectionImage.Request) {
-        networkWorker.fetchImage(from: asset?.collection?.imageURL) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.presenter.presentCollectionImage(response: .init(collectionImageData: data))
-            case .failure(let error):
-                self?.presenter.presentCollectionImage(response: .init(collectionImageData: nil))
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func save(data: AssetModel.SaveAsset.Request) {
-//        self.dataStorageWorker.save(data: data)
+    func fetchAssetData(request: AssetModel.FetchAssetData.Request) {
+        self.presenter.presentAssetData(response: .init(assetImageData: self.assetDataStore?.assetImageData,
+                                                        collectionImageData: self.assetDataStore?.collectionImageData,
+                                                        assetName: self.assetDataStore?.assetName,
+                                                        assetDescription: self.assetDataStore?.assetDescription,
+                                                        collectionName: self.assetDataStore?.collectionName))
     }
 }

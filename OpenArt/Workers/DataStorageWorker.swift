@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol IDataStorageSaveWorker {
-    func save(data: AssetSaveDataModel)
+    func save(data: AssetDataProviderModel)
 }
 
 protocol IDataStorageLoadWorker {
@@ -24,7 +24,7 @@ final class AssetDataStorageWorker: NSObject {
 
 //MARK: - IDataStorageSaveWorker
 extension AssetDataStorageWorker: IDataStorageSaveWorker {
-    func save(data: AssetSaveDataModel) {
+    func save(data: AssetDataProviderModel) {
         self.dataService.addNew(asset: data)
     }
 }

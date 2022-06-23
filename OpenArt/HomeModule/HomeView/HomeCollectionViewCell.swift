@@ -26,21 +26,26 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         static let collectionHeaderTopOffset: CGFloat = 8
         
         static let saveAssetTopOffset: CGFloat = 32
-        static let saveAssetButtonSize: CGFloat = 24
+        static let saveAssetButtonSize: CGFloat = 30
         
         static let assetImageViewTopOffset: CGFloat = 16
         static let assetImageViewBottomOffset: CGFloat = 13
     }
     
 //MARK: - properties
+    var assetImage: UIImage? {
+        self.assetImageView.image
+    }
+    var collectionImage: UIImage? {
+        self.collectionHeaderView.collectionImage()
+    }
+    
     var saveButtonTappedHandler: ((UIImage?, UIImage?) -> Void)?
     
     private var containerView = UIView()
     private var collectionHeaderView = CollectionHeaderView()
     private var saveAssetButton = UIButton(type: .system)
     private var assetImageView = ResizingImageView()
-    private var assetImage: UIImage?
-    private var collectionImage: UIImage?
     
 //MARK: - init()
     override init(frame: CGRect) {
@@ -63,12 +68,10 @@ final class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     func set(collectionImage: UIImage?) {
-        self.collectionImage = collectionImage
         self.collectionHeaderView.set(collectionImage: collectionImage)
     }
     
     func set(assetImage: UIImage?) {
-        self.assetImage = assetImage
         self.assetImageView.setImageAndUpdateAspectRatio(image: assetImage ?? UIImage())
         self.assetImageView.image = assetImage
     }
@@ -120,8 +123,9 @@ private extension HomeCollectionViewCell {
         self.containerView.addSubview(self.saveAssetButton)
         self.configureSaveAssetButton()
         NSLayoutConstraint.activate([
-            self.saveAssetButton.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.saveAssetTopOffset),
-            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.collectionHeaderView.trailingAnchor),
+//            self.saveAssetButton.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: Constraint.saveAssetTopOffset),
+            self.saveAssetButton.centerYAnchor.constraint(equalTo: self.collectionHeaderView.centerYAnchor),
+            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.collectionHeaderView.trailingAnchor, constant: 5),
             self.saveAssetButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.assetViewHorizontalInset),
             self.saveAssetButton.widthAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),
             self.saveAssetButton.heightAnchor.constraint(equalToConstant: Constraint.saveAssetButtonSize),

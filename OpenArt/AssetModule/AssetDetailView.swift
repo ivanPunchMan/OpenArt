@@ -60,7 +60,9 @@ final class AssetDetailView: UIView {
         self.collectionHeaderView.set(collectionImage: collectionImage)
     }
     
-    func set(assetInfo viewModel: AssetModel.FetchAssetInfo.ViewModel) {
+    func set(assetInfo viewModel: AssetModel.FetchAssetData.ViewModel) {
+        self.assetImageView.image = viewModel.assetImage
+        self.collectionHeaderView.set(collectionImage: viewModel.collectionImage)
         self.collectionHeaderView.set(collectionName: viewModel.collectionName)
         self.descriptionView.set(title: viewModel.assetName)
         self.descriptionView.set(description: viewModel.assetDescription)
@@ -76,7 +78,6 @@ private extension AssetDetailView {
         self.setupCollectionHeaderViewLayout()
         self.setupDescriptionViewLayout()
         self.setupSeparatorViewLayout()
-        self.setupSaveAssetButtonLayout()
     }
     
     func setupScrollViewLayout() {
@@ -130,10 +131,6 @@ private extension AssetDetailView {
             self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
             self.collectionHeaderView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset),
         ])
-        
-        let topConstraint = self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset)
-        topConstraint.priority = UILayoutPriority(250)
-        topConstraint.isActive = true
     }
     
     func setupDescriptionViewLayout() {
@@ -152,6 +149,7 @@ private extension AssetDetailView {
         
         NSLayoutConstraint.activate([
             self.separatorView.topAnchor.constraint(equalTo: self.descriptionView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.separatorView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
             self.separatorView.widthAnchor.constraint(equalTo: self.containerView.widthAnchor),
             self.separatorView.heightAnchor.constraint(equalToConstant: Constraint.separatorViewHeight)
         ])
@@ -160,33 +158,5 @@ private extension AssetDetailView {
     func configureSeparatorView() {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.backgroundColor = Color.black.tone.withAlphaComponent(Constant.separatorViewAlphaComponent)
-    }
-    
-    func setupSaveAssetButtonLayout() {
-        self.containerView.addSubview(self.saveAssetButton)
-        self.configureSaveAssetButton()
-        
-        NSLayoutConstraint.activate([
-            self.saveAssetButton.topAnchor.constraint(equalTo: self.separatorView.bottomAnchor, constant: Constraint.saveAssetButtonTopOffset),
-            self.saveAssetButton.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.saveAssetButtonHorizontalOffset),
-            self.saveAssetButton.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.saveAssetButtonBottomOffset),
-            self.saveAssetButton.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.saveAssetButtonHorizontalOffset)
-        ])
-    }
-    
-    func configureSaveAssetButton() {
-        self.saveAssetButton.addTarget(self, action: #selector(onSaveAssetButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func onSaveAssetButtonTapped() {
-        let assetName = descriptionView.assetName()
-        let assetDescription = descriptionView.assetDescription()
-        let assetImage = assetImageView.image
-        let collectionName = collectionHeaderView.collectionName()
-        let collectionImage = collectionHeaderView.collectionImage()
-        
-        let request = AssetModel.SaveAsset.Request.init(assetName: assetName, assetImage: assetImage, assetDescription: assetDescription, collectionName: collectionName, collectionImage: collectionImage)
-        
-        self.onSaveAssetButtonTappedHandler?(request)
     }
 }

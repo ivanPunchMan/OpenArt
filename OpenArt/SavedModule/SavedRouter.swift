@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 
 protocol ISavedRouter: AnyObject {
-    
+    func routeToAssetVC()
 }
 
 protocol ILikedDataPassing: AnyObject {
@@ -17,10 +18,17 @@ protocol ILikedDataPassing: AnyObject {
 }
 
 final class SavedRouter: ILikedDataPassing {
-    var dataStore: ISavedDataStore?
-    
+    weak var dataStore: ISavedDataStore?
+    weak var vc: UIViewController?
 }
 
 extension SavedRouter: ISavedRouter {
-    
+    func routeToAssetVC() {
+        let assetVC = AssetAssembly.build()
+        
+        let selectedAsset = self.dataStore?.selectedAsset
+        assetVC.router?.dataStore?.assetDataStore = selectedAsset
+        
+        vc?.navigationController?.pushViewController(assetVC, animated: true)
+    }
 }

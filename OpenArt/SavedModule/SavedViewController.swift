@@ -24,8 +24,13 @@ final class SavedViewController: UIViewController {
         self.interactor = interactor
         self.router = router
         
+        self.customView.didSelectItemAt = { [weak self] indexPath in
+            self?.interactor?.selectAsset(request: .init(indexPath: indexPath))
+            self?.router?.routeToAssetVC()
+        }
+        
         self.customView.deleleAssetHandler = { [weak self] tokenID in
-            self?.interactor?.deleteAsset(for: .init(tokenID: tokenID))
+            self?.interactor?.deleteAsset(request: .init(tokenID: tokenID))
         }
     }
     

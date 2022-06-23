@@ -20,18 +20,18 @@ struct SavedModel {
         struct AssetModel {
             var tokenID: String?
             var assetName: String?
-            var assetImage: Data?
+            var assetImageData: Data?
             var assetDescription: String?
             var collectionName: String?
-            var collectionImage: Data?
+            var collectionImageData: Data?
             
             init(from assetEntity: AssetEntity) {
                 self.tokenID = assetEntity.tokenID
                 self.assetName = assetEntity.assetName
-                self.assetImage = assetEntity.assetImage
+                self.assetImageData = assetEntity.assetImage
                 self.assetDescription = assetEntity.assetDescription
                 self.collectionName = assetEntity.collectionName
-                self.collectionImage = assetEntity.collectionImage
+                self.collectionImageData = assetEntity.collectionImage
             }
         }
         
@@ -56,6 +56,13 @@ struct SavedModel {
         
         struct ViewModel {
             let tokenID: String
+        }
+    }
+
+//MARK: - SelectAsset
+    enum SelectAsset {
+        struct Request {
+            let indexPath: IndexPath
         }
     }
 }

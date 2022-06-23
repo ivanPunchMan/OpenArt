@@ -8,6 +8,7 @@
 import Foundation
 
 protocol IHomeInteractor: AnyObject {
+    func selectAsset(request: HomeModel.SelectAsset.Request)
     func saveAsset(request: HomeModel.SaveAsset.Request)
     func fetchAssets(request: HomeModel.FetchAssets.Request)
     func fetchImagesForCell(request: HomeModel.FetchAssetImage.Request)
@@ -15,11 +16,13 @@ protocol IHomeInteractor: AnyObject {
 
 protocol IHomeDataStore: AnyObject {
     var assets: [Asset] { get set }
+    var asset: AssetDataProviderModel? { get set }
 }
 
 final class HomeInteractor: IHomeDataStore {
 //MARK: - properties
     var assets = [Asset]()
+    var asset: AssetDataProviderModel?
     
     private var presenter: IHomePresenter
     private var networkWorker: (IAssetsNetworkWorker & IImageNetworkWorker)
@@ -36,6 +39,11 @@ final class HomeInteractor: IHomeDataStore {
 
 //MARK: - IHomeInteractor
 extension HomeInteractor: IHomeInteractor {
+    
+    func selectAsset(request: HomeModel.SelectAsset.Request) {
+        self.asset = request.asset
+    }
+    
     func saveAsset(request: HomeModel.SaveAsset.Request) {
         let tokenID = request.tokenID
         let assetName = request.assetName
@@ -44,7 +52,7 @@ extension HomeInteractor: IHomeInteractor {
         let collectionName = request.collectionName
         let collectionImageData = request.collectionImage?.pngData()
         
-        let assetSaveDataModel = AssetSaveDataModel(tokenID: tokenID,
+        let assetSaveDataModel = AssetDataProviderModel(tokenID: tokenID,
                                                     assetName: assetName,
                                                     assetImageData: assetImageData,
                                                     assetDescription: assetDescription,
@@ -59,8 +67,8 @@ extension HomeInteractor: IHomeInteractor {
         networkWorker.fetchAssets(nextPage: nextPage) { [weak self] result in
             switch result {
             case .success(let assetsDTO):
-                let assetsResponse = HomeModel.FetchAssets.Response.init(from: assetsDTO)
-                self?.assets = assetsResponse.assets
+                let assetsResponse = HomeModel.FetchAssets.Response(from: assetsDTO)
+                self?.assets += assetsResponse.assets
                 self?.presenter.presentAssets(response: assetsResponse)
             case .failure(let error):
                 print(error.localizedDescription)

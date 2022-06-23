@@ -31,8 +31,13 @@ final class HomeViewController: UIViewController {
             interactor.fetchAssets(request: request)
         }
         
+        self.customView.didSelectItem = { asset in
+            interactor.selectAsset(request: .init(asset: asset))
+            router.routeToAsset()
+        }
+        
         self.customView.didSelectItemAt = { indexPath in
-            router.routeToPlaceBidVC(from: indexPath)
+            router.routeToAssetVC(from: indexPath)
         }
         
         self.customView.savedButtonTappedHandler = {
@@ -68,17 +73,24 @@ final class HomeViewController: UIViewController {
 //MARK: - IHomeViewController
 extension HomeViewController: IHomeViewController {
     func displayAssets(viewModel: HomeModel.FetchAssets.ViewModel) {
-        self.customView.viewModel = viewModel
+        self.customView.nextPage = viewModel.nextPage ?? ""
+        self.customView.assetsViewModel += viewModel.assets
         self.customView.collectionView.reloadData()
     }
     
     func displayAssetImage(viewModel: HomeModel.FetchAssetImage.ViewModel) {
+//        self.customView.setAssetImageHandler?(viewModel.assetImage ?? UIImage())
+//        self.customView.collectionView.reloadItems(at: [viewModel.indexPath])
+        
         if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(assetImage: viewModel.assetImage)
         }
     }
     
     func displayCollectionImage(viewModel: HomeModel.FetchCollectionImage.ViewModel) {
+//        self.customView.setColletcionImageHandler?(viewModel.collectionImage ?? UIImage())
+//        self.customView.collectionView.reloadItems(at: [viewModel.indexPath])
+        
         if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
             cell.set(collectionImage: viewModel.collectionImage)
         }

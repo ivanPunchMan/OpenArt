@@ -16,6 +16,8 @@ enum SavedAssembly {
         let interactor = SavedInteractor(presenter: presenter, dataStorageWorker: dataStorageWorker)
         let vc = SavedViewController(interactor: interactor, router: router)
         presenter.vc = vc
+        router.vc = vc
+        router.dataStore = interactor
         
         return vc
     }

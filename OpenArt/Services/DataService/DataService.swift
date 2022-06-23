@@ -21,11 +21,11 @@ class DataService {
         return container
     }()
     
-    private lazy var viewContext = Self.persistentContainer.viewContext
+    private lazy var viewContext = Self.persistentContainer.newBackgroundContext()
     
     private init() {}
     
-    func addNew(asset model: AssetSaveDataModel) {
+    func addNew(asset model: AssetDataProviderModel) {
         let assetEntity = AssetEntity(context: viewContext)
         
         assetEntity.collectionName = model.collectionName
