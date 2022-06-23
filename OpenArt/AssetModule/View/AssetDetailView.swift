@@ -16,10 +16,10 @@ final class AssetDetailView: UIView {
     }
     
     private enum Constraint {
-        static let assetImageViewTopOffset: CGFloat = 27
+        static let assetImageViewTopOffset: CGFloat = 15
         static let placeBidViewHorizontalInset: CGFloat = 16
         
-        static let profileAndDescriptionHorizontalOffset: CGFloat = 24
+        static let collectionAndDescriptionHorizontalOffset: CGFloat = 24
         
         static let separatorViewHeight: CGFloat = 1
         static let separatorViewBottomOffset: CGFloat = 5
@@ -113,7 +113,7 @@ private extension AssetDetailView {
         self.containerView.addSubview(self.collectionHeaderView)
         
         NSLayoutConstraint.activate([
-            self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.collectionHeaderView.topAnchor.constraint(equalTo: self.assetImageView.bottomAnchor, constant: Constraint.collectionAndDescriptionHorizontalOffset),
             self.collectionHeaderView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
             self.collectionHeaderView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset),
         ])
@@ -123,7 +123,7 @@ private extension AssetDetailView {
         self.containerView.addSubview(self.descriptionView)
         
         NSLayoutConstraint.activate([
-            self.descriptionView.topAnchor.constraint(equalTo: self.collectionHeaderView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.descriptionView.topAnchor.constraint(equalTo: self.collectionHeaderView.bottomAnchor, constant: Constraint.collectionAndDescriptionHorizontalOffset),
             self.descriptionView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: Constraint.placeBidViewHorizontalInset),
             self.descriptionView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -Constraint.placeBidViewHorizontalInset)
         ])
@@ -134,7 +134,7 @@ private extension AssetDetailView {
         self.configureSeparatorView()
         
         NSLayoutConstraint.activate([
-            self.separatorView.topAnchor.constraint(equalTo: self.descriptionView.bottomAnchor, constant: Constraint.profileAndDescriptionHorizontalOffset),
+            self.separatorView.topAnchor.constraint(equalTo: self.descriptionView.bottomAnchor, constant: Constraint.collectionAndDescriptionHorizontalOffset),
             self.separatorView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -Constraint.separatorViewBottomOffset),
             self.separatorView.widthAnchor.constraint(equalTo: self.containerView.widthAnchor),
             self.separatorView.heightAnchor.constraint(equalToConstant: Constraint.separatorViewHeight)

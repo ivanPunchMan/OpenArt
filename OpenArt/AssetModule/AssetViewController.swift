@@ -13,6 +13,11 @@ protocol IAssetViewController: AnyObject {
 }
 
 final class AssetViewController: UIViewController {
+//MARK: - privat enum
+    private enum Text {
+        static let navigationItemTitle = "Details"
+    }
+    
 //MARK: - properties
     var router: (IAssetRouter & IAssetDataPassing)?
     
@@ -40,6 +45,8 @@ final class AssetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchAssetData()
+        
+        self.navigationItem.title = Text.navigationItemTitle
     }
 
 //MARK: - internal method

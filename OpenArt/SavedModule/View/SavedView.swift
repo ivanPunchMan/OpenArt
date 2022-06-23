@@ -10,10 +10,6 @@ import UIKit
 
 final class SavedView: UIView, UICollectionViewDelegate {
 //MARK: - private enums
-    private enum Text {
-        static let savedLabelText = "Saved"
-    }
-    
     private enum Constant {
         static let itemAndGroupFractionalWidth: CGFloat = 1
         static let itemAndGroupEstimatedHeightDimension: CGFloat = 563
@@ -23,18 +19,10 @@ final class SavedView: UIView, UICollectionViewDelegate {
         
         static let itemFractionalWidthAndHeight: CGFloat = 1
         static let groupFractionalWidth: CGFloat = 1
-        static let groupFractionalHeight: CGFloat = 0.33
+        static let groupFractionalHeight: CGFloat = 0.3
         static let countItemInGroup = 2
         static let interItemSpacing: CGFloat = 16
         static let contentInsets: CGFloat = 16
-    }
-    
-    private enum Constraint {
-        static let savedViewHorizontalInset: CGFloat = 16
-        
-        static let savedLabelTopOffset: CGFloat = 27
-        
-        static let collectionViewTopOffset: CGFloat = 16
     }
 
 //MARK: - properties
@@ -42,13 +30,10 @@ final class SavedView: UIView, UICollectionViewDelegate {
     let collectionViewDelegate = SavedCollectionViewDelegate()
     lazy var collectionView = createCollectionView()
     
-    private let savedLabel = UILabel()
-    
 //MARK: - init
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
-        self.safeAreaLayoutGuide.owningView?.backgroundColor = .clear
         self.setupLayout()
         
         self.collectionViewDataSource.reloadDataHandler = { [weak self] in
@@ -106,35 +91,17 @@ private extension SavedView {
     }
     
     func setupLayout() {
-        self.setupSavedLabelLayout()
         self.setupCollectionViewLayout()
-    }
-    
-    func setupSavedLabelLayout() {
-        self.addSubview(self.savedLabel)
-        self.configureSavedLabel()
-        
-        NSLayoutConstraint.activate([
-            self.savedLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constraint.savedLabelTopOffset),
-            self.savedLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.savedViewHorizontalInset),
-            self.savedLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -Constraint.savedViewHorizontalInset)
-        ])
-    }
-    
-    func configureSavedLabel() {
-        self.savedLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.savedLabel.font = Typography.DisplayXS.semiBold.font
-        self.savedLabel.text = Text.savedLabelText
     }
     
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
         
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.savedLabel.bottomAnchor, constant: Constraint.collectionViewTopOffset),
-            self.collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            self.collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+            self.collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }

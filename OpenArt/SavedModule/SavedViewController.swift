@@ -13,6 +13,11 @@ protocol ISavedViewController: AnyObject {
 }
 
 final class SavedViewController: UIViewController {
+//MARK: - privat enum
+    private enum Text {
+        static let navigationItemTitle = "Saved NFT"
+    }
+    
 //MARK: - properties
     private let customView = SavedView()
     private var interactor: ISavedInteractor?
@@ -48,6 +53,8 @@ final class SavedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchAssets(request: .init())
+        
+        self.navigationItem.title = Text.navigationItemTitle
     }
 }
 

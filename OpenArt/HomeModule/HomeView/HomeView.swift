@@ -14,7 +14,7 @@ final class HomeView: UIView {
         static let itemAndGroupFractionalWidth: CGFloat = 1
         static let itemAndGroupEstimatedHeightDimension: CGFloat = 563
         
-        static let itemTopEdgeSpacing: CGFloat = 32
+        static let itemTopEdgeSpacing: CGFloat = 15
         static let itemHorizontalEdgeInsets: CGFloat = 16
     }
 
@@ -27,7 +27,7 @@ final class HomeView: UIView {
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
-        self.setupCollectionViewLayout()
+        self.setupLayout()
         
         self.collectionViewDelegate.assetAt = { [weak self] indexPath in
             self?.collectionViewDataSource.assetsViewModel[indexPath.row]
@@ -101,6 +101,10 @@ private extension HomeView {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+    
+    func setupLayout() {
+        self.setupCollectionViewLayout()
     }
      
     func setupCollectionViewLayout() {

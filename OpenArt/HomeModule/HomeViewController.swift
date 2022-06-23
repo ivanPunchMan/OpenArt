@@ -14,6 +14,11 @@ protocol IHomeViewController: AnyObject {
 }
 
 final class HomeViewController: UIViewController {
+//MARK: - privat enum
+    private enum Text {
+        static let navigationItemTitle = "New NFT"
+    }
+    
 //MARK: - properties
     private var router: (IHomeRouter & IHomeDataPassing)?
     private var interactor: IHomeInteractor?
@@ -86,6 +91,7 @@ private extension HomeViewController {
         let savedBarButton = UIBarButtonItem(image: savedImage, style: .done, target: self, action: #selector(onSavedBarButtonTapped))
         savedBarButton.tintColor = Color.black.tone
         self.navigationItem.rightBarButtonItem = savedBarButton
+        self.navigationItem.title = Text.navigationItemTitle
     }
     
     @objc func onSavedBarButtonTapped() {
