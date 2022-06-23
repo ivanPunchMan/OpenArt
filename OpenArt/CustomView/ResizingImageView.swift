@@ -17,7 +17,7 @@ class ResizingImageView: UIImageView {
         self.aspectRatio?.isActive = false
         if image.size.width > 0 {
             self.aspectRatio = self.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: image.size.height / image.size.width)
-            self.aspectRatio?.priority = UILayoutPriority(1000)
+            self.aspectRatio?.priority = UILayoutPriority(998)
         }
         self.aspectRatio?.isActive = true
     }

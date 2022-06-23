@@ -51,6 +51,10 @@
 		C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839D72861B61F007C047B /* SavedAssembly.swift */; };
 		C8A839E128625DB7007C047B /* AssetEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */; };
 		C8A839E528634873007C047B /* AssetDataStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A839E428634873007C047B /* AssetDataStoreModel.swift */; };
+		C8F501CD28650F6B00A52395 /* HomeCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F501CC28650F6B00A52395 /* HomeCollectionViewDataSource.swift */; };
+		C8F501CF286510D200A52395 /* HomeCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F501CE286510D200A52395 /* HomeCollectionViewDelegate.swift */; };
+		C8F501D32865189D00A52395 /* SavedCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F501D22865189D00A52395 /* SavedCollectionViewDataSource.swift */; };
+		C8F501D528651CB600A52395 /* SavedCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F501D428651CB600A52395 /* SavedCollectionViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +104,10 @@
 		C8A839D72861B61F007C047B /* SavedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAssembly.swift; sourceTree = "<group>"; };
 		C8A839E028625DB7007C047B /* AssetEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssetEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8A839E428634873007C047B /* AssetDataStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDataStoreModel.swift; sourceTree = "<group>"; };
+		C8F501CC28650F6B00A52395 /* HomeCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		C8F501CE286510D200A52395 /* HomeCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		C8F501D22865189D00A52395 /* SavedCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		C8F501D428651CB600A52395 /* SavedCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCollectionViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				C823B511285690D800FB15AB /* HomeView.swift */,
+				C8F501CC28650F6B00A52395 /* HomeCollectionViewDataSource.swift */,
+				C8F501CE286510D200A52395 /* HomeCollectionViewDelegate.swift */,
 				C823B5152857680A00FB15AB /* HomeCollectionViewCell.swift */,
 				C823B5AF285A53DC00FB15AB /* CollectionHeaderView.swift */,
 			);
@@ -250,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				C8A839D32860B07F007C047B /* SavedView.swift */,
+				C8F501D22865189D00A52395 /* SavedCollectionViewDataSource.swift */,
+				C8F501D428651CB600A52395 /* SavedCollectionViewDelegate.swift */,
 				C8A839D52860B2EB007C047B /* SavedCollectionViewCell.swift */,
 			);
 			path = View;
@@ -374,6 +386,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F501CD28650F6B00A52395 /* HomeCollectionViewDataSource.swift in Sources */,
+				C8F501CF286510D200A52395 /* HomeCollectionViewDelegate.swift in Sources */,
 				C823B5B4285A6FB600FB15AB /* ResizingImageView.swift in Sources */,
 				C8A839D02860A229007C047B /* SavedPresenter.swift in Sources */,
 				C8A839C2286095D7007C047B /* AssetEntity+CoreDataClass.swift in Sources */,
@@ -405,6 +419,8 @@
 				C8A839E528634873007C047B /* AssetDataStoreModel.swift in Sources */,
 				C823B50628568BBC00FB15AB /* HomePresenter.swift in Sources */,
 				C8A839D82861B61F007C047B /* SavedAssembly.swift in Sources */,
+				C8F501D32865189D00A52395 /* SavedCollectionViewDataSource.swift in Sources */,
+				C8F501D528651CB600A52395 /* SavedCollectionViewDelegate.swift in Sources */,
 				C88055E12848CBF000429670 /* SceneDelegate.swift in Sources */,
 				C823B5A8285A3FF300FB15AB /* AssetRouter.swift in Sources */,
 				C8A839C728609698007C047B /* DataService.swift in Sources */,

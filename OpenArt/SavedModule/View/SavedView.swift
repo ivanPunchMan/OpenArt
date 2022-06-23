@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class SavedView: UIView {
+final class SavedView: UIView, UICollectionViewDelegate {
 //MARK: - private enums
     private enum Text {
         static let savedLabelText = "Saved"
@@ -38,23 +38,22 @@ final class SavedView: UIView {
     }
 
 //MARK: - properties
-    var deleleAssetHandler: ((String) -> Void)?
-    var didSelectItemAt: ((IndexPath) -> Void)?
-    
+    let collectionViewDataSource = SavedCollectionViewDataSource()
+    let collectionViewDelegate = SavedCollectionViewDelegate()
     lazy var collectionView = createCollectionView()
-    private let savedLabel = UILabel()
     
-    private var assetsViewModel: SavedModel.LoadAssets.ViewModel? {
-        didSet {
-            self.collectionView.reloadData()
-        }
-    }
+    private let savedLabel = UILabel()
     
 //MARK: - init
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
+        self.safeAreaLayoutGuide.owningView?.backgroundColor = .clear
         self.setupLayout()
+        
+        self.collectionViewDataSource.reloadDataHandler = { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
     @available(*, unavailable)
@@ -64,7 +63,7 @@ final class SavedView: UIView {
     
 //MARK: - internal methods    
     func displayAssets(viewModel: SavedModel.LoadAssets.ViewModel) {
-        self.assetsViewModel = viewModel
+        self.collectionViewDataSource.assetsViewModel = viewModel.assets
     }
 }
 
@@ -74,8 +73,8 @@ private extension SavedView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createCollectionViewLayout())
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionView.dataSource = self.collectionViewDataSource
+        collectionView.delegate = self.collectionViewDelegate
         collectionView.register(SavedCollectionViewCell.self, forCellWithReuseIdentifier: SavedCollectionViewCell.id)
         
         return collectionView
@@ -84,18 +83,23 @@ private extension SavedView {
     func createCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constant.itemFractionalWidthAndHeight),
                                               heightDimension: .fractionalHeight(Constant.itemFractionalWidthAndHeight))
+        
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constant.groupFractionalWidth),
                                                heightDimension: .fractionalHeight(Constant.groupFractionalHeight))
+        
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: Constant.countItemInGroup)
+        
         group.interItemSpacing = .fixed(Constant.interItemSpacing)
+        
         group.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                       leading: Constant.contentInsets,
                                                       bottom: Constant.contentInsets,
                                                       trailing: Constant.contentInsets)
         
         let section = NSCollectionLayoutSection(group: group)
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
@@ -109,6 +113,7 @@ private extension SavedView {
     func setupSavedLabelLayout() {
         self.addSubview(self.savedLabel)
         self.configureSavedLabel()
+        
         NSLayoutConstraint.activate([
             self.savedLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constraint.savedLabelTopOffset),
             self.savedLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Constraint.savedViewHorizontalInset),
@@ -120,49 +125,16 @@ private extension SavedView {
         self.savedLabel.translatesAutoresizingMaskIntoConstraints = false
         self.savedLabel.font = Typography.DisplayXS.semiBold.font
         self.savedLabel.text = Text.savedLabelText
-        self.savedLabel.backgroundColor = .clear
     }
     
     func setupCollectionViewLayout() {
         self.addSubview(self.collectionView)
+        
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.savedLabel.bottomAnchor, constant: Constraint.collectionViewTopOffset),
             self.collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
-    }
-}
-
-//MARK: - UICollectionViewDataSource
-extension SavedView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.assetsViewModel?.assets.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedCollectionViewCell.id, for: indexPath) as? SavedCollectionViewCell,
-            let assets = self.assetsViewModel?.assets, assets.indices.contains(indexPath.row)
-        else { return UICollectionViewCell() }
-        
-        let asset = assets[indexPath.row]
-
-        cell.set(assetModel: asset)
-        
-        cell.onDeleteButtonTappedHandler = { [weak self] in
-            if let tokenID = asset.tokenID {
-                self?.deleleAssetHandler?(tokenID)
-                self?.assetsViewModel?.assets.remove(at: indexPath.row)
-            }
-        }
-        
-        return cell
-    }
-}
-
-extension SavedView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.didSelectItemAt?(indexPath)
     }
 }

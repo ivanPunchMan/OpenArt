@@ -64,7 +64,7 @@ extension NetworkService: INetworkService {
                     completion(.failure(error))
                 }
             }
-        }//.resume()
+        }.resume()
     }
 
     enum NetError: Error {

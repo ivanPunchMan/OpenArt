@@ -27,21 +27,21 @@ final class HomeViewController: UIViewController {
         
         self.configureNavBar()
         
-        self.customView.fetchDataHandler = { request in
+        self.customView.collectionViewDataSource.fetchAssetsHandler = { request in
             interactor.fetchAssets(request)
         }
         
-        self.customView.didSelectItem = { asset in
+        self.customView.collectionViewDelegate.didSelectItem = { asset in
             let request = HomeModel.SelectAsset.Request(asset: asset)
             interactor.selectAsset(request)
             router.routeToAsset()
         }
         
-        self.customView.fetchImagesForCellHandler = { request in
+        self.customView.collectionViewDelegate.fetchImagesForCellHandler = { request in
             interactor.fetchImagesForCell(request)
         }
         
-        self.customView.saveAssetButtonTappedHandler = { request in
+        self.customView.collectionViewDataSource.saveAssetButtonTappedHandler = { request in
             interactor.saveAsset(request)
         }
     }
@@ -59,28 +59,23 @@ final class HomeViewController: UIViewController {
 //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.customView.fetchDataHandler?(.init(nextPage: nil))
+        
+        self.customView.collectionViewDataSource.fetchAssetsHandler?(.init(nextPage: nil))
     }
 }
 
 //MARK: - IHomeViewController
 extension HomeViewController: IHomeViewController {
     func displayAssets(viewModel: HomeModel.FetchAssets.ViewModel) {
-        self.customView.nextPage = viewModel.nextPage ?? ""
-        self.customView.assetsViewModel += viewModel.assets
-        self.customView.collectionView.reloadData()
+        self.customView.displayAssets(viewModel)
     }
     
     func displayAssetImage(viewModel: HomeModel.FetchAssetImage.ViewModel) {
-        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
-            cell.set(assetImage: viewModel.assetImage)
-        }
+        self.customView.displayAssetImage(viewModel)
     }
     
     func displayCollectionImage(viewModel: HomeModel.FetchCollectionImage.ViewModel) {
-        if let cell = self.customView.collectionView.cellForItem(at: viewModel.indexPath) as? HomeCollectionViewCell {
-            cell.set(collectionImage: viewModel.collectionImage)
-        }
+        self.customView.displayCollectionImage(viewModel)
     }
 }
 

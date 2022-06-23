@@ -22,6 +22,7 @@ final class SavedRouter: ILikedDataPassing {
     weak var vc: UIViewController?
 }
 
+//MARK: - ISavedRouter
 extension SavedRouter: ISavedRouter {
     func routeToAssetVC() {
         let assetVC = AssetAssembly.build()
@@ -32,6 +33,7 @@ extension SavedRouter: ISavedRouter {
     }
 }
 
+//MARK: - private methods
 private extension SavedRouter {
     func passDataTo(_ asset: AssetViewController?, from savedDataStore: ISavedDataStore?) {
         asset?.router?.dataStore?.assetDataStore = savedDataStore?.assetDataStore
