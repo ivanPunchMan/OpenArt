@@ -55,12 +55,12 @@ class DataService {
         return assetEntities
     }
     
-    func deleteAssetEntity(with uniqueID: String) {
+    func deleteAssetEntity(with tokenID: String) {
         let fetchRequest = AssetEntity.fetchRequest()
         fetchRequest.fetchLimit = 1
         
-        let sortDescriptor = NSSortDescriptor(key: "tokenID", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let predicate = NSPredicate(format: "tokenID = %@", tokenID)
+        fetchRequest.predicate = predicate
         
         var assetEntities = [AssetEntity]()
         do {

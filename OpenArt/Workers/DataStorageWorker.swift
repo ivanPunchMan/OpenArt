@@ -40,8 +40,8 @@ extension DataStorageWorker: IDataStorageLoadWorker {
 }
 
 extension DataStorageWorker: IDataStorageDeleteWorker {
-    func deleteAsset(with uniqueID: String) {
-        self.dataService.deleteAssetEntity(with: uniqueID)
+    func deleteAsset(with tokenID: String) {
+        self.dataService.deleteAssetEntity(with: tokenID)
     }
 }
 
