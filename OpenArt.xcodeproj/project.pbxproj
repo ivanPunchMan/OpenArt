@@ -195,8 +195,8 @@
 				C823B5A3285A3A7300FB15AB /* AssetInteractor.swift */,
 				C823B5A5285A3A8B00FB15AB /* AssetPresenter.swift */,
 				C823B5A0285A3A4100FB15AB /* AssetViewController.swift */,
-				C8F501CB2865008B00A52395 /* View */,
 				C823B5A7285A3FF300FB15AB /* AssetRouter.swift */,
+				C8F501CB2865008B00A52395 /* View */,
 			);
 			path = AssetModule;
 			sourceTree = "<group>";

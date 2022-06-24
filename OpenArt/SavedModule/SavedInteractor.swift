@@ -23,7 +23,7 @@ final class SavedInteractor: ISavedDataStore {
     
     private var presenter: ISavedPresenter?
     private var dataStorageWorker: (IDataStorageLoadWorker & IDataStorageDeleteWorker)
-    private var assets: [SavedModel.LoadAssets.AssetModel]?
+    private var assets = [SavedModel.LoadAssets.AssetModel]()
     
     init(_ presenter: ISavedPresenter, _ dataStorageWorker: (IDataStorageLoadWorker & IDataStorageDeleteWorker)) {
         self.presenter = presenter
@@ -34,18 +34,17 @@ final class SavedInteractor: ISavedDataStore {
 //MARK: - ISavedInteractor
 extension SavedInteractor: ISavedInteractor {
     func selectAsset(request: SavedModel.SelectAsset.Request) {
-        guard let assets = self.assets, assets.indices.contains(request.indexPath.row) else { return }
-        let assetModel = assets[request.indexPath.row]
+        self.assets = self.loadAssets()
         
-        self.assetDataStore = convertModelsForDataPassing(from: assetModel)
+        if assets.indices.contains(request.indexPath.row) {
+            let assetModel = assets[request.indexPath.row]
+            self.assetDataStore = convertModelsForDataPassing(from: assetModel)
+        }
     }
     
     func loadAssets(request: SavedModel.LoadAssets.Request) {
-        let assetsEntities = self.dataStorageWorker.loadAssets()
-        let assetModels: [SavedModel.LoadAssets.AssetModel] = assetsEntities.map { .init(from: $0) }
-        
-        self.assets = assetModels
-        self.presenter?.presentAssets(response: .init(assets: assetModels) )
+        self.assets = self.loadAssets()
+        self.presenter?.presentAssets(response: .init(assets: self.assets) )
     }
     
     func deleteAsset(request: SavedModel.DeleteAsset.Request) {
@@ -53,11 +52,18 @@ extension SavedInteractor: ISavedInteractor {
     }
 }
 
-private func convertModelsForDataPassing(from assetModel: SavedModel.LoadAssets.AssetModel) -> AssetDataStoreModel {
-    .init(tokenID: assetModel.tokenID,
-          assetName: assetModel.assetName,
-          assetImageData: assetModel.assetImageData,
-          assetDescription: assetModel.assetDescription,
-          collectionName: assetModel.collectionName,
-          collectionImageData: assetModel.collectionImageData)
+private extension SavedInteractor {
+    func convertModelsForDataPassing(from assetModel: SavedModel.LoadAssets.AssetModel) -> AssetDataStoreModel {
+        .init(tokenID: assetModel.tokenID,
+              assetName: assetModel.assetName,
+              assetImageData: assetModel.assetImageData,
+              assetDescription: assetModel.assetDescription,
+              collectionName: assetModel.collectionName,
+              collectionImageData: assetModel.collectionImageData)
+    }
+    
+    func loadAssets() -> [SavedModel.LoadAssets.AssetModel] {
+        let assetsEntities = self.dataStorageWorker.loadAssets()
+        return assetsEntities.map { .init(from: $0) }
+    }
 }
